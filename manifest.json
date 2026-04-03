@@ -1,0 +1,19 @@
+{
+  "name": "CardioLog – BP Monitor",
+  "short_name": "CardioLog",
+  "description": "Personal blood pressure monitoring, medication tracking and insights",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#080D1A",
+  "background_color": "#080D1A",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23080D1A'/%3E%3Cpath d='M96 50 C96 50 130 70 130 95 C130 115 115 128 96 140 C77 128 62 115 62 95 C62 70 96 50 96 50Z' fill='%2300D4B8' opacity='0.9'/%3E%3Cpath d='M70 95 L82 83 L90 100 L100 75 L108 95 L122 95' stroke='%23080D1A' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["health", "medical"],
+  "screenshots": []
+}

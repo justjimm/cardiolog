@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>CardioLog – BP Monitor</title>
+<meta name="theme-color" content="#080D1A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="capacitor.js"></script>
+<script>
+// Capacitor bridge — safely no-ops in browser, activates in native APK
+window.isNative = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+window.CapPlugins = window.isNative ? window.Capacitor.Plugins : {};
+</script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#080D1A;--bg2:#0D1526;--bg3:#111B30;--surface:#152040;--surface2:#1C2A48;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --text:#E8EEF9;--text2:#8A9BBE;--text3:#4E5E80;
+  --primary:#00D4B8;--primary-dim:rgba(0,212,184,0.12);--primary-glow:rgba(0,212,184,0.3);
+  --red:#FF4757;--red-dim:rgba(255,71,87,0.14);
+  --orange:#FF8C42;--orange-dim:rgba(255,140,66,0.14);
+  --yellow:#FFD166;--yellow-dim:rgba(255,209,102,0.14);
+  --green:#2ED573;--green-dim:rgba(46,213,115,0.14);
+  --blue:#5352ED;--blue-dim:rgba(83,82,237,0.14);
+  --purple:#A855F7;
+  --radius:16px;--radius-sm:10px;--radius-xs:6px;
+  --shadow:0 4px 24px rgba(0,0,0,0.4);--shadow-sm:0 2px 12px rgba(0,0,0,0.3);
+  --nav-h:68px;--side-w:220px;
+  --font:'Sora',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.5;overflow:hidden}
+#root{height:100%;display:flex;flex-direction:column}
+
+/* ── LAYOUT ── */
+.app-shell{display:grid;grid-template-rows:1fr var(--nav-h);height:100dvh;height:100vh}
+.app-main{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:env(safe-area-inset-bottom)}
+.screen{padding:20px 16px;max-width:720px;margin:0 auto;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Tablet / Unfolded Fold 6 ≥ 600px */
+@media(min-width:600px){
+  .app-shell{grid-template-columns:var(--side-w) 1fr;grid-template-rows:1fr;grid-template-areas:'nav main'}
+  .app-nav{grid-area:nav}
+  .app-main{grid-area:main}
+  .screen{padding:28px 32px;max-width:860px}
+}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{
+  display:flex;align-items:stretch;
+  background:var(--bg2);border-top:1px solid var(--border2);
+  padding-bottom:env(safe-area-inset-bottom);
+  position:relative;z-index:100;
+}
+.bottom-nav .nav-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;padding:8px 4px;cursor:pointer;color:var(--text3);
+  transition:color .2s;border:none;background:none;font-family:var(--font);
+  font-size:10px;font-weight:500;letter-spacing:.3px;
+}
+.bottom-nav .nav-item.active{color:var(--primary)}
+.bottom-nav .nav-item svg{width:22px;height:22px;transition:transform .2s}
+.bottom-nav .nav-item.active svg{transform:scale(1.1)}
+@media(min-width:600px){.bottom-nav{display:none}}
+
+/* ── SIDE NAV ── */
+.side-nav{
+  display:none;flex-direction:column;
+  background:var(--bg2);border-right:1px solid var(--border2);
+  padding:24px 12px;overflow-y:auto;
+}
+.side-nav-logo{display:flex;align-items:center;gap:10px;padding:0 8px 24px;margin-bottom:8px;border-bottom:1px solid var(--border)}
+.side-nav-logo svg{width:32px;height:32px}
+.side-nav-logo span{font-size:18px;font-weight:700;color:var(--primary)}
+.side-nav .nav-item{
+  display:flex;align-items:center;gap:12px;padding:12px 12px;border-radius:var(--radius-sm);
+  cursor:pointer;color:var(--text2);font-size:14px;font-weight:500;
+  transition:all .18s;border:none;background:none;width:100%;font-family:var(--font);
+  margin-bottom:2px;
+}
+.side-nav .nav-item:hover{background:var(--bg3);color:var(--text)}
+.side-nav .nav-item.active{background:var(--primary-dim);color:var(--primary)}
+.side-nav .nav-item svg{width:20px;height:20px;flex-shrink:0}
+@media(min-width:600px){.side-nav{display:flex}}
+
+/* ── CARDS ── */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px}
+.card-sm{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+@media(min-width:600px){.card-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* ── SECTION HEADING ── */
+.section-title{font-size:13px;font-weight:600;color:var(--text3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px;margin-top:8px}
+.page-title{font-size:24px;font-weight:700;margin-bottom:4px}
+.page-sub{font-size:14px;color:var(--text2);margin-bottom:24px}
+
+/* ── STAT CARDS ── */
+.stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:6px}
+.stat-label{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.6px;text-transform:uppercase}
+.stat-value{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--text);line-height:1}
+.stat-value.big{font-size:32px}
+.stat-unit{font-size:13px;color:var(--text2)}
+.stat-sub{font-size:12px;color:var(--text2)}
+
+/* ── BP BADGE ── */
+.bp-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.3px}
+.bp-badge.normal{background:var(--green-dim);color:var(--green)}
+.bp-badge.elevated{background:var(--yellow-dim);color:var(--yellow)}
+.bp-badge.htn1{background:var(--orange-dim);color:var(--orange)}
+.bp-badge.htn2{background:var(--red-dim);color:var(--red)}
+.bp-badge.crisis{background:rgba(255,0,0,.2);color:#FF0000}
+.bp-badge.low{background:var(--blue-dim);color:var(--blue)}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:var(--radius-sm);font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;transition:all .18s;border:none;outline:none}
+.btn-primary{background:var(--primary);color:#000;box-shadow:0 4px 16px var(--primary-glow)}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-primary:active{transform:none;opacity:1}
+.btn-ghost{background:var(--bg3);color:var(--text);border:1px solid var(--border2)}
+.btn-ghost:hover{background:var(--surface2)}
+.btn-danger{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,71,87,.3)}
+.btn-full{width:100%;display:flex}
+.btn-sm{padding:8px 14px;font-size:13px}
+.btn-xs{padding:5px 10px;font-size:12px;border-radius:var(--radius-xs)}
+.btn-icon{padding:10px;border-radius:var(--radius-xs)}
+
+/* ── INPUTS ── */
+.input-group{margin-bottom:16px}
+.input-label{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:6px;display:block}
+.input{
+  width:100%;background:var(--bg3);border:1px solid var(--border2);
+  border-radius:var(--radius-sm);padding:12px 14px;
+  color:var(--text);font-family:var(--font);font-size:15px;outline:none;
+  transition:border-color .18s;
+}
+.input:focus{border-color:var(--primary)}
+.input::placeholder{color:var(--text3)}
+.input-num{font-family:var(--mono);font-size:18px;text-align:center;padding:10px 8px}
+.select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A9BBE' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+
+/* ── TOGGLE ── */
+.toggle-wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+.toggle{position:relative;width:48px;height:28px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:var(--surface2);border-radius:28px;cursor:pointer;transition:.2s}
+.toggle-slider:before{content:'';position:absolute;height:20px;width:20px;left:4px;bottom:4px;background:var(--text3);border-radius:50%;transition:.2s}
+.toggle input:checked+.toggle-slider{background:var(--primary)}
+.toggle input:checked+.toggle-slider:before{transform:translateX(20px);background:#000}
+
+/* ── READING ROW ── */
+.reading-row{display:grid;grid-template-columns:1fr 1fr 1fr 36px;gap:8px;align-items:center;margin-bottom:10px}
+.reading-row-header{display:grid;grid-template-columns:1fr 1fr 1fr 36px;gap:8px;margin-bottom:6px}
+.reading-row-header span{font-size:11px;font-weight:600;color:var(--text3);text-align:center;letter-spacing:.5px;text-transform:uppercase}
+.delete-btn{width:36px;height:36px;border-radius:8px;background:var(--red-dim);color:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:opacity .2s}
+.delete-btn:hover{opacity:.8}
+
+/* ── SESSION BLOCK ── */
+.session-block{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+.session-header{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);cursor:pointer}
+.session-body{padding:14px 16px}
+.session-avg{display:flex;align-items:baseline;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.session-avg .mono{font-family:var(--mono);font-size:22px;font-weight:700}
+
+/* ── TABS ── */
+.tabs{display:flex;background:var(--bg3);border-radius:var(--radius-sm);padding:4px;margin-bottom:20px;gap:4px}
+.tab{flex:1;padding:9px 4px;border-radius:var(--radius-xs);font-size:13px;font-weight:600;text-align:center;cursor:pointer;color:var(--text3);border:none;background:none;font-family:var(--font);transition:all .18s}
+.tab.active{background:var(--surface2);color:var(--primary)}
+
+/* ── MODAL ── */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:flex-end;justify-content:center;z-index:200;animation:fadeIn .2s}
+@media(min-width:600px){.modal-backdrop{align-items:center}}
+.modal{background:var(--bg2);border-radius:24px 24px 0 0;padding:24px 20px;width:100%;max-width:540px;max-height:90dvh;overflow-y:auto;animation:slideUp .25s ease}
+@media(min-width:600px){.modal{border-radius:var(--radius);}}
+@keyframes slideUp{from{transform:translateY(40px)}to{transform:none}}
+.modal-title{font-size:18px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+.close-btn{width:32px;height:32px;border-radius:50%;background:var(--bg3);border:none;cursor:pointer;color:var(--text2);display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1}
+
+/* ── CHART CONTAINER ── */
+.chart-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px;position:relative}
+.chart-title{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:14px}
+
+/* ── MISC ── */
+.divider{height:1px;background:var(--border);margin:16px 0}
+.empty-state{text-align:center;padding:48px 24px;color:var(--text2)}
+.empty-state svg{width:48px;height:48px;margin:0 auto 16px;opacity:.4}
+.empty-state h3{font-size:17px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.empty-state p{font-size:14px;line-height:1.6}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.pill{padding:6px 14px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--border2);color:var(--text2);background:var(--bg3);transition:all .15s}
+.pill.active{background:var(--primary-dim);color:var(--primary);border-color:var(--primary)}
+.flex-between{display:flex;align-items:center;justify-content:space-between}
+.flex-center{display:flex;align-items:center}
+.gap-8{gap:8px}
+.gap-12{gap:12px}
+.mb-0{margin-bottom:0}
+.text-sm{font-size:13px}
+.text-xs{font-size:11px}
+.color-text2{color:var(--text2)}
+.color-primary{color:var(--primary)}
+.color-red{color:var(--red)}
+.mono{font-family:var(--mono)}
+.fw-600{font-weight:600}
+.fw-700{font-weight:700}
+.mt-12{margin-top:12px}
+.mt-20{margin-top:20px}
+.med-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.med-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.med-row:last-child{border-bottom:none}
+.dose-chip{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:var(--font);transition:all .15s}
+.dose-taken{background:var(--green-dim);color:var(--green)}
+.dose-skipped{background:var(--red-dim);color:var(--red)}
+.dose-pending{background:var(--bg3);color:var(--text2);border:1px solid var(--border2)}
+.insight-card{background:var(--bg3);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;border-left:3px solid var(--primary)}
+.insight-card.warn{border-left-color:var(--orange)}
+.insight-card.alert{border-left-color:var(--red)}
+.insight-card.good{border-left-color:var(--green)}
+.insight-title{font-size:13px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.insight-text{font-size:13px;color:var(--text2);line-height:1.6}
+.reminder-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border)}
+.reminder-row:last-child{border-bottom:none}
+.tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.day-tag{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border2);color:var(--text2);background:var(--bg3);transition:all .15s}
+.day-tag.active{background:var(--primary-dim);color:var(--primary);border-color:var(--primary)}
+.ocr-area{border:2px dashed var(--border2);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;transition:border-color .2s;margin-bottom:16px}
+.ocr-area:hover{border-color:var(--primary)}
+.ocr-area.active{border-color:var(--primary);background:var(--primary-dim)}
+video{width:100%;border-radius:var(--radius-sm);background:#000;display:block}
+canvas.ocr-canvas{display:none}
+.onboarding{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;background:var(--bg)}
+.onboarding-card{width:100%;max-width:420px;background:var(--bg2);border:1px solid var(--border);border-radius:24px;padding:32px 28px}
+.step-dots{display:flex;gap:8px;justify-content:center;margin-bottom:32px}
+.step-dot{width:8px;height:8px;border-radius:50%;background:var(--border2);transition:.2s}
+.step-dot.active{background:var(--primary);width:24px;border-radius:4px}
+.gender-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+.gender-btn{padding:16px 8px;border-radius:var(--radius-sm);border:1px solid var(--border2);background:var(--bg3);cursor:pointer;text-align:center;font-size:13px;font-weight:500;color:var(--text2);font-family:var(--font);transition:all .15s}
+.gender-btn.active{border-color:var(--primary);background:var(--primary-dim);color:var(--primary)}
+.gender-btn .icon{font-size:24px;display:block;margin-bottom:6px}
+.fab{position:fixed;bottom:calc(var(--nav-h) + 16px + env(safe-area-inset-bottom));right:20px;width:56px;height:56px;border-radius:50%;background:var(--primary);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px var(--primary-glow);z-index:50;transition:transform .2s}
+.fab:hover{transform:scale(1.05)}
+.fab:active{transform:scale(.97)}
+@media(min-width:600px){.fab{bottom:20px;right:32px}}
+.notif-banner{background:var(--orange-dim);border:1px solid var(--orange);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--orange);display:flex;align-items:center;gap:10px}
+.today-session-item{padding:14px 16px;border-radius:var(--radius-sm);background:var(--bg3);border:1px solid var(--border);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:border-color .18s}
+.today-session-item:hover{border-color:var(--primary)}
+.today-session-item.done{border-color:var(--green);background:var(--green-dim)}
+.history-date-group{margin-bottom:20px}
+.history-date-label{font-size:13px;font-weight:600;color:var(--text3);margin-bottom:10px;letter-spacing:.4px}
+.profile-stat{text-align:center;padding:16px;background:var(--bg3);border-radius:var(--radius-sm);border:1px solid var(--border)}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+@media(min-width:600px){.profile-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const{useState,useEffect,useRef,useCallback,useReducer,useMemo}=React;
+
+/*=== DB LAYER ===*/
+const DB_NAME='CardioLogDB',DB_VER=2;
+let _db=null;
+const getDB=()=>new Promise((res,rej)=>{
+  if(_db){res(_db);return;}
+  const r=indexedDB.open(DB_NAME,DB_VER);
+  r.onupgradeneeded=e=>{
+    const d=e.target.result;
+    ['sessions','medications','medLogs','reminders'].forEach(s=>{
+      if(!d.objectStoreNames.contains(s))d.createObjectStore(s,{keyPath:'id'});
+    });
+    if(!d.objectStoreNames.contains('profile'))d.createObjectStore('profile');
+  };
+  r.onsuccess=e=>{_db=e.target.result;res(_db);};
+  r.onerror=()=>rej(r.error);
+});
+const dbOp=(store,mode,fn)=>getDB().then(d=>new Promise((res,rej)=>{
+  const tx=d.transaction(store,mode),st=tx.objectStore(store),rq=fn(st);
+  rq.onsuccess=()=>res(rq.result);rq.onerror=()=>rej(rq.error);
+}));
+const DB={
+  get:(s,k)=>dbOp(s,'readonly',st=>st.get(k)),
+  getAll:(s)=>dbOp(s,'readonly',st=>st.getAll()),
+  put:(s,v,k)=>dbOp(s,'readwrite',st=>k!==undefined?st.put(v,k):st.put(v)),
+  del:(s,k)=>dbOp(s,'readwrite',st=>st.delete(k)),
+};
+
+/*=== UTILS ===*/
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2);
+const toISO=d=>new Date(d).toISOString().split('T')[0];
+const todayStr=()=>toISO(new Date());
+const fmtDate=s=>{const d=new Date(s+'T12:00:00');return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})};
+const fmtTime=ts=>new Date(ts).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+const fmtDateShort=s=>{const d=new Date(s+'T12:00:00');return d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})};
+
+const BP_CAT=(sys,dia)=>{
+  if(!sys||!dia)return null;
+  if(sys>180||dia>120)return{label:'Hypertensive Crisis',short:'CRISIS',cls:'crisis',color:'#FF0000',sev:5,advice:'Seek emergency medical attention immediately. Stop reading and call emergency services if you feel unwell.'};
+  if(sys>=140||dia>=90)return{label:'Stage 2 Hypertension',short:'HTN-2',cls:'htn2',color:'#FF4757',sev:4,advice:'Consult your doctor promptly. Medication review and lifestyle changes are important.'};
+  if(sys>=130||dia>=80)return{label:'Stage 1 Hypertension',short:'HTN-1',cls:'htn1',color:'#FF8C42',sev:3,advice:'Discuss with your doctor. Lifestyle changes (diet, exercise, salt reduction) should be prioritised.'};
+  if(sys>=120&&dia<80)return{label:'Elevated',short:'ELEV',cls:'elevated',color:'#FFD166',sev:2,advice:'Your BP is above optimal. Heart-healthy habits (DASH diet, regular exercise) are recommended.'};
+  if(sys<90||dia<60)return{label:'Low Blood Pressure',short:'LOW',cls:'low',color:'#5352ED',sev:1,advice:'Monitor for dizziness or fainting. Stay hydrated. Consult doctor if persistent or symptomatic.'};
+  return{label:'Normal',short:'NORM',cls:'normal',color:'#2ED573',sev:0,advice:'Great reading. Continue your healthy lifestyle.'};
+};
+
+const avgReadings=readings=>{
+  if(!readings||!readings.length)return null;
+  const v=readings.filter(r=>r.sys&&r.dia);
+  if(!v.length)return null;
+  return{sys:Math.round(v.reduce((a,r)=>a+r.sys,0)/v.length),dia:Math.round(v.reduce((a,r)=>a+r.dia,0)/v.length),pul:Math.round(v.reduce((a,r)=>a+(r.pul||0),0)/v.length)};
+};
+
+const bmi=(wt,ht)=>{if(!wt||!ht)return null;const h=ht/100;return(wt/(h*h)).toFixed(1)};
+const bmiCat=b=>{if(!b)return null;if(b<18.5)return{label:'Underweight',color:'#5352ED'};if(b<25)return{label:'Normal',color:'#2ED573'};if(b<30)return{label:'Overweight',color:'#FFD166'};return{label:'Obese',color:'#FF4757'}};
+
+const SESSION_INFO={
+  morning:{label:'Morning',emoji:'🌅',hint:'07:00–09:00'},
+  afternoon:{label:'Afternoon',emoji:'☀️',hint:'12:00–14:00'},
+  evening:{label:'Evening',emoji:'🌙',hint:'19:00–21:00'},
+};
+const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MED_COLORS=['#00D4B8','#FF4757','#5352ED','#FFD166','#FF8C42','#A855F7','#2ED573','#FF6B9D'];
+
+/*=== NOTIFICATION HELPER — Capacitor + Web fallback ===*/
+let _notifId=1000;
+const nextNotifId=()=>++_notifId;
+
+const requestNotifPerm=async()=>{
+  if(window.isNative){
+    try{
+      const {LocalNotifications}=window.CapPlugins;
+      const res=await LocalNotifications.requestPermissions();
+      return res.display==='granted';
+    }catch{return false;}
+  }
+  if(!('Notification'in window))return false;
+  const p=await Notification.requestPermission();
+  return p==='granted';
+};
+
+const sendNotif=(title,body,tag)=>{
+  if(window.isNative){
+    try{
+      const{LocalNotifications}=window.CapPlugins;
+      LocalNotifications.schedule({notifications:[{title,body,id:nextNotifId(),smallIcon:'ic_notification',iconColor:'#00D4B8'}]});
+    }catch(e){console.warn('Notif err',e);}
+    return;
+  }
+  if(Notification.permission==='granted'){
+    new Notification(title,{body,tag,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="%23080D1A"/><path d="M32 14 C32 14 50 24 50 36 C50 46 42 53 32 58 C22 53 14 46 14 36 C14 24 32 14 32 14Z" fill="%2300D4B8"/></svg>'});
+  }
+};
+
+// Schedule a future notification — uses Capacitor on native, setTimeout on web
+const scheduleNotif=async(title,body,tag,fireAt)=>{
+  const delay=fireAt-Date.now();
+  if(delay<=0||delay>86400000)return;
+  if(window.isNative){
+    try{
+      const{LocalNotifications}=window.CapPlugins;
+      await LocalNotifications.schedule({notifications:[{
+        title,body,id:nextNotifId(),schedule:{at:new Date(fireAt)},
+        smallIcon:'ic_notification',iconColor:'#00D4B8',
+        channelId:'cardiolog_reminders',
+      }]});
+    }catch(e){console.warn('Schedule err',e);}
+    return;
+  }
+  setTimeout(()=>sendNotif(title,body,tag),delay);
+};
+
+/*=== SHARED COMPONENTS ===*/
+const BPBadge=({sys,dia})=>{
+  const cat=BP_CAT(sys,dia);
+  if(!cat)return null;
+  return<span className={`bp-badge ${cat.cls}`}>{cat.short}</span>;
+};
+
+const Toggle=({checked,onChange})=>(
+  <label className="toggle">
+    <input type="checkbox" checked={checked} onChange={e=>onChange(e.target.checked)}/>
+    <span className="toggle-slider"/>
+  </label>
+);
+
+const Modal=({title,onClose,children})=>(
+  <div className="modal-backdrop" onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
+    <div className="modal">
+      <div className="modal-title">
+        {title}
+        <button className="close-btn" onClick={onClose}>✕</button>
+      </div>
+      {children}
+    </div>
+  </div>
+);
+
+/*=== ICONS ===*/
+const Icon={
+  heart:()=><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21C12 21 3 14.5 3 8.5C3 5.4 5.4 3 8.5 3C10.2 3 11.7 3.8 12 5C12.3 3.8 13.8 3 15.5 3C18.6 3 21 5.4 21 8.5C21 14.5 12 21 12 21Z"/></svg>,
+  plus:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>,
+  history:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
+  chart:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>,
+  pill:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M10.5 20.5L3.5 13.5a5 5 0 017-7l7 7a5 5 0 01-7 7z"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>,
+  bell:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>,
+  user:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+  trash:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>,
+  camera:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>,
+  export:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
+  check:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>,
+  chevron:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="6 9 12 15 18 9"/></svg>,
+  chevronRight:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="9 18 15 12 9 6"/></svg>,
+  info:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>,
+  home:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+  edit:()=><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>,
+};
+
+/*=== LOGO ===*/
+const Logo=()=>(
+  <svg viewBox="0 0 32 32" fill="none">
+    <rect width="32" height="32" rx="8" fill="var(--primary)"/>
+    <path d="M16 6 C16 6 26 11.5 26 18 C26 23.5 21.5 27.5 16 30 C10.5 27.5 6 23.5 6 18 C6 11.5 16 6 16 6Z" fill="rgba(0,0,0,0.4)"/>
+    <path d="M8 18 L11.5 14.5 L14 19 L18 11 L21 18 L24 18" stroke="#000" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+/*=== NAVIGATION ===*/
+const NAV_ITEMS=[
+  {id:'dashboard',label:'Home',icon:'home'},
+  {id:'record',label:'Record',icon:'plus'},
+  {id:'history',label:'History',icon:'history'},
+  {id:'insights',label:'Insights',icon:'chart'},
+  {id:'medications',label:'Meds',icon:'pill'},
+  {id:'reminders',label:'Alerts',icon:'bell'},
+  {id:'profile',label:'Profile',icon:'user'},
+];
+
+const BottomNav=({view,setView})=>(
+  <nav className="bottom-nav">
+    {NAV_ITEMS.slice(0,6).map(it=>(
+      <button key={it.id} className={`nav-item${view===it.id?' active':''}`} onClick={()=>setView(it.id)}>
+        {React.createElement(Icon[it.icon])}
+        <span>{it.label}</span>
+      </button>
+    ))}
+  </nav>
+);
+
+const SideNav=({view,setView})=>(
+  <nav className="side-nav app-nav">
+    <div className="side-nav-logo"><Logo/><span>CardioLog</span></div>
+    {NAV_ITEMS.map(it=>(
+      <button key={it.id} className={`nav-item${view===it.id?' active':''}`} onClick={()=>setView(it.id)}>
+        {React.createElement(Icon[it.icon])}
+        <span>{it.label}</span>
+      </button>
+    ))}
+  </nav>
+);
+
+/*=== ONBOARDING ===*/
+const Onboarding=({onDone})=>{
+  const[step,setStep]=useState(0);
+  const[form,setForm]=useState({name:'',gender:'',age:'',height:'',weight:''});
+  const set=k=>v=>setForm(f=>({...f,[k]:v}));
+  const canNext=[
+    form.name.trim()&&form.gender&&form.age,
+    form.height&&form.weight,
+    true
+  ][step];
+
+  const finish=async()=>{
+    const profile={name:form.name.trim(),gender:form.gender,age:parseInt(form.age),height:parseFloat(form.height),weight:parseFloat(form.weight),createdAt:new Date().toISOString()};
+    await DB.put('profile',profile,'data');
+    const granted=await requestNotifPerm();
+    onDone(profile,granted);
+  };
+
+  return(
+    <div className="onboarding">
+      <div className="onboarding-card">
+        <div style={{textAlign:'center',marginBottom:24}}>
+          <Logo/>
+          <h1 style={{fontSize:24,fontWeight:700,marginTop:12,marginBottom:4}}>CardioLog</h1>
+          <p style={{color:'var(--text2)',fontSize:14}}>Your personal BP monitor</p>
+        </div>
+        <div className="step-dots">
+          {[0,1,2].map(i=><div key={i} className={`step-dot${step>=i?' active':''}`}/>)}
+        </div>
+
+        {step===0&&<>
+          <div className="input-group">
+            <label className="input-label">Your name</label>
+            <input className="input" placeholder="e.g. Jimi" value={form.name} onChange={e=>set('name')(e.target.value)}/>
+          </div>
+          <div className="input-group">
+            <label className="input-label">Gender</label>
+            <div className="gender-grid">
+              {[{v:'male',l:'Male',i:'♂'},{v:'female',l:'Female',i:'♀'},{v:'other',l:'Other',i:'⚧'}].map(g=>(
+                <button key={g.v} className={`gender-btn${form.gender===g.v?' active':''}`} onClick={()=>set('gender')(g.v)}>
+                  <span className="icon">{g.i}</span>{g.l}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="input-group">
+            <label className="input-label">Age (years)</label>
+            <input className="input" type="number" placeholder="e.g. 45" value={form.age} onChange={e=>set('age')(e.target.value)} min="1" max="120"/>
+          </div>
+        </>}
+
+        {step===1&&<>
+          <div className="input-group">
+            <label className="input-label">Height (cm)</label>
+            <input className="input" type="number" placeholder="e.g. 178" value={form.height} onChange={e=>set('height')(e.target.value)} min="100" max="250"/>
+          </div>
+          <div className="input-group">
+            <label className="input-label">Weight (kg)</label>
+            <input className="input" type="number" placeholder="e.g. 82" value={form.weight} onChange={e=>set('weight')(e.target.value)} min="20" max="300"/>
+          </div>
+          <p style={{fontSize:13,color:'var(--text2)',marginBottom:16,lineHeight:1.6}}>
+            This helps CardioLog personalise BP insights based on your body metrics.
+          </p>
+        </>}
+
+        {step===2&&<>
+          <p style={{fontSize:14,color:'var(--text)',lineHeight:1.7,marginBottom:20}}>
+            CardioLog will send you reminders for measuring sessions and medications. 
+            Notifications are 100% local — no data leaves your device.
+          </p>
+          <div style={{background:'var(--primary-dim)',borderRadius:'var(--radius-sm)',padding:'16px',marginBottom:20}}>
+            <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:8}}>
+              {React.createElement(Icon.bell)}
+              <span style={{fontWeight:600}}>Local notifications only</span>
+            </div>
+            <p style={{fontSize:13,color:'var(--text2)'}}>All data stays on your device. No accounts, no cloud, no tracking.</p>
+          </div>
+        </>}
+
+        <div style={{display:'flex',gap:10,marginTop:8}}>
+          {step>0&&<button className="btn btn-ghost" style={{flex:1}} onClick={()=>setStep(s=>s-1)}>Back</button>}
+          <button className="btn btn-primary" style={{flex:1}} disabled={!canNext}
+            onClick={()=>step<2?setStep(s=>s+1):finish()}>
+            {step===2?'Get Started →':'Continue →'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/*=== RECORD SCREEN ===*/
+const RecordScreen=({onSave,initSession})=>{
+  const[sessionType,setSessionType]=useState(initSession||'morning');
+  const[date,setDate]=useState(todayStr());
+  const[readings,setReadings]=useState([newReading()]);
+  const[notes,setNotes]=useState('');
+  const[saving,setSaving]=useState(false);
+  const[ocrOpen,setOcrOpen]=useState(false);
+  const[ocrIdx,setOcrIdx]=useState(0);
+
+  function newReading(){return{id:uid(),sys:'',dia:'',pul:'',ts:new Date().toISOString()};}
+
+  const addReading=()=>{if(readings.length<5)setReadings(r=>[...r,newReading()])};
+  const delReading=i=>setReadings(r=>r.filter((_,j)=>j!==i));
+  const updateR=(i,k,v)=>setReadings(r=>r.map((x,j)=>j===i?{...x,[k]:v,ts:new Date().toISOString()}:x));
+
+  const avg=useMemo(()=>avgReadings(readings.map(r=>({sys:parseInt(r.sys),dia:parseInt(r.dia),pul:parseInt(r.pul)}))),
+    [readings]);
+
+  const save=async()=>{
+    const valid=readings.filter(r=>r.sys&&r.dia);
+    if(!valid.length)return;
+    setSaving(true);
+    const session={id:uid(),date,sessionType,readings:valid.map(r=>({...r,sys:parseInt(r.sys),dia:parseInt(r.dia),pul:parseInt(r.pul)||0})),notes,createdAt:new Date().toISOString()};
+    await DB.put('sessions',session);
+    onSave();
+    setSaving(false);
+  };
+
+  const fillFromOCR=(idx,sys,dia,pul)=>{
+    setReadings(r=>r.map((x,j)=>j===idx?{...x,sys:String(sys),dia:String(dia),pul:String(pul||'')}:x));
+    setOcrOpen(false);
+  };
+
+  return(
+    <div className="screen">
+      <h1 className="page-title">Record Session</h1>
+      <p className="page-sub">Enter 3–5 readings. Times are captured automatically.</p>
+
+      <div className="section-title">Session</div>
+      <div className="pill-row">
+        {Object.entries(SESSION_INFO).map(([k,v])=>(
+          <button key={k} className={`pill${sessionType===k?' active':''}`} onClick={()=>setSessionType(k)}>
+            {v.emoji} {v.label} <span style={{color:'var(--text3)',fontSize:11}}>{v.hint}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="input-group">
+        <label className="input-label">Date</label>
+        <input className="input" type="date" value={date} onChange={e=>setDate(e.target.value)} max={todayStr()}/>
+      </div>
+
+      <div className="section-title">Readings</div>
+      <div className="reading-row-header">
+        <span>SYS mmHg</span><span>DIA mmHg</span><span>PULSE bpm</span><span/>
+      </div>
+      {readings.map((r,i)=>(
+        <div key={r.id} className="reading-row">
+          <input className="input input-num" type="number" placeholder="120" value={r.sys}
+            onChange={e=>updateR(i,'sys',e.target.value)} min="50" max="300"/>
+          <input className="input input-num" type="number" placeholder="80" value={r.dia}
+            onChange={e=>updateR(i,'dia',e.target.value)} min="30" max="200"/>
+          <input className="input input-num" type="number" placeholder="72" value={r.pul}
+            onChange={e=>updateR(i,'pul',e.target.value)} min="30" max="220"/>
+          <button className="delete-btn" onClick={()=>delReading(i)} disabled={readings.length===1}>🗑</button>
+        </div>
+      ))}
+
+      <div style={{display:'flex',gap:10,marginBottom:20}}>
+        {readings.length<5&&(
+          <button className="btn btn-ghost btn-sm" onClick={addReading}>
+            {React.createElement(Icon.plus)} Add Reading
+          </button>
+        )}
+        <button className="btn btn-ghost btn-sm" onClick={()=>{setOcrIdx(readings.length-1);setOcrOpen(true)}}>
+          {React.createElement(Icon.camera)} OCR Scan
+        </button>
+      </div>
+
+      {avg&&<div className="session-avg card-sm" style={{background:'var(--primary-dim)',borderColor:'var(--primary)',marginBottom:16}}>
+        <div style={{fontSize:13,fontWeight:600,color:'var(--primary)',marginBottom:8}}>Session Average</div>
+        <div style={{display:'flex',alignItems:'baseline',gap:12,flexWrap:'wrap'}}>
+          <span><span className="mono" style={{fontSize:24,fontWeight:700}}>{avg.sys}</span><span style={{color:'var(--text2)',fontSize:12,marginLeft:3}}>SYS</span></span>
+          <span style={{color:'var(--text3)'}}>/</span>
+          <span><span className="mono" style={{fontSize:24,fontWeight:700}}>{avg.dia}</span><span style={{color:'var(--text2)',fontSize:12,marginLeft:3}}>DIA</span></span>
+          {avg.pul>0&&<span style={{marginLeft:8}}><span className="mono" style={{fontSize:18}}>{avg.pul}</span><span style={{color:'var(--text2)',fontSize:12,marginLeft:3}}>BPM</span></span>}
+          <BPBadge sys={avg.sys} dia={avg.dia}/>
+        </div>
+        {BP_CAT(avg.sys,avg.dia)&&<p style={{fontSize:12,color:'var(--text2)',marginTop:8}}>{BP_CAT(avg.sys,avg.dia).advice}</p>}
+      </div>}
+
+      <div className="input-group">
+        <label className="input-label">Notes (optional)</label>
+        <textarea className="input" rows="2" placeholder="e.g. taken after rest, felt anxious" value={notes} onChange={e=>setNotes(e.target.value)} style={{resize:'none'}}/>
+      </div>
+
+      <button className="btn btn-primary btn-full" onClick={save} disabled={saving||!readings.some(r=>r.sys&&r.dia)}>
+        {saving?'Saving…':'Save Session ✓'}
+      </button>
+
+      {ocrOpen&&<OCRModal idx={ocrIdx} onCapture={fillFromOCR} onClose={()=>setOcrOpen(false)}/>}
+    </div>
+  );
+};
+
+/*=== OCR MODAL ===*/
+const OCRModal=({idx,onCapture,onClose})=>{
+  const videoRef=useRef();
+  const canvasRef=useRef();
+  const[status,setStatus]=useState('idle');
+  const[result,setResult]=useState(null);
+  const[stream,setStream]=useState(null);
+
+  useEffect(()=>{
+    startCam();
+    return()=>{if(stream)stream.getTracks().forEach(t=>t.stop())};
+  },[]);
+
+  const startCam=async()=>{
+    try{
+      const s=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}}});
+      setStream(s);
+      if(videoRef.current){videoRef.current.srcObject=s;videoRef.current.play();}
+    }catch{setStatus('error');}
+  };
+
+  const capture=async()=>{
+    if(!videoRef.current)return;
+    setStatus('processing');
+    const v=videoRef.current;
+    const c=canvasRef.current;
+    c.width=v.videoWidth;c.height=v.videoHeight;
+    c.getContext('2d').drawImage(v,0,0);
+    const dataURL=c.toDataURL('image/png');
+
+    // Load Tesseract if not loaded
+    if(!window.Tesseract){
+      const s=document.createElement('script');
+      s.src='https://unpkg.com/tesseract.js@4/dist/tesseract.min.js';
+      document.head.appendChild(s);
+      await new Promise(r=>s.onload=r);
+    }
+
+    try{
+      const {data:{text}}=await window.Tesseract.recognize(dataURL,'eng',{logger:()=>{}});
+      const nums=text.match(/\d{2,3}/g);
+      if(nums&&nums.length>=2){
+        // Find plausible BP numbers: sys 80-200, dia 40-140, pul 40-200
+        const bpNums=nums.map(Number).filter(n=>n>=40&&n<=250);
+        if(bpNums.length>=2){
+          const sys=bpNums.find(n=>n>=80&&n<=250)||bpNums[0];
+          const dia=bpNums.find(n=>n<sys&&n>=40&&n<=140)||bpNums[1];
+          const pul=bpNums.find(n=>n>=40&&n<=200&&n!==sys&&n!==dia)||0;
+          setResult({sys,dia,pul});setStatus('done');
+        }else{setStatus('failed');}
+      }else{setStatus('failed');}
+    }catch{setStatus('failed');}
+  };
+
+  return(
+    <Modal title="📷 OCR — Scan Monitor" onClose={onClose}>
+      <video ref={videoRef} playsInline autoPlay muted style={{borderRadius:'var(--radius-sm)',marginBottom:16,maxHeight:240,objectFit:'cover',width:'100%'}}/>
+      <canvas ref={canvasRef} style={{display:'none'}}/>
+
+      {status==='idle'&&<button className="btn btn-primary btn-full" onClick={capture}>Capture &amp; Read</button>}
+      {status==='processing'&&<div style={{textAlign:'center',padding:16,color:'var(--text2)'}}>🔍 Reading numbers…</div>}
+      {status==='failed'&&<>
+        <div style={{color:'var(--orange)',textAlign:'center',marginBottom:12,fontSize:14}}>Could not detect BP numbers. Try better lighting or position.</div>
+        <button className="btn btn-ghost btn-full" onClick={()=>setStatus('idle')}>Retry</button>
+      </>}
+      {status==='error'&&<div style={{color:'var(--red)',textAlign:'center',fontSize:14}}>Camera access denied. Enable camera permissions.</div>}
+      {status==='done'&&result&&<>
+        <div style={{background:'var(--green-dim)',borderRadius:'var(--radius-sm)',padding:16,marginBottom:16,textAlign:'center'}}>
+          <div style={{fontSize:13,color:'var(--green)',marginBottom:8}}>✓ Detected</div>
+          <span className="mono" style={{fontSize:28,fontWeight:700}}>{result.sys}/{result.dia}</span>
+          {result.pul>0&&<span className="mono" style={{fontSize:20,marginLeft:16,color:'var(--text2)'}}>♥ {result.pul}</span>}
+        </div>
+        <div style={{display:'flex',gap:10}}>
+          <button className="btn btn-ghost" style={{flex:1}} onClick={()=>setStatus('idle')}>Retake</button>
+          <button className="btn btn-primary" style={{flex:1}} onClick={()=>onCapture(idx,result.sys,result.dia,result.pul)}>Use These</button>
+        </div>
+      </>}
+    </Modal>
+  );
+};
+
+/*=== DASHBOARD ===*/
+const Dashboard=({sessions,medications,medLogs,reminders,profile,setView,setInitSession})=>{
+  const today=todayStr();
+  const todaySessions=sessions.filter(s=>s.date===today);
+  const allReadings=sessions.flatMap(s=>s.readings.map(r=>({...r,date:s.date})));
+
+  const last7=sessions.filter(s=>{const d=new Date(s.date);const w=new Date();w.setDate(w.getDate()-7);return d>=w});
+  const avgAll=avgReadings(last7.flatMap(s=>s.readings));
+
+  const sessionsDone=new Set(todaySessions.map(s=>s.sessionType));
+  const sessionTypes=['morning','afternoon','evening'];
+
+  const todayMeds=[];
+  if(medications){
+    medications.filter(m=>m.active).forEach(m=>{
+      (m.times||[]).forEach(t=>{
+        const logKey=`${today}_${m.id}_${t}`;
+        const log=medLogs.find(l=>l.key===logKey);
+        todayMeds.push({med:m,time:t,log,logKey});
+      });
+    });
+    todayMeds.sort((a,b)=>a.time.localeCompare(b.time));
+  }
+
+  const hour=new Date().getHours();
+  const greeting=hour<12?'Good morning':hour<17?'Good afternoon':'Good evening';
+
+  return(
+    <div className="screen">
+      <div style={{marginBottom:24}}>
+        <div style={{fontSize:13,color:'var(--text2)',marginBottom:2}}>{greeting},</div>
+        <h1 style={{fontSize:28,fontWeight:700}}>{profile?.name||'there'} 👋</h1>
+        <div style={{fontSize:13,color:'var(--text3)'}}>{new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'})}</div>
+      </div>
+
+      {/* 7-day average */}
+      {avgAll?(
+        <div className="card" style={{background:'linear-gradient(135deg,var(--bg3),var(--surface))',marginBottom:14}}>
+          <div className="section-title" style={{marginBottom:8}}>7-Day Average</div>
+          <div style={{display:'flex',alignItems:'baseline',gap:12,marginBottom:10}}>
+            <span><span className="mono" style={{fontSize:36,fontWeight:700,color:'var(--text)'}}>{avgAll.sys}</span><span style={{color:'var(--text2)',fontSize:13}}> SYS</span></span>
+            <span style={{color:'var(--text3)',fontSize:20}}>/</span>
+            <span><span className="mono" style={{fontSize:36,fontWeight:700,color:'var(--text)'}}>{avgAll.dia}</span><span style={{color:'var(--text2)',fontSize:13}}> DIA</span></span>
+          </div>
+          <div style={{display:'flex',alignItems:'center',gap:10}}>
+            <BPBadge sys={avgAll.sys} dia={avgAll.dia}/>
+            {avgAll.pul>0&&<span style={{fontSize:13,color:'var(--text2)'}}>♥ {avgAll.pul} bpm</span>}
+          </div>
+        </div>
+      ):(
+        <div className="card" style={{textAlign:'center',padding:'24px 20px'}}>
+          <div style={{fontSize:32,marginBottom:8}}>🫀</div>
+          <div style={{fontWeight:600,marginBottom:6}}>No readings yet</div>
+          <div style={{fontSize:13,color:'var(--text2)'}}>Record your first session to see your average here.</div>
+        </div>
+      )}
+
+      {/* Today's sessions */}
+      <div className="section-title">Today's Sessions</div>
+      {sessionTypes.map(st=>{
+        const done=sessionsDone.has(st);
+        const info=SESSION_INFO[st];
+        const s=todaySessions.find(x=>x.sessionType===st);
+        const avg=s?avgReadings(s.readings):null;
+        return(
+          <div key={st} className={`today-session-item${done?' done':''}`}
+            onClick={()=>{if(!done){setInitSession(st);setView('record')}}}>
+            <div style={{display:'flex',alignItems:'center',gap:10}}>
+              <span style={{fontSize:20}}>{info.emoji}</span>
+              <div>
+                <div style={{fontWeight:600,fontSize:14}}>{info.label}</div>
+                <div style={{fontSize:12,color:'var(--text2)'}}>{info.hint}</div>
+              </div>
+            </div>
+            {done&&avg?(
+              <div style={{textAlign:'right'}}>
+                <span className="mono" style={{fontSize:16,fontWeight:700}}>{avg.sys}/{avg.dia}</span>
+                <div style={{marginTop:2}}><BPBadge sys={avg.sys} dia={avg.dia}/></div>
+              </div>
+            ):(
+              <div style={{display:'flex',alignItems:'center',gap:6,color:'var(--text3)',fontSize:13}}>
+                Record {React.createElement(Icon.chevronRight)}
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      {/* Today's meds */}
+      {todayMeds.length>0&&<>
+        <div className="section-title" style={{marginTop:20}}>Medications Due Today</div>
+        <div className="card-sm">
+          {todayMeds.slice(0,4).map(({med,time,log,logKey})=>(
+            <div key={logKey} className="med-row">
+              <div className="med-dot" style={{background:med.color||'var(--primary)'}}/>
+              <div style={{flex:1}}>
+                <div style={{fontSize:14,fontWeight:500}}>{med.name}</div>
+                <div style={{fontSize:12,color:'var(--text2)'}}>{med.dosage} · {time}</div>
+              </div>
+              <span className={`dose-chip${log?.taken?' dose-taken':log?.skipped?' dose-skipped':' dose-pending'}`}>
+                {log?.taken?'✓ Taken':log?.skipped?'Skipped':'Pending'}
+              </span>
+            </div>
+          ))}
+        </div>
+      </>}
+
+      {/* FAB */}
+      <div style={{height:80}}/>
+      <button className="fab" onClick={()=>setView('record')}>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="3" strokeLinecap="round">
+          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+      </button>
+    </div>
+  );
+};
+
+/*=== HISTORY SCREEN ===*/
+const HistoryScreen=({sessions})=>{
+  const[period,setPeriod]=useState('30');
+  const[expanded,setExpanded]=useState({});
+
+  const filtered=useMemo(()=>{
+    if(period==='all')return sessions;
+    const cutoff=new Date();
+    cutoff.setDate(cutoff.getDate()-parseInt(period));
+    return sessions.filter(s=>new Date(s.date)>=cutoff);
+  },[sessions,period]);
+
+  const grouped=useMemo(()=>{
+    const g={};
+    filtered.forEach(s=>{
+      if(!g[s.date])g[s.date]=[];
+      g[s.date].push(s);
+    });
+    return Object.entries(g).sort((a,b)=>b[0].localeCompare(a[0]));
+  },[filtered]);
+
+  const toggleExpand=(id)=>setExpanded(e=>({...e,[id]:!e[id]}));
+
+  if(!sessions.length)return(
+    <div className="screen">
+      <h1 className="page-title">History</h1>
+      <div className="empty-state">
+        {React.createElement(Icon.history)}
+        <h3>No readings yet</h3>
+        <p>Record your first BP session and it will appear here.</p>
+      </div>
+    </div>
+  );
+
+  return(
+    <div className="screen">
+      <h1 className="page-title">History</h1>
+      <p className="page-sub">{filtered.length} session{filtered.length!==1?'s':''}</p>
+      <div className="tabs">
+        {[['7','7 Days'],['30','30 Days'],['90','90 Days'],['365','Year'],['all','All']].map(([v,l])=>(
+          <button key={v} className={`tab${period===v?' active':''}`} onClick={()=>setPeriod(v)}>{l}</button>
+        ))}
+      </div>
+      {grouped.map(([date,ss])=>(
+        <div key={date} className="history-date-group">
+          <div className="history-date-label">{fmtDateShort(date)}</div>
+          {ss.map(s=>{
+            const avg=avgReadings(s.readings);
+            const cat=avg?BP_CAT(avg.sys,avg.dia):null;
+            const exp=expanded[s.id];
+            return(
+              <div key={s.id} className="session-block">
+                <div className="session-header" onClick={()=>toggleExpand(s.id)}>
+                  <div style={{display:'flex',alignItems:'center',gap:10}}>
+                    <span style={{fontSize:18}}>{SESSION_INFO[s.sessionType]?.emoji}</span>
+                    <div>
+                      <div style={{fontWeight:600,fontSize:14}}>{SESSION_INFO[s.sessionType]?.label}</div>
+                      <div style={{fontSize:12,color:'var(--text2)'}}>{s.readings.length} reading{s.readings.length>1?'s':''}</div>
+                    </div>
+                  </div>
+                  <div style={{display:'flex',alignItems:'center',gap:8}}>
+                    {avg&&<>
+                      <span className="mono" style={{fontSize:16,fontWeight:700}}>{avg.sys}/{avg.dia}</span>
+                      {cat&&<span className="bp-badge" style={{background:cat.color+'22',color:cat.color}}>{cat.short}</span>}
+                    </>}
+                    <span style={{color:'var(--text3)',transform:exp?'rotate(180deg)':'none',transition:'.2s',display:'flex'}}>{React.createElement(Icon.chevron)}</span>
+                  </div>
+                </div>
+                {exp&&<div className="session-body">
+                  <div style={{display:'grid',gridTemplateColumns:'auto 1fr 1fr 1fr',gap:'6px 12px',fontSize:12,color:'var(--text3)',fontWeight:600,textTransform:'uppercase',letterSpacing:'.5px',marginBottom:8}}>
+                    <span>Time</span><span style={{textAlign:'center'}}>SYS</span><span style={{textAlign:'center'}}>DIA</span><span style={{textAlign:'center'}}>PULSE</span>
+                  </div>
+                  {s.readings.map((r,i)=>(
+                    <div key={r.id||i} style={{display:'grid',gridTemplateColumns:'auto 1fr 1fr 1fr',gap:'6px 12px',padding:'6px 0',borderBottom:'1px solid var(--border)'}}>
+                      <span style={{fontSize:12,color:'var(--text2)'}}>{fmtTime(r.ts)}</span>
+                      <span className="mono" style={{textAlign:'center',fontWeight:700,fontSize:15}}>{r.sys}</span>
+                      <span className="mono" style={{textAlign:'center',fontWeight:700,fontSize:15}}>{r.dia}</span>
+                      <span className="mono" style={{textAlign:'center',color:'var(--text2)',fontSize:14}}>{r.pul||'—'}</span>
+                    </div>
+                  ))}
+                  {avg&&<div className="session-avg">
+                    <span style={{fontSize:13,color:'var(--text2)'}}>Avg:</span>
+                    <span className="mono" style={{fontSize:20,fontWeight:700}}>{avg.sys}/{avg.dia}</span>
+                    {avg.pul>0&&<span style={{color:'var(--text2)',fontSize:13}}>♥ {avg.pul}</span>}
+                    {cat&&<BPBadge sys={avg.sys} dia={avg.dia}/>}
+                  </div>}
+                  {s.notes&&<p style={{fontSize:13,color:'var(--text2)',marginTop:10,fontStyle:'italic'}}>"{s.notes}"</p>}
+                </div>}
+              </div>
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+/*=== INSIGHTS SCREEN ===*/
+const InsightsScreen=({sessions,profile})=>{
+  const[period,setPeriod]=useState('30');
+  const trendRef=useRef();
+  const todRef=useRef();
+  const distRef=useRef();
+  const trendChart=useRef();
+  const todChart=useRef();
+  const distChart=useRef();
+
+  const filtered=useMemo(()=>{
+    if(period==='all')return sessions;
+    const cutoff=new Date();cutoff.setDate(cutoff.getDate()-parseInt(period));
+    return sessions.filter(s=>new Date(s.date)>=cutoff);
+  },[sessions,period]);
+
+  const allReadings=filtered.flatMap(s=>s.readings.map(r=>({...r,date:s.date,sType:s.sessionType})));
+  const avg=avgReadings(allReadings);
+  const sysVals=allReadings.map(r=>r.sys).filter(Boolean);
+  const diaVals=allReadings.map(r=>r.dia).filter(Boolean);
+  const pulVals=allReadings.map(r=>r.pul).filter(Boolean);
+  const pp=avg?avg.sys-avg.dia:0;
+  const map_val=avg?Math.round(avg.dia+(pp/3)):0;
+
+  // Trend chart
+  useEffect(()=>{
+    if(!trendRef.current||!filtered.length)return;
+    if(trendChart.current)trendChart.current.destroy();
+    const byDate={};
+    filtered.forEach(s=>{
+      if(!byDate[s.date])byDate[s.date]={sys:[],dia:[]};
+      s.readings.forEach(r=>{if(r.sys)byDate[s.date].sys.push(r.sys);if(r.dia)byDate[s.date].dia.push(r.dia);});
+    });
+    const dates=Object.keys(byDate).sort();
+    trendChart.current=new Chart(trendRef.current,{
+      type:'line',
+      data:{
+        labels:dates.map(d=>new Date(d+'T12:00').toLocaleDateString('en-GB',{month:'short',day:'numeric'})),
+        datasets:[
+          {label:'Systolic',data:dates.map(d=>Math.round(byDate[d].sys.reduce((a,v)=>a+v,0)/byDate[d].sys.length)),
+            borderColor:'#FF4757',backgroundColor:'rgba(255,71,87,.1)',borderWidth:2,tension:.4,pointRadius:3,pointBackgroundColor:'#FF4757',fill:true},
+          {label:'Diastolic',data:dates.map(d=>Math.round(byDate[d].dia.reduce((a,v)=>a+v,0)/byDate[d].dia.length)),
+            borderColor:'#5352ED',backgroundColor:'rgba(83,82,237,.1)',borderWidth:2,tension:.4,pointRadius:3,pointBackgroundColor:'#5352ED',fill:true},
+        ]
+      },
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8A9BBE',font:{size:12}}},tooltip:{mode:'index',intersect:false}},
+        scales:{x:{ticks:{color:'#4E5E80',maxTicksLimit:8},grid:{color:'rgba(255,255,255,0.05)'}},y:{ticks:{color:'#4E5E80'},grid:{color:'rgba(255,255,255,0.05)'},min:40,max:200}}}
+    });
+  },[filtered]);
+
+  // Time of day
+  useEffect(()=>{
+    if(!todRef.current||!allReadings.length)return;
+    if(todChart.current)todChart.current.destroy();
+    const byTod={morning:[],afternoon:[],evening:[]};
+    filtered.forEach(s=>{s.readings.forEach(r=>{if(r.sys&&byTod[s.sessionType])byTod[s.sessionType].push(r.sys);});});
+    const labels=['Morning','Afternoon','Evening'];
+    const avgs=[byTod.morning,byTod.afternoon,byTod.evening].map(v=>v.length?Math.round(v.reduce((a,b)=>a+b)/v.length):0);
+    todChart.current=new Chart(todRef.current,{
+      type:'bar',
+      data:{labels,datasets:[{label:'Avg Systolic',data:avgs,backgroundColor:['rgba(255,209,102,.7)','rgba(255,140,66,.7)','rgba(83,82,237,.7)'],borderRadius:8,borderWidth:0}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+        scales:{x:{ticks:{color:'#8A9BBE'},grid:{display:false}},y:{ticks:{color:'#4E5E80'},grid:{color:'rgba(255,255,255,0.05)'},min:40}}}
+    });
+  },[filtered]);
+
+  // Distribution
+  useEffect(()=>{
+    if(!distRef.current||!allReadings.length)return;
+    if(distChart.current)distChart.current.destroy();
+    const counts={Normal:0,Elevated:0,'HTN-1':0,'HTN-2+':0,Low:0};
+    allReadings.filter(r=>r.sys&&r.dia).forEach(r=>{
+      const c=BP_CAT(r.sys,r.dia);
+      if(c.sev===0)counts.Normal++;else if(c.sev===2)counts.Elevated++;
+      else if(c.sev===3)counts['HTN-1']++;else if(c.sev>=4)counts['HTN-2+']++;
+      else if(c.sev===1)counts.Low++;
+    });
+    const labels=Object.keys(counts).filter(k=>counts[k]>0);
+    const colors={'Normal':'#2ED573','Elevated':'#FFD166','HTN-1':'#FF8C42','HTN-2+':'#FF4757','Low':'#5352ED'};
+    distChart.current=new Chart(distRef.current,{
+      type:'doughnut',
+      data:{labels,datasets:[{data:labels.map(l=>counts[l]),backgroundColor:labels.map(l=>colors[l]),borderWidth:0,hoverOffset:4}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#8A9BBE',font:{size:12},padding:12}}}}
+    });
+  },[filtered]);
+
+  const genInsights=()=>{
+    const ins=[];
+    if(!avg)return ins;
+    const cat=BP_CAT(avg.sys,avg.dia);
+    if(cat){ins.push({type:cat.sev>=3?'alert':cat.sev>=2?'warn':cat.sev===0?'good':'info',title:`${cat.label} (${period==='all'?'All time':period+'-day'} avg)`,text:cat.advice});}
+    if(pp>60)ins.push({type:'warn',title:'Wide Pulse Pressure',text:`Your pulse pressure is ${pp} mmHg (avg). Values above 60 mmHg may indicate arterial stiffness. Discuss with your doctor.`});
+    if(pp>0&&pp<30)ins.push({type:'warn',title:'Narrow Pulse Pressure',text:`Pulse pressure of ${pp} mmHg can indicate reduced cardiac output. Worth discussing with your doctor.`});
+    if(profile){
+      const b=bmi(profile.weight,profile.height);
+      const bc=bmiCat(b);
+      if(b&&bc){ins.push({type:bc.label!=='Normal'?'warn':'good',title:`BMI: ${b} — ${bc.label}`,text:bc.label==='Normal'?'Your BMI is healthy, which is a positive factor for blood pressure.':'Maintaining a healthy weight is one of the most effective ways to manage blood pressure. Even a 5% weight reduction can lower BP significantly.'});}
+      if(profile.age>55)ins.push({type:'info',title:'Age-related consideration',text:'BP tends to rise with age. More frequent monitoring and regular doctor check-ups are recommended after 55.'});
+    }
+    if(pulVals.length&&pulVals.reduce((a,b)=>a+b)/pulVals.length>100)ins.push({type:'warn',title:'Elevated Resting Heart Rate',text:`Average pulse of ${Math.round(pulVals.reduce((a,b)=>a+b)/pulVals.length)} bpm. A resting heart rate above 100 (tachycardia) warrants evaluation.`});
+    return ins;
+  };
+
+  if(!sessions.length)return(
+    <div className="screen">
+      <h1 className="page-title">Insights</h1>
+      <div className="empty-state">{React.createElement(Icon.chart)}<h3>No data yet</h3><p>Record some BP sessions to unlock personalised insights.</p></div>
+    </div>
+  );
+
+  const insights=genInsights();
+
+  return(
+    <div className="screen">
+      <h1 className="page-title">Insights</h1>
+      <p className="page-sub">{allReadings.length} reading{allReadings.length!==1?'s':''} analysed</p>
+      <div className="tabs">
+        {[['7','7D'],['30','30D'],['90','90D'],['365','1Y'],['all','All']].map(([v,l])=>(
+          <button key={v} className={`tab${period===v?' active':''}`} onClick={()=>setPeriod(v)}>{l}</button>
+        ))}
+      </div>
+
+      {avg&&<div className="card-grid">
+        {[
+          {l:'Avg Systolic',v:avg.sys,u:'mmHg'},
+          {l:'Avg Diastolic',v:avg.dia,u:'mmHg'},
+          {l:'Avg Pulse',v:avg.pul||'—',u:'bpm'},
+          {l:'Pulse Pressure',v:pp,u:'mmHg'},
+          {l:'Mean Art. Pressure',v:map_val,u:'mmHg'},
+          {l:'Max Systolic',v:Math.max(...sysVals),u:'mmHg'},
+        ].map(({l,v,u})=>(
+          <div key={l} className="stat-card">
+            <div className="stat-label">{l}</div>
+            <div className="stat-value">{v}</div>
+            <div className="stat-unit">{u}</div>
+          </div>
+        ))}
+      </div>}
+
+      <div className="chart-wrap">
+        <div className="chart-title">BP Trend</div>
+        <div style={{height:220,position:'relative'}}><canvas ref={trendRef}/></div>
+      </div>
+
+      <div className="card-grid" style={{gridTemplateColumns:'1fr 1fr'}}>
+        <div className="chart-wrap" style={{margin:0}}>
+          <div className="chart-title">Time of Day</div>
+          <div style={{height:160,position:'relative'}}><canvas ref={todRef}/></div>
+        </div>
+        <div className="chart-wrap" style={{margin:0}}>
+          <div className="chart-title">Distribution</div>
+          <div style={{height:160,position:'relative'}}><canvas ref={distRef}/></div>
+        </div>
+      </div>
+
+      {insights.length>0&&<>
+        <div className="section-title" style={{marginTop:8}}>Personalised Insights</div>
+        {insights.map((ins,i)=>(
+          <div key={i} className={`insight-card ${ins.type}`}>
+            <div className="insight-title">{ins.title}</div>
+            <div className="insight-text">{ins.text}</div>
+          </div>
+        ))}
+      </>}
+
+      <div className="insight-card" style={{borderLeftColor:'var(--text3)'}}>
+        <div className="insight-title">⚠️ Important Disclaimer</div>
+        <div className="insight-text">CardioLog is a personal tracking tool only. It does not provide medical advice. Always consult a qualified healthcare professional about your blood pressure and medication.</div>
+      </div>
+    </div>
+  );
+};
+
+/*=== MEDICATIONS SCREEN ===*/
+const MedicationsScreen=({medications,medLogs,onUpdate})=>{
+  const[showAdd,setShowAdd]=useState(false);
+  const[editMed,setEditMed]=useState(null);
+  const today=todayStr();
+
+  const logDose=async(logKey,medId,taken)=>{
+    const existing=medLogs.find(l=>l.key===logKey);
+    if(existing){
+      await DB.put('medLogs',{...existing,taken,skipped:!taken,takenAt:taken?new Date().toISOString():null});
+    }else{
+      await DB.put('medLogs',{id:uid(),key:logKey,medId,taken,skipped:!taken,takenAt:taken?new Date().toISOString():null,date:today});
+    }
+    onUpdate();
+  };
+
+  const deleteMed=async(id)=>{await DB.del('medications',id);onUpdate();};
+  const toggleActive=async(med)=>{await DB.put('medications',{...med,active:!med.active});onUpdate();};
+
+  const todayDoses=[];
+  medications.filter(m=>m.active).forEach(m=>{
+    (m.times||[]).forEach(t=>{
+      const logKey=`${today}_${m.id}_${t}`;
+      const log=medLogs.find(l=>l.key===logKey);
+      todayDoses.push({med:m,time:t,log,logKey});
+    });
+  });
+  todayDoses.sort((a,b)=>a.time.localeCompare(b.time));
+
+  return(
+    <div className="screen">
+      <div className="flex-between" style={{marginBottom:4}}>
+        <h1 className="page-title">Medications</h1>
+        <button className="btn btn-primary btn-sm" onClick={()=>setShowAdd(true)}>+ Add</button>
+      </div>
+      <p className="page-sub">Track your medications and doses.</p>
+
+      {todayDoses.length>0&&<>
+        <div className="section-title">Today's Schedule</div>
+        <div className="card">
+          {todayDoses.map(({med,time,log,logKey})=>(
+            <div key={logKey} className="med-row">
+              <div className="med-dot" style={{background:med.color}}/>
+              <div style={{flex:1}}>
+                <div style={{fontWeight:600,fontSize:14}}>{med.name}</div>
+                <div style={{fontSize:12,color:'var(--text2)'}}>{med.dosage} · {time}</div>
+              </div>
+              <div style={{display:'flex',gap:6}}>
+                <button className={`dose-chip${log?.taken?' dose-taken':' dose-pending'}`}
+                  onClick={()=>logDose(logKey,med.id,true)}>
+                  {log?.taken?'✓ Taken':'Take'}
+                </button>
+                {!log?.taken&&<button className={`dose-chip${log?.skipped?' dose-skipped':' dose-pending'}`}
+                  onClick={()=>logDose(logKey,med.id,false)}>
+                  {log?.skipped?'Skipped':'Skip'}
+                </button>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </>}
+
+      <div className="section-title">All Medications</div>
+      {medications.length===0?(
+        <div className="empty-state" style={{padding:'32px 16px'}}>
+          {React.createElement(Icon.pill)}
+          <h3>No medications added</h3>
+          <p>Add your medications to track doses and set reminders.</p>
+        </div>
+      ):(
+        medications.map(m=>(
+          <div key={m.id} className="card-sm" style={{opacity:m.active?1:.6}}>
+            <div style={{display:'flex',alignItems:'flex-start',gap:12}}>
+              <div className="med-dot" style={{background:m.color,marginTop:4,width:12,height:12}}/>
+              <div style={{flex:1}}>
+                <div className="flex-between">
+                  <span style={{fontWeight:600,fontSize:15}}>{m.name}</span>
+                  <Toggle checked={m.active} onChange={()=>toggleActive(m)}/>
+                </div>
+                <div style={{fontSize:13,color:'var(--text2)',marginTop:2}}>{m.dosage} · {m.frequency}</div>
+                <div style={{fontSize:12,color:'var(--text3)',marginTop:4}}>⏰ {(m.times||[]).join(', ')}</div>
+                {m.notes&&<div style={{fontSize:12,color:'var(--text3)',marginTop:4,fontStyle:'italic'}}>{m.notes}</div>}
+              </div>
+            </div>
+            <div style={{display:'flex',gap:8,marginTop:12}}>
+              <button className="btn btn-ghost btn-xs" onClick={()=>setEditMed(m)}>{React.createElement(Icon.edit)} Edit</button>
+              <button className="btn btn-danger btn-xs" onClick={()=>deleteMed(m.id)}>{React.createElement(Icon.trash)}</button>
+            </div>
+          </div>
+        ))
+      )}
+      {(showAdd||editMed)&&<AddMedModal med={editMed} onClose={()=>{setShowAdd(false);setEditMed(null)}} onSave={async(m)=>{await DB.put('medications',m);onUpdate();setShowAdd(false);setEditMed(null)}}/>}
+    </div>
+  );
+};
+
+const AddMedModal=({med,onClose,onSave})=>{
+  const[form,setForm]=useState(med||{id:uid(),name:'',dosage:'',frequency:'once daily',times:['08:00'],color:MED_COLORS[0],active:true,notes:'',startDate:todayStr()});
+  const set=k=>v=>setForm(f=>({...f,[k]:v}));
+  const setTime=(i,v)=>setForm(f=>({...f,times:f.times.map((t,j)=>j===i?v:t)}));
+  const addTime=()=>{if(form.times.length<4)setForm(f=>({...f,times:[...f.times,'12:00']}))};
+  const delTime=i=>setForm(f=>({...f,times:f.times.filter((_,j)=>j!==i)}));
+
+  return(
+    <Modal title={med?'Edit Medication':'Add Medication'} onClose={onClose}>
+      <div className="input-group">
+        <label className="input-label">Medication name</label>
+        <input className="input" placeholder="e.g. Amlodipine" value={form.name} onChange={e=>set('name')(e.target.value)}/>
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+        <div className="input-group">
+          <label className="input-label">Dosage</label>
+          <input className="input" placeholder="e.g. 5mg" value={form.dosage} onChange={e=>set('dosage')(e.target.value)}/>
+        </div>
+        <div className="input-group">
+          <label className="input-label">Frequency</label>
+          <select className="input select" value={form.frequency} onChange={e=>set('frequency')(e.target.value)}>
+            {['once daily','twice daily','three times daily','four times daily','as needed','weekly'].map(f=><option key={f} value={f}>{f}</option>)}
+          </select>
+        </div>
+      </div>
+      <div className="input-group">
+        <label className="input-label">Reminder times</label>
+        {form.times.map((t,i)=>(
+          <div key={i} style={{display:'flex',gap:8,marginBottom:8,alignItems:'center'}}>
+            <input className="input" type="time" value={t} onChange={e=>setTime(i,e.target.value)} style={{flex:1}}/>
+            {form.times.length>1&&<button className="delete-btn" onClick={()=>delTime(i)}>🗑</button>}
+          </div>
+        ))}
+        {form.times.length<4&&<button className="btn btn-ghost btn-sm" onClick={addTime}>+ Add time</button>}
+      </div>
+      <div className="input-group">
+        <label className="input-label">Colour</label>
+        <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
+          {MED_COLORS.map(c=>(
+            <button key={c} style={{width:32,height:32,borderRadius:'50%',background:c,border:form.color===c?'3px solid #fff':'3px solid transparent',cursor:'pointer'}} onClick={()=>set('color')(c)}/>
+          ))}
+        </div>
+      </div>
+      <div className="input-group">
+        <label className="input-label">Notes (optional)</label>
+        <input className="input" placeholder="e.g. take with food" value={form.notes} onChange={e=>set('notes')(e.target.value)}/>
+      </div>
+      <div style={{display:'flex',gap:10,marginTop:4}}>
+        <button className="btn btn-ghost" style={{flex:1}} onClick={onClose}>Cancel</button>
+        <button className="btn btn-primary" style={{flex:1}} onClick={()=>onSave(form)} disabled={!form.name.trim()}>Save</button>
+      </div>
+    </Modal>
+  );
+};
+
+/*=== REMINDERS SCREEN ===*/
+const RemindersScreen=({reminders,medications,onUpdate})=>{
+  const[notifGranted,setNotifGranted]=useState(Notification.permission==='granted');
+  const[showAdd,setShowAdd]=useState(false);
+
+  const toggleReminder=async(r)=>{await DB.put('reminders',{...r,active:!r.active});onUpdate();};
+  const deleteReminder=async(id)=>{await DB.del('reminders',id);onUpdate();};
+
+  const requestPerm=async()=>{const g=await requestNotifPerm();setNotifGranted(g);};
+
+  const bpReminders=reminders.filter(r=>r.type==='bp');
+  const medReminders=reminders.filter(r=>r.type==='medication');
+
+  return(
+    <div className="screen">
+      <div className="flex-between" style={{marginBottom:4}}>
+        <h1 className="page-title">Reminders</h1>
+        <button className="btn btn-primary btn-sm" onClick={()=>setShowAdd(true)}>+ Add</button>
+      </div>
+      <p className="page-sub">Schedule BP sessions and medication alerts.</p>
+
+      {!notifGranted&&(
+        <div className="notif-banner">
+          <span style={{fontSize:20}}>🔔</span>
+          <div style={{flex:1}}>Notifications are off — reminders won't fire in the background.</div>
+          <button className="btn btn-sm" style={{background:'var(--orange)',color:'#000',flexShrink:0}} onClick={requestPerm}>Enable</button>
+        </div>
+      )}
+
+      <div className="section-title">BP Session Reminders</div>
+      {bpReminders.length===0?<p style={{fontSize:13,color:'var(--text3)',marginBottom:20}}>No BP reminders set.</p>:
+        bpReminders.map(r=>(
+          <div key={r.id} className="card-sm" style={{opacity:r.active?1:.5}}>
+            <div className="reminder-row" style={{padding:0,border:'none'}}>
+              <div>
+                <div style={{fontWeight:600,fontSize:14}}>{r.label||'BP Session'}</div>
+                <div style={{fontSize:13,color:'var(--text2)',marginTop:2}}>⏰ {r.time} · {r.days.map(d=>DAYS[d]).join(', ')}</div>
+              </div>
+              <div style={{display:'flex',alignItems:'center',gap:10}}>
+                <Toggle checked={r.active} onChange={()=>toggleReminder(r)}/>
+                <button className="btn btn-danger btn-xs" onClick={()=>deleteReminder(r.id)}>{React.createElement(Icon.trash)}</button>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+
+      <div className="section-title">Medication Reminders</div>
+      {medReminders.length===0&&medications.filter(m=>m.active).length===0?
+        <p style={{fontSize:13,color:'var(--text3)',marginBottom:20}}>Add medications to auto-create reminders.</p>:null}
+      {medications.filter(m=>m.active).map(m=>(
+        <div key={m.id} className="card-sm">
+          <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:8}}>
+            <div className="med-dot" style={{background:m.color}}/>
+            <span style={{fontWeight:600,fontSize:14}}>{m.name} · {m.dosage}</span>
+          </div>
+          {(m.times||[]).map(t=>(
+            <div key={t} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'6px 0 6px 20px',fontSize:13,color:'var(--text2)'}}>
+              <span>⏰ {t}</span>
+              <span style={{fontSize:11,color:'var(--green)'}}>Active</span>
+            </div>
+          ))}
+        </div>
+      ))}
+      {medReminders.map(r=>(
+        <div key={r.id} className="card-sm" style={{opacity:r.active?1:.5}}>
+          <div className="reminder-row" style={{padding:0,border:'none'}}>
+            <div>
+              <div style={{fontWeight:600,fontSize:14}}>{r.label}</div>
+              <div style={{fontSize:13,color:'var(--text2)',marginTop:2}}>⏰ {r.time} · {r.days.map(d=>DAYS[d]).join(', ')}</div>
+            </div>
+            <Toggle checked={r.active} onChange={()=>toggleReminder(r)}/>
+          </div>
+        </div>
+      ))}
+
+      {showAdd&&<AddReminderModal onClose={()=>setShowAdd(false)} onSave={async(r)=>{await DB.put('reminders',r);onUpdate();setShowAdd(false);}}/>}
+    </div>
+  );
+};
+
+const AddReminderModal=({onClose,onSave})=>{
+  const[form,setForm]=useState({id:uid(),type:'bp',label:'Morning BP Check',time:'07:30',days:[1,2,3,4,5],active:true});
+  const set=k=>v=>setForm(f=>({...f,[k]:v}));
+  const toggleDay=d=>setForm(f=>({...f,days:f.days.includes(d)?f.days.filter(x=>x!==d):[...f.days,d].sort()}));
+
+  return(
+    <Modal title="Add Reminder" onClose={onClose}>
+      <div className="input-group">
+        <label className="input-label">Label</label>
+        <input className="input" value={form.label} onChange={e=>set('label')(e.target.value)}/>
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+        <div className="input-group">
+          <label className="input-label">Type</label>
+          <select className="input select" value={form.type} onChange={e=>set('type')(e.target.value)}>
+            <option value="bp">BP Session</option>
+            <option value="medication">Medication</option>
+          </select>
+        </div>
+        <div className="input-group">
+          <label className="input-label">Time</label>
+          <input className="input" type="time" value={form.time} onChange={e=>set('time')(e.target.value)}/>
+        </div>
+      </div>
+      <div className="input-group">
+        <label className="input-label">Days</label>
+        <div className="tag-row">
+          {DAYS.map((d,i)=>(
+            <button key={i} className={`day-tag${form.days.includes(i)?' active':''}`} onClick={()=>toggleDay(i)}>{d[0]}</button>
+          ))}
+        </div>
+      </div>
+      <div style={{display:'flex',gap:10,marginTop:8}}>
+        <button className="btn btn-ghost" style={{flex:1}} onClick={onClose}>Cancel</button>
+        <button className="btn btn-primary" style={{flex:1}} onClick={()=>onSave(form)}>Save</button>
+      </div>
+    </Modal>
+  );
+};
+
+/*=== PROFILE SCREEN ===*/
+const ProfileScreen=({profile,sessions,medications,medLogs,onUpdate})=>{
+  const[editing,setEditing]=useState(false);
+  const[form,setForm]=useState(profile||{});
+  const set=k=>v=>setForm(f=>({...f,[k]:v}));
+
+  const saveProfile=async()=>{await DB.put('profile',form,'data');onUpdate(form);setEditing(false);};
+
+  const exportCSV=async()=>{
+    const rows=[['Date','Session','Reading#','Systolic','Diastolic','Pulse','Time','Category']];
+    sessions.forEach(s=>{
+      s.readings.forEach((r,i)=>{
+        const cat=BP_CAT(r.sys,r.dia);
+        rows.push([s.date,SESSION_INFO[s.sessionType]?.label||s.sessionType,i+1,r.sys,r.dia,r.pul||'',fmtTime(r.ts),cat?.label||'']);
+      });
+    });
+    const medRows=[[''],['Medications'],['Name','Dosage','Frequency','Times','Active','Notes']];
+    medications.forEach(m=>medRows.push([m.name,m.dosage,m.frequency,(m.times||[]).join(';'),m.active?'Yes':'No',m.notes||'']));
+    const logRows=[[''],['Medication Logs'],['Date','Medication','Scheduled Time','Taken','Taken At','Skipped']];
+    medLogs.forEach(l=>{
+      const m=medications.find(x=>x.id===l.medId);
+      logRows.push([l.date||'',m?.name||'',l.key?.split('_').pop()||'',l.taken?'Yes':'No',l.takenAt||'',l.skipped?'Yes':'No']);
+    });
+    const all=[...rows,...medRows,...logRows];
+    const csv=all.map(r=>r.map(c=>'"'+(String(c||'').replace(/"/g,'""'))+'"').join(',')).join('\n');
+    const filename=`cardiolog_export_${todayStr()}.csv`;
+
+    if(window.isNative){
+      try{
+        const{Filesystem,Share}=window.CapPlugins;
+        // Write to cache dir then share
+        const result=await Filesystem.writeFile({
+          path:filename,data:btoa(unescape(encodeURIComponent(csv))),
+          directory:'CACHE',encoding:'BASE64',
+        });
+        await Share.share({title:'CardioLog Export',text:'Your CardioLog BP data',url:result.uri,dialogTitle:'Export CardioLog Data'});
+        return;
+      }catch(e){console.warn('Native export failed, falling back',e);}
+    }
+    // Web fallback
+    const blob=new Blob([csv],{type:'text/csv'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download=filename;
+    a.click();
+  };
+
+  const b=bmi(form.weight,form.height);
+  const bc=bmiCat(b);
+
+  return(
+    <div className="screen">
+      <div className="flex-between" style={{marginBottom:20}}>
+        <h1 className="page-title">Profile</h1>
+        <button className="btn btn-ghost btn-sm" onClick={()=>editing?saveProfile():setEditing(true)}>
+          {editing?'Save ✓':'Edit'}
+        </button>
+      </div>
+
+      {editing?(
+        <div className="card">
+          <div className="input-group">
+            <label className="input-label">Name</label>
+            <input className="input" value={form.name||''} onChange={e=>set('name')(e.target.value)}/>
+          </div>
+          <div className="input-group">
+            <label className="input-label">Gender</label>
+            <div className="gender-grid">
+              {[{v:'male',l:'Male',i:'♂'},{v:'female',l:'Female',i:'♀'},{v:'other',l:'Other',i:'⚧'}].map(g=>(
+                <button key={g.v} className={`gender-btn${form.gender===g.v?' active':''}`} onClick={()=>set('gender')(g.v)}>
+                  <span className="icon">{g.i}</span>{g.l}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+            {[['Age','age','years',1,120],['Height','height','cm',100,250],['Weight','weight','kg',20,300]].map(([l,k,u,min,max])=>(
+              <div key={k} className="input-group" style={{marginBottom:8}}>
+                <label className="input-label">{l} ({u})</label>
+                <input className="input" type="number" value={form[k]||''} onChange={e=>set(k)(parseFloat(e.target.value))} min={min} max={max}/>
+              </div>
+            ))}
+          </div>
+        </div>
+      ):(
+        <div className="card">
+          <div style={{display:'flex',alignItems:'center',gap:16,marginBottom:20}}>
+            <div style={{width:64,height:64,borderRadius:'50%',background:'var(--primary-dim)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:28}}>
+              {form.gender==='female'?'👩':form.gender==='male'?'👨':'🧑'}
+            </div>
+            <div>
+              <div style={{fontSize:22,fontWeight:700}}>{form.name}</div>
+              <div style={{fontSize:14,color:'var(--text2)',textTransform:'capitalize'}}>{form.gender} · {form.age} years</div>
+            </div>
+          </div>
+          <div className="profile-grid">
+            {[['Height',`${form.height} cm`],['Weight',`${form.weight} kg`],['BMI',b||'—'],['BMI Cat',bc?.label||'—']].map(([l,v])=>(
+              <div key={l} className="profile-stat">
+                <div style={{fontSize:11,fontWeight:600,color:'var(--text3)',letterSpacing:'.5px',textTransform:'uppercase',marginBottom:6}}>{l}</div>
+                <div className="mono" style={{fontSize:18,fontWeight:700}}>{v}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="section-title">Your Data</div>
+      <div className="card">
+        {[['Total sessions',sessions.length],['Total readings',sessions.reduce((a,s)=>a+s.readings.length,0)],['Medications tracked',medications.length]].map(([l,v])=>(
+          <div key={l} className="flex-between" style={{padding:'10px 0',borderBottom:'1px solid var(--border)'}}>
+            <span style={{fontSize:14,color:'var(--text2)'}}>{l}</span>
+            <span className="mono" style={{fontWeight:700}}>{v}</span>
+          </div>
+        ))}
+        <div style={{marginTop:16}}>
+          <button className="btn btn-ghost btn-full" onClick={exportCSV}>
+            {React.createElement(Icon.export)} Export all data as CSV
+          </button>
+        </div>
+      </div>
+
+      <div className="card" style={{marginTop:16,border:'1px solid var(--border2)'}}>
+        <div style={{fontSize:13,color:'var(--text2)',lineHeight:1.7}}>
+          <strong style={{color:'var(--text)'}}>CardioLog v1.0</strong><br/>
+          All data stored locally on this device. No accounts, no cloud sync, no tracking.
+          Built for Samsung Galaxy Z Fold 6.
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/*=== NOTIFICATION SCHEDULER ===*/
+const scheduleReminders=async(reminders,medications)=>{
+  // Cancel all existing scheduled notifications first (native only)
+  if(window.isNative){
+    try{
+      const{LocalNotifications}=window.CapPlugins;
+      const pending=await LocalNotifications.getPending();
+      if(pending.notifications.length){
+        await LocalNotifications.cancel({notifications:pending.notifications});
+      }
+      // Ensure notification channel exists
+      await LocalNotifications.createChannel({
+        id:'cardiolog_reminders',name:'Reminders',description:'BP and medication reminders',
+        importance:4,visibility:1,vibration:true,
+      }).catch(()=>{});
+    }catch{}
+  }
+
+  const now=new Date();
+  const day=now.getDay();
+
+  // BP Session reminders
+  reminders.filter(r=>r.active&&r.days.includes(day)).forEach(r=>{
+    const[h,m]=r.time.split(':').map(Number);
+    const fireAt=new Date();fireAt.setHours(h,m,0,0);
+    const title=r.type==='bp'?'Time to measure your BP 🫀':'Medication Reminder 💊';
+    scheduleNotif(title,r.label,`reminder_${r.id}`,fireAt.getTime());
+  });
+
+  // Medication reminders derived from med schedule
+  medications.filter(m=>m.active).forEach(m=>{
+    (m.times||[]).forEach(t=>{
+      const[h,mi]=t.split(':').map(Number);
+      const fireAt=new Date();fireAt.setHours(h,mi,0,0);
+      scheduleNotif('Medication Reminder 💊',`Time to take ${m.name} ${m.dosage}`,
+        `med_${m.id}_${t}`,fireAt.getTime());
+    });
+  });
+};
+
+/*=== APP ROOT ===*/
+const App=()=>{
+  const[view,setView]=useState('dashboard');
+  const[profile,setProfile]=useState(null);
+  const[sessions,setSessions]=useState([]);
+  const[medications,setMedications]=useState([]);
+  const[medLogs,setMedLogs]=useState([]);
+  const[reminders,setReminders]=useState([]);
+  const[loading,setLoading]=useState(true);
+  const[initSession,setInitSession]=useState(null);
+
+  const loadAll=useCallback(async()=>{
+    const[p,s,m,ml,r]=await Promise.all([
+      DB.get('profile','data'),DB.getAll('sessions'),DB.getAll('medications'),
+      DB.getAll('medLogs'),DB.getAll('reminders')
+    ]);
+    setProfile(p||null);
+    setSessions((s||[]).sort((a,b)=>b.date.localeCompare(a.date)||b.createdAt.localeCompare(a.createdAt)));
+    setMedications(m||[]);setMedLogs(ml||[]);setReminders(r||[]);
+    setLoading(false);
+    if(p)scheduleReminders(r||[],m||[]);
+  },[]);
+
+  useEffect(()=>{
+    loadAll();
+    // Service worker only on web (Capacitor handles its own asset bundling)
+    if(!window.isNative && 'serviceWorker'in navigator){
+      navigator.serviceWorker.register('./sw.js').catch(()=>{});
+    }
+    // Capacitor native setup
+    if(window.isNative){
+      // Status bar styling
+      try{
+        const{StatusBar,App:CapApp}=window.CapPlugins;
+        StatusBar.setBackgroundColor({color:'#080D1A'}).catch(()=>{});
+        StatusBar.setStyle({style:'DARK'}).catch(()=>{});
+        // Android back button — go to dashboard or exit
+        CapApp.addListener('backButton',({canGoBack})=>{
+          setView(v=>{
+            if(v==='dashboard'){CapApp.exitApp();return v;}
+            return'dashboard';
+          });
+        });
+      }catch{}
+    }
+  },[]);
+
+  useEffect(()=>{
+    if(view==='record'&&initSession){}
+    else if(view!=='record')setInitSession(null);
+  },[view]);
+
+  if(loading)return(
+    <div style={{height:'100vh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:16}}>
+      <Logo/>
+      <div style={{fontSize:13,color:'var(--text3)'}}>Loading CardioLog…</div>
+    </div>
+  );
+
+  if(!profile)return<Onboarding onDone={async(p,granted)=>{setProfile(p);await loadAll();}}/>;
+
+  const screens={
+    dashboard:<Dashboard sessions={sessions} medications={medications} medLogs={medLogs} reminders={reminders} profile={profile} setView={v=>{setView(v)}} setInitSession={setInitSession}/>,
+    record:<RecordScreen onSave={async()=>{await loadAll();setView('dashboard')}} initSession={initSession}/>,
+    history:<HistoryScreen sessions={sessions}/>,
+    insights:<InsightsScreen sessions={sessions} profile={profile}/>,
+    medications:<MedicationsScreen medications={medications} medLogs={medLogs} onUpdate={loadAll}/>,
+    reminders:<RemindersScreen reminders={reminders} medications={medications} onUpdate={loadAll}/>,
+    profile:<ProfileScreen profile={profile} sessions={sessions} medications={medications} medLogs={medLogs} onUpdate={p=>{setProfile(p);loadAll()}}/>,
+  };
+
+  return(
+    <div className="app-shell">
+      <SideNav view={view} setView={setView}/>
+      <main className="app-main">
+        {screens[view]||screens.dashboard}
+      </main>
+      <BottomNav view={view} setView={setView}/>
+    </div>
+  );
+};
+
+const root=ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App/>);
+</script>
+</body>
+</html>
