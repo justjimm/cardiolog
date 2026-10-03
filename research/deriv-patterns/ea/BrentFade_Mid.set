@@ -1,0 +1,27 @@
+; BrentFadeEA, MID set: 3.5x notional, weekend at 75% size, halt at 55% drawdown
+; Backtest (haircut): year 1 +44%, year 2 +294%, worst drawdown -45%
+LeverageMultiple=3.5
+WeekendSizeFactor=0.75
+MaxDrawdownHaltPct=55.0
+EnableEarlyFade=true
+EnableWeekendFade=true
+SizingMode=0
+FixedLots=10.0
+MaxLots=1000.0
+FadeThresholdPct=0.5
+FadeDecisionHourGMT=3
+FadeDecisionWindowMin=10
+FadeExitHourGMT=13
+FadeStopPct=2.0
+WeekendMinGapPct=0.3
+WeekendEntryDelayMin=2
+WeekendEntryWindowMin=10
+WeekendExitHourGMT=20
+WeekendExitMinute=50
+WeekendStopPct=0.0
+GMTOffsetOverrideHours=-99
+MaxSpreadPoints=0
+SlippagePoints=50
+MagicEarly=240301
+MagicWeekend=240302
+TradeComment=BrentFade
