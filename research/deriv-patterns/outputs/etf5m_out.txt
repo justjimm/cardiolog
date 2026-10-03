@@ -1,0 +1,36 @@
+=== TQQQ 5-minute, n=59 days 2026-07-13..2026-10-02 (Deriv open = 09:35 NY) ===
+first 5 min move: mean=-0.043% |mean|=0.501%  corr(gap930, first5)=0.01  corr(first5, rest)=-0.06
+Fade gap from 09:35 to close                                 n=  59 win= 49.2% mean= -0.112% t=-0.39 pf=0.87 tot=-6.6% dd=-17.2%
+Follow gap from 09:35 to close                               n=  59 win= 45.8% mean= -0.208% t=-0.72 pf=0.78 tot=-12.3% dd=-21.1%
+Fade gap 09:35 -> 10:30                                      n=  59 win= 52.5% mean=  0.087% t=0.39 pf=1.14 tot=5.1% dd=-11.4%
+Follow first-5-min direction 09:35->close                    n=  59 win= 49.2% mean=  -0.27% t=-0.93 pf=0.72 tot=-15.9% dd=-31.1%
+Follow first-5-min direction 09:35->10:30                    n=  59 win= 44.1% mean=  -0.26% t=-1.16 pf=0.67 tot=-15.3% dd=-20.8%
+Fade first-5-min direction 09:35->10:30                      n=  59 win= 52.5% mean=  -0.06% t=-0.27 pf=0.91 tot=-3.6% dd=-17.9%
+ORB 09:30-945 breakout on 5m close, exit close               n=  60 win= 46.7% mean= -0.143% t=-0.7 pf=0.79 tot=-8.6% dd=-22.4%
+ORB 09:30-1000 breakout on 5m close, exit close              n=  59 win= 40.7% mean= -0.297% t=-1.56 pf=0.59 tot=-17.5% dd=-22.8%
+ORB 09:30-1030 breakout on 5m close, exit close              n=  54 win= 29.6% mean= -0.412% t=-2.44 pf=0.42 tot=-22.3% dd=-25.2%
+Last 30 min follow day                                       n=  59 win= 27.1% mean= -0.184% t=-1.87 pf=0.46 tot=-10.8% dd=-10.4%
+=== SPXS 5-minute, n=59 days 2026-07-13..2026-10-02 (Deriv open = 09:35 NY) ===
+first 5 min move: mean=0.017% |mean|=0.290%  corr(gap930, first5)=-0.08  corr(first5, rest)=-0.05
+Fade gap from 09:35 to close                                 n=  59 win=  0.0% mean= -6.897% t=-38.63 pf=0.0 tot=-406.9% dd=-398.6%
+Follow gap from 09:35 to close                               n=  59 win=  0.0% mean= -6.303% t=-35.3 pf=0.0 tot=-371.9% dd=-367.0%
+Fade gap 09:35 -> 10:30                                      n=  59 win=  0.0% mean= -6.629% t=-57.74 pf=0.0 tot=-391.1% dd=-384.4%
+Follow first-5-min direction 09:35->close                    n=  59 win=  0.0% mean= -6.621% t=-36.37 pf=0.0 tot=-390.6% dd=-382.3%
+Follow first-5-min direction 09:35->10:30                    n=  59 win=  0.0% mean= -6.698% t=-59.5 pf=0.0 tot=-395.2% dd=-388.5%
+Fade first-5-min direction 09:35->10:30                      n=  59 win=  0.0% mean= -6.502% t=-57.76 pf=0.0 tot=-383.6% dd=-377.1%
+ORB 09:30-945 breakout on 5m close, exit close               n=  60 win=  0.0% mean= -6.467% t=-41.27 pf=0.0 tot=-388.0% dd=-379.9%
+ORB 09:30-1000 breakout on 5m close, exit close              n=  60 win=  0.0% mean= -6.665% t=-45.09 pf=0.0 tot=-399.9% dd=-391.7%
+ORB 09:30-1030 breakout on 5m close, exit close              n=  56 win=  0.0% mean= -6.761% t=-50.83 pf=0.0 tot=-378.6% dd=-370.5%
+Last 30 min follow day                                       n=  59 win=  0.0% mean= -6.585% t=-105.82 pf=0.0 tot=-388.5% dd=-381.6%
+=== SPY 5-minute, n=59 days 2026-07-13..2026-10-02 (Deriv open = 09:35 NY) ===
+first 5 min move: mean=-0.003% |mean|=0.092%  corr(gap930, first5)=-0.09  corr(first5, rest)=-0.03
+Fade gap from 09:35 to close                                 n=  59 win= 42.4% mean= -0.146% t=-2.48 pf=0.41 tot=-8.6% dd=-9.1%
+Follow gap from 09:35 to close                               n=  59 win= 49.2% mean=  0.046% t=0.79 pf=1.31 tot=2.7% dd=-1.9%
+Fade gap 09:35 -> 10:30                                      n=  59 win= 28.8% mean= -0.069% t=-1.83 pf=0.52 tot=-4.1% dd=-5.5%
+Follow first-5-min direction 09:35->close                    n=  59 win= 42.4% mean= -0.065% t=-1.08 pf=0.69 tot=-3.8% dd=-4.7%
+Follow first-5-min direction 09:35->10:30                    n=  59 win= 30.5% mean= -0.081% t=-2.13 pf=0.47 tot=-4.8% dd=-4.8%
+Fade first-5-min direction 09:35->10:30                      n=  59 win= 42.4% mean= -0.019% t=-0.51 pf=0.83 tot=-1.1% dd=-3.6%
+ORB 09:30-945 breakout on 5m close, exit close               n=  60 win= 46.7% mean=    0.0% t=0.01 pf=1.0 tot=0.0% dd=-2.9%
+ORB 09:30-1000 breakout on 5m close, exit close              n=  60 win= 40.0% mean= -0.077% t=-1.58 pf=0.59 tot=-4.6% dd=-5.3%
+ORB 09:30-1030 breakout on 5m close, exit close              n=  55 win= 32.7% mean= -0.108% t=-2.41 pf=0.41 tot=-5.9% dd=-6.7%
+Last 30 min follow day                                       n=  59 win= 30.5% mean= -0.043% t=-2.06 pf=0.45 tot=-2.5% dd=-2.8%

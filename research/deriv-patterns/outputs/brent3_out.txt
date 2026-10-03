@@ -1,0 +1,73 @@
+=== FADE 00:00-03:00 move: stops (exit 13:00) ===
+thr 0.5, exit 13:00, stop=None                               n= 171 win= 56.1% mean=  0.543% t=3.26 pf=2.1 tot=92.8% dd=-9.4%
+                                                               IS n=64 win=51.6% mean=0.209% t=1.3 | OOS n=107 win=58.9% mean=0.742% t=3.01   stopped=0%
+thr 0.5, exit 13:00, stop=0.5                                n= 171 win= 24.6% mean= -0.026% t=-0.33 pf=0.93 tot=-4.4% dd=-15.8%
+                                                               IS n=64 win=29.7% mean=0.048% t=0.38 | OOS n=107 win=21.5% mean=-0.07% t=-0.71   stopped=75%
+thr 0.5, exit 13:00, stop=0.75                               n= 171 win= 32.7% mean=  0.026% t=0.25 pf=1.05 tot=4.4% dd=-17.6%
+                                                               IS n=64 win=39.1% mean=0.078% t=0.55 | OOS n=107 win=29.0% mean=-0.006% t=-0.04   stopped=63%
+thr 0.5, exit 13:00, stop=1.0                                n= 171 win= 39.2% mean=  0.092% t=0.79 pf=1.17 tot=15.6% dd=-16.7%
+                                                               IS n=64 win=43.8% mean=0.104% t=0.71 | OOS n=107 win=36.4% mean=0.084% t=0.52   stopped=47%
+thr 0.5, exit 13:00, stop=1.5                                n= 171 win= 49.7% mean=  0.317% t=2.17 pf=1.59 tot=54.2% dd=-14.4%
+                                                               IS n=64 win=48.4% mean=0.101% t=0.63 | OOS n=107 win=50.5% mean=0.446% t=2.1   stopped=29%
+thr 0.5, exit 13:00, stop=2.0                                n= 171 win= 55.6% mean=  0.555% t=3.43 pf=2.17 tot=94.8% dd=-9.4%
+                                                               IS n=64 win=50.0% mean=0.15% t=0.91 | OOS n=107 win=58.9% mean=0.796% t=3.37   stopped=15%
+thr 0.5, exit 21:00, stop=None                               n= 171 win= 50.9% mean=   0.59% t=2.24 pf=1.7 tot=101.0% dd=-14.0%
+                                                               IS n=64 win=53.1% mean=0.251% t=0.77 | OOS n=107 win=49.5% mean=0.793% t=2.13   stopped=0%
+thr 0.5, exit 21:00, stop=1.0                                n= 171 win= 31.0% mean=  0.119% t=0.76 pf=1.18 tot=20.4% dd=-20.2%
+                                                               IS n=64 win=35.9% mean=0.044% t=0.22 | OOS n=107 win=28.0% mean=0.164% t=0.74   stopped=64%
+thr 0.5, exit 21:00, stop=1.5                                n= 171 win= 40.9% mean=  0.351% t=1.55 pf=1.44 tot=60.0% dd=-12.8%
+                                                               IS n=64 win=42.2% mean=0.053% t=0.23 | OOS n=107 win=40.2% mean=0.529% t=1.59   stopped=49%
+trade distribution (net %): {'count': 171.0, 'mean': 0.54, 'std': 2.18, 'min': -4.45, '25%': -0.6, '50%': 0.24, '75%': 1.4, 'max': 10.75}
+by month:
+         count    sum  mean
+t                          
+2024-10      5   0.27  0.05
+2024-11      7   0.85  0.12
+2024-12      1  -0.58 -0.58
+2025-01      4   0.71  0.18
+2025-02      2  -0.60 -0.30
+2025-03      6   4.71  0.78
+2025-04     12   2.37  0.20
+2025-05      9   2.03  0.23
+2025-06      8  -3.99 -0.50
+2025-07      2  -0.62 -0.31
+2025-08      1  -0.15 -0.15
+2025-09      7   8.39  1.20
+2025-10      3  -0.40 -0.13
+2025-11     10   1.78  0.18
+2025-12      5   1.12  0.22
+2026-01      5  -0.51 -0.10
+2026-02      4   0.17  0.04
+2026-03     18  32.80  1.82
+2026-04     13   5.64  0.43
+2026-05     10   5.35  0.54
+2026-06     12  -5.87 -0.49
+2026-07     13  11.79  0.91
+2026-08      5  11.07  2.21
+2026-09      8  13.08  1.64
+2026-10      1   3.39  3.39
+longs: long side                                                    n=  88 win= 52.3% mean=  0.286% t=1.44 pf=1.52 tot=25.1% dd=-14.8%
+                                                               IS n=37 win=45.9% mean=0.028% t=0.13 | OOS n=51 win=56.9% mean=0.473% t=1.57 
+shorts: short side                                                   n=  83 win= 60.2% mean=  0.815% t=3.03 pf=2.91 tot=67.7% dd=-5.9%
+                                                               IS n=27 win=59.3% mean=0.458% t=1.97 | OOS n=56 win=60.7% mean=0.987% t=2.58
+monthly cum: {Period('2024-10', 'M'): 0.27, Period('2024-11', 'M'): 1.12, Period('2024-12', 'M'): 0.54, Period('2025-01', 'M'): 1.25, Period('2025-02', 'M'): 0.66, Period('2025-03', 'M'): 5.37, Period('2025-04', 'M'): 7.73, Period('2025-05', 'M'): 9.76, Period('2025-06', 'M'): 5.77, Period('2025-07', 'M'): 5.15, Period('2025-08', 'M'): 5.0, Period('2025-09', 'M'): 13.39, Period('2025-10', 'M'): 12.99, Period('2025-11', 'M'): 14.77, Period('2025-12', 'M'): 15.89, Period('2026-01', 'M'): 15.38, Period('2026-02', 'M'): 15.55, Period('2026-03', 'M'): 48.35, Period('2026-04', 'M'): 53.99, Period('2026-05', 'M'): 59.34, Period('2026-06', 'M'): 53.47, Period('2026-07', 'M'): 65.26, Period('2026-08', 'M'): 76.33, Period('2026-09', 'M'): 89.41, Period('2026-10', 'M'): 92.8}
+
+=== WEEKEND GAP FADE to fill: by month ===
+        count    sum  mean
+t                         
+2024Q4     12  -3.69 -0.31
+2025Q1     11   2.82  0.26
+2025Q2     12   8.87  0.74
+2025Q3      9  -0.97 -0.11
+2025Q4     11   3.77  0.34
+2026Q1      9  22.85  2.54
+2026Q2      9   4.70  0.52
+2026Q3     10  -3.91 -0.39
+Weekend fade to fill, stop 0.75% (conservative)              n=  83 win= 55.4% mean=   0.08% t=0.72 pf=1.24 tot=6.6% dd=-5.7%
+                                                               IS n=44 win=63.6% mean=0.086% t=0.73 | OOS n=39 win=46.2% mean=0.072% t=0.37
+Weekend fade to fill, stop 1.0% (conservative)               n=  83 win= 62.7% mean=  0.093% t=0.78 pf=1.26 tot=7.7% dd=-8.9%
+                                                               IS n=44 win=72.7% mean=0.141% t=1.09 | OOS n=39 win=51.3% mean=0.039% t=0.19
+Weekend fade to fill, stop 1.5% (conservative)               n=  83 win= 65.1% mean= -0.009% t=-0.06 pf=0.98 tot=-0.7% dd=-10.9%
+                                                               IS n=44 win=72.7% mean=0.032% t=0.21 | OOS n=39 win=56.4% mean=-0.055% t=-0.23
+Weekend fade to fill, stop 2.0% (conservative)               n=  83 win= 67.5% mean=  0.015% t=0.1 pf=1.03 tot=1.2% dd=-10.0%
+                                                               IS n=44 win=75.0% mean=0.071% t=0.45 | OOS n=39 win=59.0% mean=-0.049% t=-0.19
