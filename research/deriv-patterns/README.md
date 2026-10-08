@@ -53,3 +53,10 @@ python3 etf.py tqqq 0.16 > outputs/tqqq_out.txt
 3. TQQQ: no gap, opening-range or intraday pattern beats the 0.14% spread in both years. Weak day-of-week
    effects (Monday long, Thursday short, Tuesday close to Wednesday open) are consistent but low confidence.
 4. SPXS is untradeable on Deriv at a 6.51% spread; use SPY.US or the US SP 500 index CFD instead.
+
+## Added 8 Oct 2026: index CFD proxies and the TQQQ gap-follow test
+
+- `index.py <es|nq> "<label>"`: weekend, overnight, session and hourly tests on ES and NQ futures as proxies for Deriv's US SP 500 and US Tech 100 index CFDs (cost 0.01%, swap-free). Headline: buy the Sunday reopen, sell Monday's cash close: NQ +0.38% net per weekend, ES +0.31%, both years positive.
+- `gapfollow.py <name> <cost>`: follow the opening gap with target 1x or 2x the gap and a half-gap stop, capped at 30 minutes (5-minute data, 60 sessions) or 1 hour (hourly data, 2 years). Loses 0.2% to 0.3% per trade in every variant.
+- `gapfade_check.py <name> <cost>`: the mirror rule (fade the gap, half-gap target, one-gap stop) and its robustness checks. Also loses.
+- Bug fixed in both gap scripts on 8 Oct: the previous-close lookup was keyed on the New York date of a UTC-midnight daily index, which shifted it one day and produced look-ahead. Outputs here are from the corrected code.

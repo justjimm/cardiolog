@@ -1,0 +1,102 @@
+=== US Tech 100 (proxy NQ futures), 482 sessions 2024-10-03..2026-10-07, cost 0.01% round trip, swap-free ===
+Weekend reopen gap (Fri close -> Sun 18:00 ET): n=95 mean=-0.011% |gap|=0.424% up=53% filled by Mon close=77%
+Weeknight break gap (17:00->18:00 ET): |gap| mean=0.063%
+WEEKEND hold long (Fri close -> Sun reopen)                  n=  94 win= 51.1% mean= -0.021% t=-0.3 pf=0.91 tot=-2.0% dd=-8.2%
+                                                               IS n=47 win=51.1% mean=0.0% t=0.0 | OOS n=47 win=51.1% mean=-0.042% t=-0.48
+WEEKEND hold long to Monday 09:00 ET                         n=  95 win= 58.9% mean=  0.209% t=1.88 pf=1.68 tot=19.8% dd=-7.2%
+                                                               IS n=48 win=58.3% mean=0.116% t=0.67 | OOS n=47 win=59.6% mean=0.303% t=2.19
+WEEKEND hold long to Monday 16:00 ET close                   n=  94 win= 62.8% mean=  0.369% t=2.74 pf=2.21 tot=34.7% dd=-9.9%
+                                                               IS n=47 win=59.6% mean=0.196% t=0.95 | OOS n=47 win=66.0% mean=0.543% t=3.15
+Fade weekend reopen gap at Sun 18:00, exit Mon 09:00         n=  94 win= 39.4% mean=  -0.11% t=-1.28 pf=0.7 tot=-10.4% dd=-17.4%
+                                                               IS n=47 win=34.0% mean=-0.281% t=-2.36 | OOS n=47 win=44.7% mean=0.06% t=0.5
+  |gap|>0.3%                                                 n=  37 win= 45.9% mean= -0.008% t=-0.04 pf=0.98 tot=-0.3% dd=-6.6%
+                                                               IS n=14 win=42.9% mean=-0.292% t=-0.86 | OOS n=23 win=47.8% mean=0.165% t=0.79
+Follow weekend reopen gap, exit Mon 09:00                    n=  94 win= 57.4% mean=   0.09% t=1.05 pf=1.34 tot=8.5% dd=-11.4%
+                                                               IS n=47 win=59.6% mean=0.261% t=2.2 | OOS n=47 win=55.3% mean=-0.08% t=-0.66
+Fade weekend reopen gap at Sun 18:00, exit Mon 16:00         n=  93 win= 49.5% mean=  -0.02% t=-0.15 pf=0.96 tot=-1.9% dd=-10.0%
+                                                               IS n=46 win=50.0% mean=-0.012% t=-0.06 | OOS n=47 win=48.9% mean=-0.029% t=-0.16
+  |gap|>0.3%                                                 n=  37 win= 54.1% mean=  0.193% t=0.7 pf=1.3 tot=7.1% dd=-6.8%
+                                                               IS n=14 win=64.3% mean=0.399% t=0.78 | OOS n=23 win=47.8% mean=0.068% t=0.21
+Follow weekend reopen gap, exit Mon 16:00                    n=  93 win= 46.2% mean=    0.0% t=0.0 pf=1.0 tot=0.0% dd=-16.0%
+                                                               IS n=46 win=41.3% mean=-0.008% t=-0.04 | OOS n=47 win=51.1% mean=0.009% t=0.05
+Fade weekend gap, target=fill else Mon close                 n=  92 win= 78.3% mean=  0.022% t=0.22 pf=1.08 tot=2.0% dd=-8.0%
+                                                               IS n=45 win=71.1% mean=-0.122% t=-0.76 | OOS n=47 win=85.1% mean=0.16% t=1.3
+Fade weekend gap |gap|>0.3%, target=fill                     n=  37 win= 81.1% mean=  0.279% t=1.37 pf=1.74 tot=10.3% dd=-4.9%
+                                                               IS n=14 win=64.3% mean=-0.012% t=-0.03 | OOS n=23 win=91.3% mean=0.456% t=2.37
+
+--- OVERNIGHT vs SESSIONS (every trading day) ---
+Overnight hold long: 16:00 ET close -> 09:00 ET              n= 471 win= 55.2% mean=  0.055% t=1.35 pf=1.19 tot=25.7% dd=-19.0%
+                                                               IS n=233 win=55.8% mean=0.025% t=0.43 | OOS n=238 win=54.6% mean=0.083% t=1.48
+Asia 18:00 -> 02:00 ET long                                  n= 480 win= 53.5% mean=  0.018% t=0.79 pf=1.11 tot=8.4% dd=-7.6%
+                                                               IS n=239 win=49.8% mean=0.003% t=0.1 | OOS n=241 win=57.3% mean=0.032% t=0.95
+Europe 02:00 -> 09:00 ET long                                n= 481 win= 55.1% mean=  0.027% t=1.08 pf=1.15 tot=13.2% dd=-8.4%
+                                                               IS n=240 win=55.8% mean=0.022% t=0.62 | OOS n=241 win=54.4% mean=0.033% t=0.9
+US cash 09:00 -> 16:00 ET long                               n= 480 win= 53.8% mean=  0.014% t=0.26 pf=1.04 tot=6.5% dd=-19.2%
+                                                               IS n=238 win=54.2% mean=0.028% t=0.35 | OOS n=242 win=53.3% mean=-0.001% t=-0.01
+Post-close 16:00 -> 17:00 ET long                            n= 480 win= 43.8% mean= -0.004% t=-0.34 pf=0.94 tot=-1.8% dd=-6.9%
+                                                               IS n=238 win=41.6% mean=-0.024% t=-1.41 | OOS n=242 win=45.9% mean=0.016% t=1.12
+  overnight into Mon                                         n=  86 win= 57.0% mean=  0.141% t=1.19 pf=1.41 tot=12.1% dd=-9.5%
+                                                               IS n=43 win=58.1% mean=-0.023% t=-0.13 | OOS n=43 win=55.8% mean=0.305% t=2.03 
+   US cash Mon                                                n=  94 win= 60.6% mean=  0.166% t=1.71 pf=1.59 tot=15.6% dd=-6.8%
+                                                               IS n=47 win=63.8% mean=0.1% t=0.74 | OOS n=47 win=57.4% mean=0.231% t=1.65
+  overnight into Tue                                         n=  95 win= 48.4% mean= -0.054% t=-0.72 pf=0.81 tot=-5.1% dd=-8.4%
+                                                               IS n=47 win=51.1% mean=0.032% t=0.38 | OOS n=48 win=45.8% mean=-0.139% t=-1.13 
+   US cash Tue                                                n=  96 win= 55.2% mean=  0.063% t=0.64 pf=1.19 tot=6.0% dd=-6.3%
+                                                               IS n=48 win=58.3% mean=0.036% t=0.24 | OOS n=48 win=52.1% mean=0.09% t=0.71
+  overnight into Wed                                         n= 102 win= 60.8% mean=  0.168% t=2.21 pf=1.94 tot=17.1% dd=-3.5%
+                                                               IS n=50 win=58.0% mean=0.111% t=0.96 | OOS n=52 win=63.5% mean=0.222% t=2.22 
+   US cash Wed                                                n= 102 win= 49.0% mean=  0.078% t=0.51 pf=1.21 tot=7.9% dd=-8.7%
+                                                               IS n=50 win=48.0% mean=0.266% t=0.94 | OOS n=52 win=50.0% mean=-0.103% t=-0.86
+  overnight into Thu                                         n=  97 win= 53.6% mean=  0.017% t=0.17 pf=1.05 tot=1.6% dd=-9.7%
+                                                               IS n=48 win=56.2% mean=-0.007% t=-0.05 | OOS n=49 win=51.0% mean=0.04% t=0.3 
+   US cash Thu                                                n=  96 win= 45.8% mean=  -0.19% t=-1.74 pf=0.61 tot=-18.2% dd=-28.5%
+                                                               IS n=47 win=40.4% mean=-0.235% t=-1.69 | OOS n=49 win=51.0% mean=-0.146% t=-0.87
+  overnight into Fri                                         n=  91 win= 56.0% mean=   -0.0% t=-0.0 pf=1.0 tot=-0.0% dd=-10.9%
+                                                               IS n=45 win=55.6% mean=0.002% t=0.01 | OOS n=46 win=56.5% mean=-0.002% t=-0.01 
+   US cash Fri                                                n=  92 win= 58.7% mean= -0.052% t=-0.48 pf=0.87 tot=-4.8% dd=-7.6%
+                                                               IS n=46 win=60.9% mean=-0.04% t=-0.26 | OOS n=46 win=56.5% mean=-0.064% t=-0.41
+
+--- Overnight conditional on prior US cash session ---
+Overnight long after US session < -1%                        n=  57 win= 57.9% mean=  0.192% t=1.56 pf=1.66 tot=11.0% dd=-4.6%
+                                                               IS n=29 win=55.2% mean=0.08% t=0.55 | OOS n=28 win=60.7% mean=0.309% t=1.52
+Overnight long after US session < -2%                        n=  16 win= 50.0% mean=  0.101% t=0.36 pf=1.26 tot=1.6% dd=-4.8%
+                                                               IS n=8 win=25.0% mean=-0.464% t=-1.43 | OOS n=8 win=75.0% mean=0.665% t=1.83
+Overnight long after US session > +1%                        n=  60 win= 51.7% mean=   0.07% t=0.5 pf=1.23 tot=4.2% dd=-7.4%
+                                                               IS n=31 win=51.6% mean=0.063% t=0.25 | OOS n=29 win=51.7% mean=0.077% t=0.64
+Overnight long after US session > +2%                        n=   7 win= 42.9% mean=  0.021% t=0.04 pf=1.05 tot=0.1% dd=-2.8%
+                                                               IS n=3 win=33.3% mean=-0.116% t=-0.08 | OOS n=4 win=50.0% mean=0.123% t=0.69
+Fade overnight move at 09:00, exit 16:00                     n= 469 win= 52.0% mean=   0.05% t=0.94 pf=1.14 tot=23.4% dd=-13.4%
+                                                               IS n=231 win=51.1% mean=0.05% t=0.6 | OOS n=238 win=52.9% mean=0.05% t=0.76
+  |overnight|>0.5%                                           n= 220 win= 54.1% mean=  0.124% t=1.32 pf=1.33 tot=27.2% dd=-13.1%
+                                                               IS n=91 win=56.0% mean=0.278% t=1.51 | OOS n=129 win=52.7% mean=0.015% t=0.16
+Follow overnight move |>0.5%| at 09:00, exit 16:00           n= 220 win= 44.5% mean= -0.144% t=-1.53 pf=0.72 tot=-31.6% dd=-41.9%
+                                                               IS n=91 win=42.9% mean=-0.298% t=-1.62 | OOS n=129 win=45.7% mean=-0.035% t=-0.38
+Follow overnight move |>1%| at 09:00, exit 16:00             n=  96 win= 44.8% mean= -0.098% t=-0.71 pf=0.82 tot=-9.4% dd=-23.7%
+                                                               IS n=39 win=41.0% mean=-0.207% t=-0.9 | OOS n=57 win=47.4% mean=-0.023% t=-0.13
+
+--- HOURLY (NY time) winsorised mean, win%, IS/OOS ---
+        n    mean   wmean      win     t      IS     OOS
+hour                                                    
+0     502 -0.0048 -0.0035  51.1952 -0.91 -0.0058 -0.0039
+1     501  0.0064  0.0018  50.8982  0.87  0.0079  0.0049
+2     501  0.0106  0.0110  53.4930  1.40  0.0050  0.0161
+3     500  0.0160  0.0110  54.2000  1.58  0.0165  0.0154
+4     501 -0.0093 -0.0058  49.7006 -0.97 -0.0061 -0.0126
+5     503  0.0039  0.0042  52.8827  0.50  0.0046  0.0032
+6     503  0.0033  0.0077  55.0696  0.37  0.0028  0.0039
+7     503  0.0029  0.0045  53.4791  0.27 -0.0043  0.0101
+8     503  0.0064  0.0067  48.5089  0.51  0.0041  0.0088
+9     508 -0.0062 -0.0050  52.1654 -0.29 -0.0184  0.0061
+10    503 -0.0007 -0.0004  54.4732 -0.03  0.0112 -0.0124
+11    502  0.0146  0.0238  54.7809  0.87  0.0112  0.0180
+12    502 -0.0004 -0.0002  50.7968 -0.03 -0.0033  0.0025
+13    495  0.0318  0.0091  55.3535  1.51  0.0418  0.0220
+14    495 -0.0131 -0.0175  48.0808 -0.93 -0.0086 -0.0174
+15    495 -0.0044 -0.0046  49.8990 -0.27  0.0064 -0.0150
+16    496  0.0069  0.0051  47.5806  0.62 -0.0115  0.0248
+18    497  0.0070  0.0071  51.1066  0.60 -0.0044  0.0184
+19    497  0.0085  0.0067  55.3320  1.07  0.0055  0.0114
+20    499  0.0090  0.0089  54.5090  0.99 -0.0083  0.0263
+21    499  0.0059  0.0036  52.1042  0.64  0.0285 -0.0166
+22    499 -0.0147 -0.0126  46.0922 -2.48 -0.0050 -0.0244
+23    500 -0.0017  0.0036  53.4000 -0.27 -0.0025 -0.0008
