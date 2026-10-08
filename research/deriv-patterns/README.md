@@ -66,3 +66,5 @@ python3 etf.py tqqq 0.16 > outputs/tqqq_out.txt
 - `data_deriv/TQQQ.US_M5_...csv`: MT5 export from Deriv (tab-separated, server time = GMT, spread column in points).
 - `deriv_tqqq.py <csv> [cost%]`: overnight-gap fill curve, fade/follow by exit, bracket rules, a 72-combination stop sweep, and the intraday bar-to-bar gap study. Run with `python3 -P deriv_tqqq.py data_deriv/<file> 0.05`.
 - Findings: Deriv's recorded TQQQ spread is 1 point (about 0.017%), far below the 0.14% website figure; no follow-the-gap variant is positive with any stop; the best fade variant is +0.15% per trade at t=1.3; intraday gaps are absent (15 jumps above 0.3% in three years).
+
+- `deriv_tqqq_intraday.py <csv>`: every intraday bar-to-bar gap (any non-zero open minus previous close), size in ticks and percent, fill rates, fade and follow outcomes. 5,535 gaps in three years, 87% of them one tick; fading them earns +0.016% gross, below the spread.
