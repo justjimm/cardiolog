@@ -60,3 +60,9 @@ python3 etf.py tqqq 0.16 > outputs/tqqq_out.txt
 - `gapfollow.py <name> <cost>`: follow the opening gap with target 1x or 2x the gap and a half-gap stop, capped at 30 minutes (5-minute data, 60 sessions) or 1 hour (hourly data, 2 years). Loses 0.2% to 0.3% per trade in every variant.
 - `gapfade_check.py <name> <cost>`: the mirror rule (fade the gap, half-gap target, one-gap stop) and its robustness checks. Also loses.
 - Bug fixed in both gap scripts on 8 Oct: the previous-close lookup was keyed on the New York date of a UTC-midnight daily index, which shifted it one day and produced look-ahead. Outputs here are from the corrected code.
+
+## Added 8 Oct 2026: Deriv's own TQQQ 5-minute history
+
+- `data_deriv/TQQQ.US_M5_...csv`: MT5 export from Deriv (tab-separated, server time = GMT, spread column in points).
+- `deriv_tqqq.py <csv> [cost%]`: overnight-gap fill curve, fade/follow by exit, bracket rules, a 72-combination stop sweep, and the intraday bar-to-bar gap study. Run with `python3 -P deriv_tqqq.py data_deriv/<file> 0.05`.
+- Findings: Deriv's recorded TQQQ spread is 1 point (about 0.017%), far below the 0.14% website figure; no follow-the-gap variant is positive with any stop; the best fade variant is +0.15% per trade at t=1.3; intraday gaps are absent (15 jumps above 0.3% in three years).
