@@ -1,0 +1,143 @@
+=== 1. WEEKEND GAP FADE deep-dive ===
+Fade to fill, all gaps                                     n=83 mean=0.415 median=0.283 win=75.9 winsor5=0.306 t_w=2.27 trim|r|<3=0.243(n=77) worst=-6.06 best=14.61
+     quarterly mean: 2024Q4:-0.31 2025Q1:+0.26 2025Q2:+0.74 2025Q3:-0.11 2025Q4:+0.34 2026Q1:+2.54 2026Q2:+0.52 2026Q3:-0.39  | positive quarters: 5/8
+Fade to fill, GAP UP only (short)                          n=52 mean=0.464 median=0.235 win=75.0 winsor5=0.258 t_w=1.59 trim|r|<3=0.217(n=49) worst=-6.06 best=14.61
+     quarterly mean: 2024Q4:-0.01 2025Q1:+0.06 2025Q2:+0.42 2025Q3:-0.42 2025Q4:+0.02 2026Q1:+3.51 2026Q2:+0.65 2026Q3:+0.26  | positive quarters: 6/8
+Fade to fill, GAP DOWN only (long)                         n=31 mean=0.332 median=0.364 win=77.4 winsor5=0.376 t_w=1.71 trim|r|<3=0.289(n=28) worst=-4.59 best=3.74
+     quarterly mean: 2024Q4:-0.72 2025Q1:+1.12 2025Q2:+0.97 2025Q3:+0.51 2025Q4:+0.73 2026Q1:+1.32 2026Q2:+0.08 2026Q3:-1.91  | positive quarters: 6/8
+Fade to fill, |gap|>0.3%                                   n=60 mean=0.565 median=0.525 win=73.3 winsor5=0.427 t_w=2.25 trim|r|<3=0.337(n=54) worst=-6.06 best=14.61
+     quarterly mean: 2024Q4:-0.93 2025Q1:+0.58 2025Q2:+1.04 2025Q3:-0.06 2025Q4:+0.35 2026Q1:+3.19 2026Q2:+0.58 2026Q3:-0.45  | positive quarters: 5/8
+Fade to fill, gap up >0.3% (short)                         n=35 mean=0.702 median=0.662 win=71.4 winsor5=0.442 t_w=1.70 trim|r|<3=0.346(n=32) worst=-6.06 best=14.61
+     quarterly mean: 2024Q4:-0.33 2025Q1:+0.36 2025Q2:+0.48 2025Q3:-0.63 2025Q4:-0.02 2026Q1:+4.33 2026Q2:+0.75 2026Q3:+0.28  | positive quarters: 5/8
+Fade to fill, gap down >0.3% (long)                        n=25 mean=0.372 median=0.519 win=76.0 winsor5=0.417 t_w=1.44 trim|r|<3=0.323(n=22) worst=-4.59 best=3.74
+     quarterly mean: 2024Q4:-1.33 2025Q1:+1.12 2025Q2:+1.60 2025Q3:+0.51 2025Q4:+0.73 2026Q1:+1.68 2026Q2:+0.08 2026Q3:-1.91  | positive quarters: 6/8
+Fade gap-up>0.3% exit c8                                   n=35 mean=0.060 median=-0.100 win=45.7 winsor5=0.061 t_w=0.29 trim|r|<3=0.060(n=35) worst=-2.29 best=2.66
+     quarterly mean: 2024Q4:+0.26 2025Q1:+0.01 2025Q2:+0.43 2025Q3:-0.23 2025Q4:-0.08 2026Q1:+0.56 2026Q2:-0.36 2026Q3:+0.13  | positive quarters: 5/8
+Fade gap-down>0.3% exit c8                                 n=25 mean=0.030 median=0.215 win=60.0 winsor5=0.059 t_w=0.28 trim|r|<3=0.165(n=24) worst=-3.21 best=2.58
+     quarterly mean: 2024Q4:+0.55 2025Q1:+1.09 2025Q2:+0.38 2025Q3:-0.11 2025Q4:+0.01 2026Q1:+0.50 2026Q2:-0.28 2026Q3:-1.75  | positive quarters: 5/8
+Fade gap-up>0.3% exit c13                                  n=35 mean=0.350 median=0.098 win=54.3 winsor5=0.297 t_w=1.03 trim|r|<3=0.164(n=32) worst=-4.58 best=6.03
+     quarterly mean: 2024Q4:+0.04 2025Q1:-0.08 2025Q2:+1.14 2025Q3:-0.41 2025Q4:-0.05 2026Q1:+1.55 2026Q2:+0.63 2026Q3:-0.08  | positive quarters: 4/8
+Fade gap-down>0.3% exit c13                                n=25 mean=0.241 median=0.369 win=60.0 winsor5=0.284 t_w=1.05 trim|r|<3=0.389(n=24) worst=-3.33 best=2.72
+     quarterly mean: 2024Q4:+0.46 2025Q1:+1.12 2025Q2:+1.48 2025Q3:-1.20 2025Q4:+0.51 2026Q1:-0.56 2026Q2:-0.36 2026Q3:-0.03  | positive quarters: 4/8
+Fade gap-up>0.3% exit close                                n=35 mean=0.924 median=0.198 win=57.1 winsor5=0.599 t_w=1.48 trim|r|<3=0.058(n=28) worst=-6.06 best=17.96
+     quarterly mean: 2024Q4:+0.94 2025Q1:+0.78 2025Q2:+2.86 2025Q3:-0.62 2025Q4:+0.19 2026Q1:+4.37 2026Q2:+0.75 2026Q3:-0.99  | positive quarters: 6/8
+Fade gap-down>0.3% exit close                              n=25 mean=0.262 median=0.559 win=60.0 winsor5=0.261 t_w=0.70 trim|r|<3=0.288(n=21) worst=-4.59 best=4.67
+     quarterly mean: 2024Q4:-0.05 2025Q1:+1.24 2025Q2:+1.20 2025Q3:-0.28 2025Q4:+0.89 2026Q1:+1.47 2026Q2:+0.24 2026Q3:-3.04  | positive quarters: 5/8
+
+Monday session by gap size bucket (gap up):
+      bucket   n   win   mean  median     t
+0    [0,0.3)  17  41.2 -0.164  -0.611 -0.28
+1  [0.3,0.6)   6  33.3 -0.864  -0.820 -1.63
+2    [0.6,1)   4  75.0  1.001   2.318  0.58
+3      [1,2)  14  57.1  0.335   0.132  0.97
+4     [2,20)  11  63.6  2.717   1.329  1.35
+Monday session by gap size bucket (gap down, long):
+      bucket  n   win   mean  median     t
+0    [0,0.3)  6  50.0 -0.199   0.240 -0.20
+1  [0.3,0.6)  9  66.7  0.111   0.589  0.25
+2    [0.6,1)  5  60.0  0.992   0.310  0.86
+3      [1,2)  5  60.0  0.527   0.946  0.44
+4     [2,20)  6  50.0 -0.215   0.556 -0.20
+Largest weekend gaps:
+date
+2026-03-09 00:00:00+00:00    17.15
+2026-04-13 00:00:00+00:00     9.32
+2026-03-02 00:00:00+00:00     7.22
+2026-07-27 00:00:00+00:00     5.07
+2025-05-05 00:00:00+00:00     4.10
+2026-06-15 00:00:00+00:00     4.04
+2026-03-16 00:00:00+00:00     3.64
+2026-05-11 00:00:00+00:00     3.50
+fill hour distribution (Monday): {0.0: 22, 1.0: 9, 2.0: 1, 3.0: 2, 5.0: 1, 6.0: 3, 7.0: 4, 8.0: 3, 9.0: 4, 10.0: 2, 11.0: 1, 12.0: 1, 14.0: 1, 16.0: 2, 19.0: 1}
+cumulative fill % by hour: {0.0: 27.0, 1.0: 37.0, 2.0: 39.0, 3.0: 41.0, 5.0: 42.0, 6.0: 46.0, 7.0: 51.0, 8.0: 54.0, 9.0: 59.0, 10.0: 61.0, 11.0: 63.0, 12.0: 64.0, 14.0: 65.0, 16.0: 67.0, 19.0: 69.0}
+
+=== 2. FADE EARLY ASIA MOVE (00:00->03:00 GMT) ===
+Fade |00-03|>0.3% exit 8:00                                n=248 mean=0.174 median=-0.023 win=49.6 winsor5=0.112 t_w=1.33 trim|r|<3=-0.054(n=230) worst=-7.22 best=10.34
+     quarterly mean: 2024Q4:-0.06 2025Q1:+0.11 2025Q2:+0.18 2025Q3:+0.30 2025Q4:-0.26 2026Q1:+0.41 2026Q2:+0.22 2026Q3:+0.23 2026Q4:+3.81  | positive quarters: 7/9
+Fade |00-03|>0.5% exit 8:00                                n=171 mean=0.305 median=0.080 win=51.5 winsor5=0.230 t_w=2.04 trim|r|<3=-0.011(n=156) worst=-4.83 best=10.34
+     quarterly mean: 2024Q4:+0.05 2025Q1:+0.33 2025Q2:+0.13 2025Q3:+0.39 2025Q4:-0.25 2026Q1:+0.44 2026Q2:+0.28 2026Q3:+0.72 2026Q4:+3.81  | positive quarters: 8/9
+Fade |00-03|>0.8% exit 8:00                                n=105 mean=0.514 median=0.134 win=55.2 winsor5=0.417 t_w=2.52 trim|r|<3=0.075(n=94) worst=-3.97 best=10.34
+     quarterly mean: 2024Q4:-0.45 2025Q1:+0.61 2025Q2:+0.24 2025Q3:+0.83 2025Q4:-0.10 2026Q1:+1.02 2026Q2:+0.23 2026Q3:+0.98 2026Q4:+3.81  | positive quarters: 7/9
+  ..>0.5% UP moves (short) exit 8                          n=83 mean=0.637 median=0.080 win=51.8 winsor5=0.549 t_w=2.58 trim|r|<3=0.008(n=73) worst=-3.13 best=10.34
+     quarterly mean: 2024Q4:+0.40 2025Q1:-0.28 2025Q2:+0.67 2025Q3:+0.32 2025Q4:-0.24 2026Q1:+0.63 2026Q2:+1.23 2026Q3:+1.14  | positive quarters: 6/8
+  ..>0.5% DOWN moves (long) exit 8                         n=88 mean=-0.008 median=0.066 win=51.1 winsor5=0.011 t_w=0.09 trim|r|<3=-0.027(n=83) worst=-4.83 best=3.81
+     quarterly mean: 2024Q4:-0.35 2025Q1:+0.53 2025Q2:-0.31 2025Q3:+0.43 2025Q4:-0.27 2026Q1:+0.21 2026Q2:-0.43 2026Q3:+0.24 2026Q4:+3.81  | positive quarters: 5/9
+  ..>0.5% excl Monday exit 8                               n=131 mean=0.293 median=0.112 win=53.4 winsor5=0.225 t_w=1.68 trim|r|<3=-0.025(n=118) worst=-4.83 best=10.34
+     quarterly mean: 2024Q4:+0.07 2025Q1:+0.18 2025Q2:+0.33 2025Q3:+0.62 2025Q4:-0.23 2026Q1:+0.14 2026Q2:+0.33 2026Q3:+0.53 2026Q4:+3.81  | positive quarters: 8/9
+  ..>0.5% Monday only exit 8                               n=40 mean=0.344 median=-0.151 win=45.0 winsor5=0.183 t_w=1.01 trim|r|<3=0.033(n=38) worst=-1.94 best=8.33
+     quarterly mean: 2024Q4:+0.01 2025Q1:+0.77 2025Q2:-0.50 2025Q3:-0.16 2025Q4:-0.31 2026Q1:+1.48 2026Q2:+0.11 2026Q3:+1.80  | positive quarters: 5/8
+Fade |00-03|>0.3% exit 13:00                               n=248 mean=0.361 median=0.185 win=55.2 winsor5=0.292 t_w=2.71 trim|r|<3=0.062(n=221) worst=-6.50 best=12.53
+     quarterly mean: 2024Q4:-0.22 2025Q1:+0.35 2025Q2:+0.19 2025Q3:+0.76 2025Q4:-0.03 2026Q1:+1.15 2026Q2:-0.10 2026Q3:+0.69 2026Q4:+4.10  | positive quarters: 6/9
+Fade |00-03|>0.5% exit 13:00                               n=171 mean=0.572 median=0.285 win=58.5 winsor5=0.475 t_w=3.46 trim|r|<3=0.181(n=149) worst=-5.20 best=12.53
+     quarterly mean: 2024Q4:-0.21 2025Q1:+0.62 2025Q2:+0.11 2025Q3:+0.95 2025Q4:+0.02 2026Q1:+1.34 2026Q2:+0.11 2026Q3:+1.38 2026Q4:+4.10  | positive quarters: 8/9
+Fade |00-03|>0.8% exit 13:00                               n=105 mean=0.731 median=0.527 win=61.0 winsor5=0.648 t_w=3.09 trim|r|<3=0.208(n=88) worst=-5.20 best=12.53
+     quarterly mean: 2024Q4:-1.02 2025Q1:+0.54 2025Q2:+0.30 2025Q3:+1.45 2025Q4:+0.06 2026Q1:+1.91 2026Q2:-0.05 2026Q3:+1.59 2026Q4:+4.10  | positive quarters: 7/9
+  ..>0.5% UP moves (short) exit 13                         n=83 mean=0.902 median=0.425 win=63.9 winsor5=0.806 t_w=3.50 trim|r|<3=0.143(n=70) worst=-5.20 best=12.53
+     quarterly mean: 2024Q4:+0.23 2025Q1:+0.01 2025Q2:+0.73 2025Q3:+0.64 2025Q4:-0.05 2026Q1:+1.57 2026Q2:+1.17 2026Q3:+1.48  | positive quarters: 7/8
+  ..>0.5% DOWN moves (long) exit 13                        n=88 mean=0.261 median=0.172 win=53.4 winsor5=0.237 t_w=1.32 trim|r|<3=0.215(n=79) worst=-4.65 best=7.96
+     quarterly mean: 2024Q4:-0.73 2025Q1:+0.83 2025Q2:-0.39 2025Q3:+1.15 2025Q4:+0.16 2026Q1:+1.06 2026Q2:-0.68 2026Q3:+1.25 2026Q4:+4.10  | positive quarters: 6/9
+  ..>0.5% excl Monday exit 13                              n=131 mean=0.522 median=0.310 win=60.3 winsor5=0.453 t_w=2.84 trim|r|<3=0.192(n=115) worst=-5.20 best=9.70
+     quarterly mean: 2024Q4:-0.22 2025Q1:+0.36 2025Q2:+0.64 2025Q3:+1.24 2025Q4:+0.07 2026Q1:+0.51 2026Q2:+0.01 2026Q3:+1.28 2026Q4:+4.10  | positive quarters: 8/9
+  ..>0.5% Monday only exit 13                              n=40 mean=0.733 median=0.235 win=52.5 winsor5=0.528 t_w=1.96 trim|r|<3=0.146(n=34) worst=-4.65 best=12.53
+     quarterly mean: 2024Q4:-0.20 2025Q1:+1.40 2025Q2:-1.55 2025Q3:+0.26 2025Q4:-0.12 2026Q1:+4.25 2026Q2:+0.44 2026Q3:+1.89  | positive quarters: 5/8
+Fade |00-03|>0.3% exit 21:00                               n=248 mean=0.373 median=0.029 win=50.4 winsor5=0.309 t_w=2.06 trim|r|<3=-0.174(n=197) worst=-10.64 best=23.64
+     quarterly mean: 2024Q4:-0.51 2025Q1:+0.16 2025Q2:+0.41 2025Q3:+0.81 2025Q4:-0.13 2026Q1:+1.65 2026Q2:+0.08 2026Q3:+0.20 2026Q4:+5.53  | positive quarters: 7/9
+Fade |00-03|>0.5% exit 21:00                               n=171 mean=0.590 median=0.057 win=50.9 winsor5=0.511 t_w=2.56 trim|r|<3=-0.231(n=131) worst=-10.64 best=23.64
+     quarterly mean: 2024Q4:-0.38 2025Q1:+0.38 2025Q2:+0.39 2025Q3:+0.53 2025Q4:-0.32 2026Q1:+1.90 2026Q2:+0.40 2026Q3:+0.76 2026Q4:+5.53  | positive quarters: 7/9
+Fade |00-03|>0.8% exit 21:00                               n=105 mean=0.975 median=0.185 win=51.4 winsor5=0.796 t_w=2.71 trim|r|<3=-0.327(n=73) worst=-5.20 best=23.64
+     quarterly mean: 2024Q4:-1.39 2025Q1:+0.03 2025Q2:+1.28 2025Q3:+0.97 2025Q4:-0.53 2026Q1:+2.73 2026Q2:+0.53 2026Q3:+0.62 2026Q4:+5.53  | positive quarters: 7/9
+  ..>0.5% UP moves (short) exit 21                         n=83 mean=0.721 median=-0.045 win=48.2 winsor5=0.525 t_w=1.87 trim|r|<3=-0.448(n=63) worst=-5.20 best=23.64
+     quarterly mean: 2024Q4:+0.32 2025Q1:-0.00 2025Q2:+0.95 2025Q3:-0.45 2025Q4:-0.39 2026Q1:+2.12 2026Q2:+1.24 2026Q3:+0.09  | positive quarters: 5/8
+  ..>0.5% DOWN moves (long) exit 21                        n=88 mean=0.467 median=0.161 win=53.4 winsor5=0.461 t_w=1.61 trim|r|<3=-0.029(n=68) worst=-10.64 best=10.06
+     quarterly mean: 2024Q4:-1.20 2025Q1:+0.51 2025Q2:-0.07 2025Q3:+1.17 2025Q4:-0.18 2026Q1:+1.63 2026Q2:-0.23 2026Q3:+1.53 2026Q4:+5.53  | positive quarters: 5/9
+  ..>0.5% excl Monday exit 21                              n=131 mean=0.636 median=0.057 win=51.1 winsor5=0.606 t_w=2.61 trim|r|<3=-0.287(n=98) worst=-5.94 best=10.06
+     quarterly mean: 2024Q4:-0.25 2025Q1:+0.32 2025Q2:+1.28 2025Q3:+0.90 2025Q4:-0.36 2026Q1:+0.88 2026Q2:+0.37 2026Q3:+0.87 2026Q4:+5.53  | positive quarters: 7/9
+  ..>0.5% Monday only exit 21                              n=40 mean=0.442 median=0.030 win=50.0 winsor5=0.155 t_w=0.42 trim|r|<3=-0.064(n=33) worst=-10.64 best=23.64
+     quarterly mean: 2024Q4:-0.66 2025Q1:+0.57 2025Q2:-2.41 2025Q3:-0.34 2025Q4:-0.23 2026Q1:+5.48 2026Q2:+0.52 2026Q3:+0.14  | positive quarters: 4/8
+Fade |00-02|>0.5% exit 21:00                               n=157 mean=0.441 median=0.076 win=52.2 winsor5=0.351 t_w=1.75 trim|r|<3=-0.149(n=120) worst=-10.61 best=23.18
+     quarterly mean: 2024Q4:-0.34 2025Q1:+0.37 2025Q2:+0.35 2025Q3:+0.68 2025Q4:+0.13 2026Q1:+1.58 2026Q2:+0.09 2026Q3:+0.39  | positive quarters: 7/8
+
+=== 3. LONDON OPEN SHORT ===
+Short 07:00-08:00 GMT                                      n=495 mean=0.126 median=-0.014 win=48.5 winsor5=0.001 t_w=0.04 trim|r|<3=-0.044(n=478) worst=-4.08 best=10.91
+     quarterly mean: 2024Q4:-0.07 2025Q1:-0.09 2025Q2:+0.01 2025Q3:-0.01 2025Q4:+0.01 2026Q1:+0.27 2026Q2:+0.48 2026Q3:+0.42 2026Q4:-0.31  | positive quarters: 5/9
+Short 07:00-09:00 GMT                                      n=495 mean=0.141 median=-0.000 win=49.9 winsor5=0.030 t_w=0.85 trim|r|<3=-0.038(n=476) worst=-4.03 best=10.77
+     quarterly mean: 2024Q4:-0.11 2025Q1:-0.03 2025Q2:+0.09 2025Q3:-0.02 2025Q4:+0.09 2026Q1:+0.11 2026Q2:+0.59 2026Q3:+0.41 2026Q4:-0.11  | positive quarters: 5/9
+Short 08:00-09:00 GMT                                      n=497 mean=-0.029 median=-0.030 win=47.9 winsor5=-0.025 t_w=-1.04 trim|r|<3=-0.009(n=494) worst=-3.64 best=2.64
+     quarterly mean: 2024Q4:-0.05 2025Q1:+0.03 2025Q2:+0.03 2025Q3:-0.03 2025Q4:-0.00 2026Q1:-0.22 2026Q2:+0.08 2026Q3:-0.07 2026Q4:+0.16  | positive quarters: 4/9
+Short 07:00-10:00 GMT                                      n=495 mean=0.074 median=-0.017 win=49.5 winsor5=-0.005 t_w=-0.12 trim|r|<3=-0.068(n=471) worst=-6.91 best=9.20
+     quarterly mean: 2024Q4:-0.19 2025Q1:-0.08 2025Q2:+0.02 2025Q3:-0.04 2025Q4:+0.06 2026Q1:-0.02 2026Q2:+0.44 2026Q3:+0.41 2026Q4:-0.07  | positive quarters: 4/9
+Short 06:00-09:00 GMT                                      n=495 mean=0.164 median=0.022 win=50.7 winsor5=0.080 t_w=1.90 trim|r|<3=-0.005(n=475) worst=-4.22 best=10.33
+     quarterly mean: 2024Q4:-0.12 2025Q1:-0.01 2025Q2:+0.21 2025Q3:+0.04 2025Q4:+0.13 2026Q1:-0.03 2026Q2:+0.63 2026Q3:+0.45 2026Q4:-0.36  | positive quarters: 5/9
+Short 08:00-09:00 LONDON local time                        n=496 mean=0.087 median=-0.035 win=46.0 winsor5=-0.011 t_w=-0.44 trim|r|<3=-0.039(n=481) worst=-4.08 best=10.91
+     quarterly mean: 2024Q4:-0.04 2025Q1:+0.05 2025Q2:+0.01 2025Q3:-0.01 2025Q4:+0.02 2026Q1:-0.23 2026Q2:+0.48 2026Q3:+0.42 2026Q4:-0.31  | positive quarters: 5/9
+Short 08:00-10:00 LONDON local time                        n=496 mean=0.067 median=-0.045 win=47.6 winsor5=-0.019 t_w=-0.51 trim|r|<3=-0.080(n=478) worst=-4.55 best=10.77
+     quarterly mean: 2024Q4:-0.11 2025Q1:-0.04 2025Q2:+0.09 2025Q3:-0.02 2025Q4:-0.06 2026Q1:-0.33 2026Q2:+0.59 2026Q3:+0.41 2026Q4:-0.11  | positive quarters: 3/9
+Short 07:00-09:00 LONDON local time                        n=494 mean=0.161 median=0.050 win=53.4 winsor5=0.063 t_w=2.08 trim|r|<3=0.002(n=477) worst=-4.16 best=10.46
+     quarterly mean: 2024Q4:-0.07 2025Q1:-0.01 2025Q2:+0.12 2025Q3:+0.05 2025Q4:+0.13 2026Q1:+0.09 2026Q2:+0.52 2026Q3:+0.46 2026Q4:-0.55  | positive quarters: 6/9
+Short 09:00-10:00 LONDON local time                        n=497 mean=-0.061 median=-0.058 win=46.3 winsor5=-0.054 t_w=-2.09 trim|r|<3=-0.032(n=493) worst=-4.26 best=2.64
+     quarterly mean: 2024Q4:-0.08 2025Q1:-0.16 2025Q2:+0.03 2025Q3:-0.03 2025Q4:-0.13 2026Q1:-0.15 2026Q2:+0.08 2026Q3:-0.07 2026Q4:+0.16  | positive quarters: 3/9
+by dow: {'count': {0: 95, 1: 101, 2: 101, 3: 99, 4: 99}, 'mean': {0: 0.033, 1: 0.215, 2: 0.031, 3: 0.139, 4: 0.433}, 'median': {0: -0.055, 1: 0.137, 2: 0.03, 3: -0.014, 4: 0.094}}
+short 07-09 when asia up: 0.207 n 247  when asia down: 0.164
+Long 09:00-13:00 GMT                                       n=498 mean=0.038 median=0.065 win=54.0 winsor5=0.014 t_w=0.34 trim|r|<3=-0.017(n=484) worst=-6.99 best=6.08
+     quarterly mean: 2024Q4:-0.03 2025Q1:+0.10 2025Q2:-0.09 2025Q3:+0.04 2025Q4:-0.04 2026Q1:+0.27 2026Q2:-0.03 2026Q3:+0.11 2026Q4:-0.18  | positive quarters: 4/9
+Long 09:00-10:00 GMT                                       n=498 mean=0.050 median=0.019 win=52.2 winsor5=0.023 t_w=1.03 trim|r|<3=0.007(n=489) worst=-10.54 best=7.40
+     quarterly mean: 2024Q4:+0.04 2025Q1:+0.05 2025Q2:+0.01 2025Q3:+0.01 2025Q4:+0.02 2026Q1:+0.12 2026Q2:+0.20 2026Q3:-0.04 2026Q4:-0.07  | positive quarters: 7/9
+Long 01:00-03:00 GMT                                       n=493 mean=0.044 median=-0.015 win=48.5 winsor5=0.021 t_w=0.97 trim|r|<3=0.012(n=490) worst=-2.57 best=6.39
+     quarterly mean: 2024Q4:-0.03 2025Q1:-0.03 2025Q2:+0.15 2025Q3:-0.07 2025Q4:+0.13 2026Q1:+0.18 2026Q2:+0.03 2026Q3:+0.03 2026Q4:-0.71  | positive quarters: 5/9
+Long 18:00-19:00 GMT                                       n=497 mean=0.026 median=-0.014 win=48.9 winsor5=0.020 t_w=1.06 trim|r|<3=0.016(n=496) worst=-1.99 best=4.67
+     quarterly mean: 2024Q4:+0.01 2025Q1:-0.08 2025Q2:+0.05 2025Q3:-0.00 2025Q4:+0.00 2026Q1:+0.09 2026Q2:+0.11 2026Q3:+0.02 2026Q4:-0.29  | positive quarters: 6/9
+Short 20:00-21:00 GMT                                      n=494 mean=-0.025 median=-0.018 win=46.6 winsor5=-0.031 t_w=-1.98 trim|r|<3=-0.039(n=492) worst=-2.97 best=3.56
+     quarterly mean: 2024Q4:+0.09 2025Q1:-0.02 2025Q2:-0.09 2025Q3:-0.04 2025Q4:+0.01 2026Q1:-0.05 2026Q2:-0.02 2026Q3:-0.09 2026Q4:+0.29  | positive quarters: 3/9
+Long 13:00-16:00 GMT (US open)                             n=499 mean=0.038 median=0.014 win=50.9 winsor5=-0.017 t_w=-0.38 trim|r|<3=-0.042(n=482) worst=-5.30 best=15.37
+     quarterly mean: 2024Q4:+0.01 2025Q1:-0.16 2025Q2:-0.11 2025Q3:-0.15 2025Q4:-0.24 2026Q1:+0.12 2026Q2:+0.28 2026Q3:+0.51 2026Q4:+1.63  | positive quarters: 5/9
+placeholder                                                n=493 mean=0.036 median=0.013 win=50.7 winsor5=-0.019 t_w=-0.41 trim|r|<3=-0.044(n=476) worst=-5.30 best=15.37
+     quarterly mean: 2024Q4:+0.01 2025Q1:-0.16 2025Q2:-0.13 2025Q3:-0.15 2025Q4:-0.24 2026Q1:+0.11 2026Q2:+0.28 2026Q3:+0.52 2026Q4:+1.63  | positive quarters: 5/9
+Long 09:00-11:00 NEW YORK local time                       n=503 mean=-0.052 median=-0.073 win=46.3 winsor5=-0.054 t_w=-1.45 trim|r|<3=-0.062(n=498) worst=-3.61 best=4.88
+     quarterly mean: 2024Q4:-0.06 2025Q1:-0.18 2025Q2:-0.20 2025Q3:-0.15 2025Q4:-0.20 2026Q1:+0.08 2026Q2:+0.12 2026Q3:+0.17 2026Q4:+0.82  | positive quarters: 4/9
+Long 09:00-12:00 NEW YORK local time                       n=502 mean=0.028 median=-0.000 win=50.0 winsor5=-0.017 t_w=-0.37 trim|r|<3=-0.031(n=484) worst=-5.30 best=15.37
+     quarterly mean: 2024Q4:-0.06 2025Q1:-0.17 2025Q2:-0.11 2025Q3:-0.15 2025Q4:-0.21 2026Q1:+0.11 2026Q2:+0.28 2026Q3:+0.51 2026Q4:+1.63  | positive quarters: 4/9
+Long 08:00-10:00 NEW YORK local time                       n=498 mean=-0.011 median=-0.045 win=47.4 winsor5=-0.052 t_w=-1.42 trim|r|<3=-0.076(n=486) worst=-7.52 best=10.59
+     quarterly mean: 2024Q4:-0.02 2025Q1:+0.04 2025Q2:-0.04 2025Q3:-0.18 2025Q4:-0.21 2026Q1:+0.10 2026Q2:-0.08 2026Q3:+0.30 2026Q4:+0.25  | positive quarters: 4/9
+Long 10:00-11:00 NEW YORK local time                       n=503 mean=-0.018 median=0.001 win=50.3 winsor5=-0.021 t_w=-0.79 trim|r|<3=-0.018(n=503) worst=-2.67 best=2.53
+     quarterly mean: 2024Q4:-0.04 2025Q1:-0.19 2025Q2:-0.14 2025Q3:-0.02 2025Q4:-0.05 2026Q1:+0.03 2026Q2:+0.11 2026Q3:+0.15 2026Q4:+0.36  | positive quarters: 4/9
+worst 07:00 bars: {Timestamp('2026-07-23 07:00:00+0000', tz='UTC'): -10.94, Timestamp('2026-03-10 07:00:00+0000', tz='UTC'): -8.58, Timestamp('2026-04-30 07:00:00+0000', tz='UTC'): -6.91, Timestamp('2026-07-24 07:00:00+0000', tz='UTC'): -6.67, Timestamp('2026-05-01 07:00:00+0000', tz='UTC'): -6.57, Timestamp('2026-04-23 07:00:00+0000', tz='UTC'): -6.17}

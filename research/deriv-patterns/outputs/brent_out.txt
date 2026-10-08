@@ -1,0 +1,290 @@
+sessions 478 2024-10-03 2026-10-02
+
+=== WEEKEND GAP (Fri 21:00 -> Mon 00:00 GMT) ===
+n=83 mean gap=0.535% median=0.197% up%=62.7 |gap| mean=1.488% max=17.15%
+fill by Mon close:  68.7%  | fill when |gap|>0.3%: 60.0% (n=60)  | |gap|>0.6%: 55.6% (n=45)
+Weekend hold long (Fri 21:00 -> Mon 00:00)                   n=  83 win= 61.4% mean=  0.505% t=1.69 pf=2.04 tot=42.0% dd=-9.2%
+                                                               IS n=44 win=59.1% mean=-0.061% t=-0.32 | OOS n=39 win=64.1% mean=1.145% t=1.94
+Weekend hold short                                           n=  83 win= 36.1% mean= -0.565% t=-1.89 pf=0.45 tot=-46.9% dd=-53.3%
+                                                               IS n=44 win=36.4% mean=0.001% t=0.01 | OOS n=39 win=35.9% mean=-1.205% t=-2.05
+Fade weekend gap, exit 3:00 GMT, all gaps                    n=  83 win= 48.2% mean= -0.063% t=-0.56 pf=0.8 tot=-5.2% dd=-11.2%
+                                                               IS n=44 win=54.5% mean=0.08% t=0.95 | OOS n=39 win=41.0% mean=-0.223% t=-1.02
+Fade weekend gap |gap|>0.3%, exit 3:00                       n=  60 win= 55.0% mean= -0.028% t=-0.18 pf=0.92 tot=-1.7% dd=-10.2%
+                                                               IS n=26 win=69.2% mean=0.227% t=2.18 | OOS n=34 win=44.1% mean=-0.223% t=-0.89
+Fade weekend gap |gap|>0.6%, exit 3:00                       n=  45 win= 55.6% mean= -0.014% t=-0.07 pf=0.96 tot=-0.6% dd=-9.0%
+                                                               IS n=18 win=72.2% mean=0.279% t=2.01 | OOS n=27 win=44.4% mean=-0.21% t=-0.68
+Fade weekend gap, exit 8:00 GMT, all gaps                    n=  83 win= 51.8% mean=  -0.01% t=-0.08 pf=0.98 tot=-0.8% dd=-9.8%
+                                                               IS n=44 win=50.0% mean=0.137% t=0.81 | OOS n=39 win=53.8% mean=-0.176% t=-0.95
+Fade weekend gap |gap|>0.3%, exit 8:00                       n=  60 win= 51.7% mean=  0.047% t=0.29 pf=1.1 tot=2.8% dd=-8.4%
+                                                               IS n=26 win=46.2% mean=0.254% t=1.0 | OOS n=34 win=55.9% mean=-0.111% t=-0.54
+Fade weekend gap |gap|>0.6%, exit 8:00                       n=  45 win= 55.6% mean=  0.177% t=0.91 pf=1.4 tot=8.0% dd=-7.4%
+                                                               IS n=18 win=55.6% mean=0.538% t=1.7 | OOS n=27 win=55.6% mean=-0.063% t=-0.26
+Fade weekend gap, exit 13:00 GMT, all gaps                   n=  83 win= 51.8% mean=  0.164% t=0.81 pf=1.28 tot=13.6% dd=-8.6%
+                                                               IS n=44 win=50.0% mean=0.015% t=0.06 | OOS n=39 win=53.8% mean=0.331% t=1.01
+Fade weekend gap |gap|>0.3%, exit 13:00                      n=  60 win= 56.7% mean=  0.305% t=1.26 pf=1.55 tot=18.3% dd=-6.6%
+                                                               IS n=26 win=57.7% mean=0.345% t=0.96 | OOS n=34 win=55.9% mean=0.274% t=0.82
+Fade weekend gap |gap|>0.6%, exit 13:00                      n=  45 win= 57.8% mean=  0.511% t=1.7 pf=1.99 tot=23.0% dd=-6.5%
+                                                               IS n=18 win=61.1% mean=0.798% t=1.78 | OOS n=27 win=55.6% mean=0.319% t=0.79
+Fade weekend gap, exit 21:00 GMT, all gaps                   n=  83 win= 54.2% mean=  0.412% t=1.19 pf=1.54 tot=34.2% dd=-22.9%
+                                                               IS n=44 win=54.5% mean=0.397% t=1.04 | OOS n=39 win=53.8% mean=0.43% t=0.71
+Fade weekend gap |gap|>0.3%, exit 21:00                      n=  60 win= 58.3% mean=  0.648% t=1.48 pf=1.93 tot=38.9% dd=-15.7%
+                                                               IS n=26 win=61.5% mean=0.835% t=1.46 | OOS n=34 win=55.9% mean=0.506% t=0.78
+Fade weekend gap |gap|>0.6%, exit 21:00                      n=  45 win= 60.0% mean=  0.968% t=1.7 pf=2.38 tot=43.5% dd=-15.9%
+                                                               IS n=18 win=66.7% mean=1.321% t=1.69 | OOS n=27 win=55.6% mean=0.732% t=0.92
+Fade weekend gap, target=fill else Mon close                 n=  83 win= 75.9% mean=  0.415% t=1.72 pf=2.07 tot=34.4% dd=-9.2%
+                                                               IS n=44 win=77.3% mean=0.16% t=0.92 | OOS n=39 win=74.4% mean=0.703% t=1.48
+Fade weekend gap |gap|>0.3%, target=fill else Mon close      n=  60 win= 73.3% mean=  0.565% t=1.7 pf=2.14 tot=33.9% dd=-9.4%
+                                                               IS n=26 win=76.9% mean=0.284% t=1.0 | OOS n=34 win=70.6% mean=0.779% t=1.43
+Fade |gap|>0.3%, target=fill, stop=1x gap (conservative)     n=  60 win= 40.0% mean=  0.155% t=0.48 pf=1.24 tot=9.3% dd=-14.4%
+                                                               IS n=26 win=38.5% mean=0.017% t=0.07 | OOS n=34 win=41.2% mean=0.261% t=0.49
+Follow weekend gap, exit Mon close                           n=  83 win= 45.8% mean= -0.472% t=-1.36 pf=0.61 tot=-39.2% dd=-66.0%
+                                                               IS n=44 win=45.5% mean=-0.457% t=-1.2 | OOS n=39 win=46.2% mean=-0.49% t=-0.81
+      bucket   n   win   mean  median     t
+0    [0,0.2)  13  30.8 -1.327  -1.041 -2.67
+1  [0.2,0.4)  16  62.5  0.702   0.559  1.34
+2  [0.4,0.7)  12  50.0 -0.132   0.027 -0.32
+3  [0.7,1.0)   6  66.7  1.165   2.261  0.86
+4   [1.0,10)  35  57.1  0.482   0.364  1.00
+Monday session return by gap sign:       count   mean  median
+gap                       
+-1.0     31  0.197   0.589
+ 1.0     52 -0.589  -0.132
+
+=== OVERNIGHT GAP Tue-Fri (21:00 -> 00:00 GMT) ===
+n=368 mean=0.006% |gap| mean=0.360% fill by close=89.7%
+Overnight hold long (21:00->00:00)                           n= 368 win= 47.8% mean= -0.024% t=-0.58 pf=0.87 tot=-8.9% dd=-17.8%
+                                                               IS n=184 win=48.9% mean=-0.023% t=-0.68 | OOS n=184 win=46.7% mean=-0.026% t=-0.34
+Fade overnight gap exit 21:00                                n= 368 win= 51.9% mean=  0.152% t=1.16 pf=1.18 tot=56.1% dd=-54.6%
+                                                               IS n=184 win=57.6% mean=0.244% t=1.82 | OOS n=184 win=46.2% mean=0.061% t=0.27
+Fade overnight gap exit 08:00                                n= 368 win= 51.1% mean=  0.083% t=0.9 pf=1.16 tot=30.7% dd=-19.7%
+                                                               IS n=184 win=50.0% mean=0.025% t=0.38 | OOS n=184 win=52.2% mean=0.142% t=0.82
+Follow overnight gap exit 21:00                              n= 368 win= 44.6% mean= -0.212% t=-1.61 pf=0.79 tot=-78.2% dd=-130.2%
+                                                               IS n=184 win=38.6% mean=-0.304% t=-2.27 | OOS n=184 win=50.5% mean=-0.121% t=-0.53
+      bucket    n   win   mean  median     t
+0    [0,0.1)  124  50.8  0.002   0.050  0.01
+1  [0.1,0.2)   82  50.0  0.228   0.009  0.85
+2  [0.2,0.4)   79  50.6  0.329   0.018  1.00
+3   [0.4,10)   83  56.6  0.134   0.545  0.40
+
+=== SESSION RETURN BY DAY OF WEEK (00:00->21:00 GMT) ===
+Long session Mon                                             n=  93 win= 52.7% mean= -0.253% t=-0.8 pf=0.76 tot=-23.5% dd=-32.5%
+                                                               IS n=48 win=52.1% mean=-0.127% t=-0.35 | OOS n=45 win=53.3% mean=-0.387% t=-0.73
+Long session Tue                                             n=  94 win= 51.1% mean= -0.177% t=-0.69 pf=0.83 tot=-16.7% dd=-29.3%
+                                                               IS n=47 win=51.1% mean=-0.003% t=-0.01 | OOS n=47 win=51.1% mean=-0.351% t=-0.78
+Long session Wed                                             n= 100 win= 49.0% mean=  0.127% t=0.51 pf=1.15 tot=12.7% dd=-20.6%
+                                                               IS n=49 win=36.7% mean=-0.137% t=-0.45 | OOS n=51 win=60.8% mean=0.38% t=0.98
+Long session Thu                                             n=  96 win= 53.1% mean=  0.403% t=1.57 pf=1.57 tot=38.7% dd=-15.9%
+                                                               IS n=48 win=52.1% mean=0.031% t=0.13 | OOS n=48 win=54.2% mean=0.774% t=1.72
+Long session Fri                                             n=  95 win= 50.5% mean= -0.175% t=-0.64 pf=0.82 tot=-16.6% dd=-42.1%
+                                                               IS n=48 win=43.8% mean=-0.125% t=-0.46 | OOS n=47 win=57.4% mean=-0.225% t=-0.47
+Long every session                                           n= 478 win= 51.3% mean= -0.011% t=-0.09 pf=0.99 tot=-5.4% dd=-46.7%
+                                                               IS n=240 win=47.1% mean=-0.073% t=-0.57 | OOS n=238 win=55.5% mean=0.051% t=0.25
+
+=== HOURLY BAR RETURNS (GMT) all sessions ===
+        n    mean   win     t  absmean  IS_mean  OOS_mean  range
+hour                                                            
+0     489 -0.0127  47.2 -0.54    0.301  -0.0089   -0.0164  0.645
+1     493  0.0382  52.5  1.34    0.361   0.0248    0.0518  0.751
+2     493  0.0412  50.7  2.09    0.265   0.0326    0.0499  0.609
+3     493 -0.0116  50.9 -0.67    0.228  -0.0304    0.0076  0.497
+4     493 -0.0061  48.1 -0.42    0.201  -0.0260    0.0144  0.427
+5     493 -0.0174  46.7 -0.67    0.296  -0.0178   -0.0169  0.597
+6     495 -0.0152  53.3 -0.69    0.323  -0.0307    0.0007  0.732
+7     495 -0.1563  46.9 -2.79    0.580   0.0083   -0.3255  1.054
+8     497 -0.0015  49.7 -0.05    0.487  -0.0260    0.0236  1.050
+9     498  0.0795  54.2  1.80    0.511   0.0502    0.1093  1.072
+10    498 -0.0225  48.8 -0.81    0.433  -0.0231   -0.0219  0.940
+11    498 -0.0309  52.8 -0.95    0.456  -0.0169   -0.0451  0.965
+12    498  0.0242  49.6  0.51    0.513  -0.0149    0.0639  1.101
+13    499 -0.0159  48.7 -0.49    0.522  -0.0225   -0.0092  1.145
+14    503  0.0244  51.5  0.76    0.530  -0.0317    0.0816  1.213
+15    503  0.0605  50.7  1.19    0.625  -0.0082    0.1306  1.248
+16    502 -0.0344  49.6 -1.30    0.427  -0.0401   -0.0287  1.001
+17    500  0.0241  50.8  0.76    0.432   0.0526   -0.0049  0.935
+18    497  0.0557  51.1  2.25    0.375   0.0270    0.0847  0.898
+19    494  0.0045  52.6  0.15    0.334   0.0100   -0.0011  0.747
+20    494 -0.0053  46.6 -0.23    0.294  -0.0169    0.0064  0.660
+
+=== HOURLY by DOW mean ret (GMT) ===
+dow       0      1      2      3      4
+hour                                   
+0    -0.026  0.026 -0.062 -0.015  0.016
+1     0.040  0.058  0.053  0.039 -0.000
+2     0.047  0.109 -0.021  0.040  0.034
+3     0.003  0.011 -0.072  0.035 -0.034
+4    -0.011 -0.023 -0.001  0.004  0.002
+5    -0.052 -0.028  0.008 -0.019  0.002
+6    -0.017  0.018 -0.012  0.005 -0.070
+7    -0.007 -0.237 -0.024 -0.185 -0.322
+8    -0.024  0.092 -0.015  0.028 -0.093
+9     0.023  0.151 -0.005  0.023  0.203
+10    0.049  0.023 -0.085  0.005 -0.103
+11   -0.130 -0.012 -0.012 -0.008  0.003
+12   -0.009 -0.092  0.209  0.033 -0.021
+13   -0.070 -0.007 -0.039  0.035 -0.001
+14    0.076 -0.015 -0.021  0.053  0.034
+15   -0.003 -0.010  0.124  0.267 -0.076
+16   -0.053 -0.051 -0.079 -0.034  0.046
+17   -0.005 -0.039  0.018  0.019  0.129
+18   -0.033  0.120  0.056  0.108  0.023
+19   -0.091  0.032  0.080  0.040 -0.045
+20    0.012 -0.099  0.024 -0.030  0.072
+
+=== SESSION BLOCKS ===
+Long Asia 00-07 GMT                                          n= 478 win= 50.2% mean= -0.018% t=-0.4 pf=0.95 tot=-8.5% dd=-27.1%
+                                                               IS n=240 win=48.3% mean=-0.046% t=-1.06 | OOS n=238 win=52.1% mean=0.011% t=0.14
+Long London 07-13 GMT                                        n= 495 win= 49.1% mean= -0.145% t=-1.96 pf=0.77 tot=-71.8% dd=-83.0%
+                                                               IS n=251 win=51.4% mean=-0.018% t=-0.26 | OOS n=244 win=46.7% mean=-0.276% t=-2.09
+Long US 13-21 GMT                                            n= 493 win= 50.9% mean=  0.097% t=1.07 pf=1.17 tot=47.8% dd=-33.0%
+                                                               IS n=248 win=47.2% mean=-0.044% t=-0.45 | OOS n=245 win=54.7% mean=0.239% t=1.57
+Long Early US 13-16 GMT                                      n= 499 win= 50.9% mean=  0.038% t=0.56 pf=1.08 tot=18.8% dd=-48.4%
+                                                               IS n=252 win=46.8% mean=-0.108% t=-1.71 | OOS n=247 win=55.1% mean=0.186% t=1.57
+Long Late 16-21 GMT                                          n= 493 win= 51.5% mean=  0.011% t=0.18 pf=1.03 tot=5.2% dd=-22.7%
+                                                               IS n=248 win=50.0% mean=-0.003% t=-0.04 | OOS n=245 win=53.1% mean=0.024% t=0.27
+Long London open 07-09 GMT                                   n= 495 win= 45.9% mean= -0.201% t=-3.27 pf=0.59 tot=-99.4% dd=-105.1%
+                                                               IS n=251 win=45.8% mean=-0.047% t=-1.14 | OOS n=244 win=45.9% mean=-0.359% t=-3.09
+Long Pre-US 11-13 GMT                                        n= 498 win= 48.0% mean= -0.028% t=-0.52 pf=0.92 tot=-13.7% dd=-29.4%
+                                                               IS n=251 win=51.4% mean=-0.056% t=-1.44 | OOS n=247 win=44.5% mean=0.001% t=0.01
+
+=== INTRADAY MOMENTUM: sign of 00:00->X predicts X->21:00 ===
+Follow 00->3:00 sign into 3->21:00 (corr=-0.250)             n= 478 win= 51.5% mean= -0.041% t=-0.33 pf=0.96 tot=-19.4% dd=-83.2%
+                                                               IS n=240 win=50.4% mean=0.0% t=0.0 | OOS n=238 win=52.5% mean=-0.082% t=-0.38
+  Fade 00->3:00 sign                                         n= 478 win= 46.0% mean= -0.019% t=-0.16 pf=0.98 tot=-9.3% dd=-63.8%
+                                                               IS n=240 win=45.8% mean=-0.06% t=-0.49 | OOS n=238 win=46.2% mean=0.022% t=0.1
+  Follow |00->3|>0.3%                                        n= 248 win= 47.6% mean= -0.433% t=-2.17 pf=0.65 tot=-107.3% dd=-118.7%
+                                                               IS n=101 win=41.6% mean=-0.315% t=-1.31 | OOS n=147 win=51.7% mean=-0.514% t=-1.75
+  Follow |00->3|>0.5%                                        n= 171 win= 46.2% mean=  -0.65% t=-2.47 pf=0.55 tot=-111.2% dd=-116.7%
+                                                               IS n=64 win=40.6% mean=-0.311% t=-0.95 | OOS n=107 win=49.5% mean=-0.853% t=-2.29
+Follow 00->6:00 sign into 6->21:00 (corr=-0.032)             n= 478 win= 48.5% mean= -0.057% t=-0.5 pf=0.93 tot=-27.4% dd=-87.1%
+                                                               IS n=240 win=47.5% mean=0.029% t=0.24 | OOS n=238 win=49.6% mean=-0.144% t=-0.74
+  Fade 00->6:00 sign                                         n= 478 win= 48.7% mean= -0.003% t=-0.02 pf=1.0 tot=-1.3% dd=-43.2%
+                                                               IS n=240 win=48.8% mean=-0.089% t=-0.75 | OOS n=238 win=48.7% mean=0.084% t=0.43
+  Follow |00->6|>0.3%                                        n= 302 win= 46.7% mean= -0.058% t=-0.38 pf=0.94 tot=-17.4% dd=-67.3%
+                                                               IS n=137 win=46.0% mean=0.059% t=0.34 | OOS n=165 win=47.3% mean=-0.154% t=-0.65
+  Follow |00->6|>0.5%                                        n= 218 win= 50.0% mean= -0.055% t=-0.29 pf=0.95 tot=-12.0% dd=-54.6%
+                                                               IS n=86 win=47.7% mean=0.094% t=0.38 | OOS n=132 win=51.5% mean=-0.152% t=-0.57
+Follow 00->7:00 sign into 7->21:00 (corr=-0.184)             n= 477 win= 46.8% mean= -0.151% t=-1.33 pf=0.83 tot=-72.0% dd=-92.9%
+                                                               IS n=240 win=47.5% mean=-0.025% t=-0.22 | OOS n=237 win=46.0% mean=-0.278% t=-1.41
+  Fade 00->7:00 sign                                         n= 477 win= 52.2% mean=  0.091% t=0.8 pf=1.12 tot=43.3% dd=-32.9%
+                                                               IS n=240 win=52.1% mean=-0.035% t=-0.31 | OOS n=237 win=52.3% mean=0.218% t=1.1
+  Follow |00->7|>0.3%                                        n= 334 win= 47.3% mean= -0.141% t=-0.93 pf=0.86 tot=-47.1% dd=-86.8%
+                                                               IS n=151 win=49.7% mean=0.05% t=0.32 | OOS n=183 win=45.4% mean=-0.299% t=-1.21
+  Follow |00->7|>0.5%                                        n= 253 win= 48.2% mean=  -0.27% t=-1.54 pf=0.75 tot=-68.4% dd=-101.9%
+                                                               IS n=103 win=52.4% mean=0.193% t=1.05 | OOS n=150 win=45.3% mean=-0.588% t=-2.23
+Follow 00->8:00 sign into 8->21:00 (corr=-0.159)             n= 478 win= 47.1% mean= -0.162% t=-1.51 pf=0.81 tot=-77.6% dd=-95.3%
+                                                               IS n=240 win=47.5% mean=-0.098% t=-0.91 | OOS n=238 win=46.6% mean=-0.227% t=-1.22
+  Fade 00->8:00 sign                                         n= 478 win= 50.6% mean=  0.102% t=0.95 pf=1.14 tot=48.9% dd=-26.8%
+                                                               IS n=240 win=50.4% mean=0.038% t=0.35 | OOS n=238 win=50.8% mean=0.167% t=0.9
+  Follow |00->8|>0.3%                                        n= 375 win= 48.3% mean= -0.151% t=-1.18 pf=0.83 tot=-56.7% dd=-79.4%
+                                                               IS n=171 win=50.3% mean=-0.007% t=-0.06 | OOS n=204 win=46.6% mean=-0.272% t=-1.29
+  Follow |00->8|>0.5%                                        n= 295 win= 46.4% mean= -0.266% t=-1.75 pf=0.73 tot=-78.6% dd=-94.7%
+                                                               IS n=122 win=51.6% mean=0.026% t=0.18 | OOS n=173 win=42.8% mean=-0.473% t=-1.98
+Follow 00->10:00 sign into 10->21:00 (corr=-0.156)           n= 478 win= 48.7% mean= -0.065% t=-0.64 pf=0.91 tot=-31.2% dd=-61.6%
+                                                               IS n=240 win=50.4% mean=0.026% t=0.25 | OOS n=238 win=47.1% mean=-0.157% t=-0.89
+  Fade 00->10:00 sign                                        n= 478 win= 48.3% mean=  0.005% t=0.05 pf=1.01 tot=2.6% dd=-45.0%
+                                                               IS n=240 win=47.5% mean=-0.086% t=-0.84 | OOS n=238 win=49.2% mean=0.097% t=0.55
+  Follow |00->10|>0.3%                                       n= 374 win= 48.7% mean= -0.104% t=-0.86 pf=0.87 tot=-38.8% dd=-68.8%
+                                                               IS n=183 win=51.9% mean=0.052% t=0.43 | OOS n=191 win=45.5% mean=-0.252% t=-1.23
+  Follow |00->10|>0.5%                                       n= 325 win= 48.3% mean= -0.125% t=-0.93 pf=0.86 tot=-40.7% dd=-67.7%
+                                                               IS n=148 win=51.4% mean=0.053% t=0.38 | OOS n=177 win=45.8% mean=-0.274% t=-1.25
+Follow 00->12:00 sign into 12->21:00 (corr=-0.045)           n= 478 win= 50.8% mean=  0.054% t=0.59 pf=1.09 tot=25.8% dd=-30.0%
+                                                               IS n=240 win=50.8% mean=0.04% t=0.41 | OOS n=238 win=50.8% mean=0.068% t=0.43
+  Fade 00->12:00 sign                                        n= 478 win= 47.3% mean= -0.114% t=-1.24 pf=0.83 tot=-54.4% dd=-75.3%
+                                                               IS n=240 win=45.8% mean=-0.1% t=-1.02 | OOS n=238 win=48.7% mean=-0.128% t=-0.82
+  Follow |00->12|>0.3%                                       n= 408 win= 51.7% mean=  0.091% t=0.87 pf=1.15 tot=37.1% dd=-26.3%
+                                                               IS n=195 win=51.8% mean=0.06% t=0.52 | OOS n=213 win=51.6% mean=0.119% t=0.7
+  Follow |00->12|>0.5%                                       n= 350 win= 52.6% mean=  0.092% t=0.78 pf=1.15 tot=32.2% dd=-25.0%
+                                                               IS n=162 win=50.6% mean=0.006% t=0.05 | OOS n=188 win=54.3% mean=0.166% t=0.89
+Follow 00->13:00 sign into 13->21:00 (corr=-0.044)           n= 478 win= 50.0% mean= -0.003% t=-0.03 pf=1.0 tot=-1.4% dd=-25.2%
+                                                               IS n=240 win=50.4% mean=0.035% t=0.39 | OOS n=238 win=49.6% mean=-0.041% t=-0.28
+  Fade 00->13:00 sign                                        n= 478 win= 48.3% mean= -0.057% t=-0.67 pf=0.91 tot=-27.3% dd=-41.7%
+                                                               IS n=240 win=48.3% mean=-0.095% t=-1.06 | OOS n=238 win=48.3% mean=-0.019% t=-0.13
+  Follow |00->13|>0.3%                                       n= 401 win= 51.6% mean= -0.007% t=-0.07 pf=0.99 tot=-2.9% dd=-30.1%
+                                                               IS n=195 win=52.8% mean=0.037% t=0.37 | OOS n=206 win=50.5% mean=-0.049% t=-0.3
+  Follow |00->13|>0.5%                                       n= 360 win= 52.2% mean=  0.017% t=0.16 pf=1.03 tot=6.1% dd=-30.5%
+                                                               IS n=168 win=53.0% mean=0.069% t=0.62 | OOS n=192 win=51.6% mean=-0.028% t=-0.16
+Follow 00->14:00 sign into 14->21:00 (corr=-0.060)           n= 478 win= 50.0% mean=    0.0% t=0.0 pf=1.0 tot=0.1% dd=-23.8%
+                                                               IS n=240 win=51.7% mean=0.009% t=0.1 | OOS n=238 win=48.3% mean=-0.008% t=-0.06
+  Fade 00->14:00 sign                                        n= 478 win= 47.7% mean=  -0.06% t=-0.74 pf=0.89 tot=-28.8% dd=-49.6%
+                                                               IS n=240 win=45.8% mean=-0.069% t=-0.78 | OOS n=238 win=49.6% mean=-0.052% t=-0.37
+  Follow |00->14|>0.3%                                       n= 422 win= 50.2% mean=  0.001% t=0.02 pf=1.0 tot=0.6% dd=-27.4%
+                                                               IS n=211 win=51.7% mean=-0.001% t=-0.01 | OOS n=211 win=48.8% mean=0.004% t=0.03
+  Follow |00->14|>0.5%                                       n= 372 win= 50.3% mean=  0.002% t=0.02 pf=1.0 tot=0.6% dd=-27.0%
+                                                               IS n=180 win=49.4% mean=-0.033% t=-0.32 | OOS n=192 win=51.0% mean=0.034% t=0.21
+Follow 00->15:00 sign into 15->21:00 (corr=0.033)            n= 478 win= 44.8% mean= -0.022% t=-0.36 pf=0.95 tot=-10.3% dd=-37.7%
+                                                               IS n=240 win=45.0% mean=-0.075% t=-0.99 | OOS n=238 win=44.5% mean=0.032% t=0.35
+  Fade 00->15:00 sign                                        n= 478 win= 50.2% mean= -0.038% t=-0.64 pf=0.91 tot=-18.4% dd=-43.7%
+                                                               IS n=240 win=49.2% mean=0.015% t=0.2 | OOS n=238 win=51.3% mean=-0.092% t=-0.99
+  Follow |00->15|>0.3%                                       n= 419 win= 45.6% mean= -0.014% t=-0.21 pf=0.97 tot=-5.8% dd=-30.3%
+                                                               IS n=204 win=46.1% mean=-0.067% t=-0.78 | OOS n=215 win=45.1% mean=0.037% t=0.36
+  Follow |00->15|>0.5%                                       n= 383 win= 45.2% mean= -0.018% t=-0.25 pf=0.96 tot=-6.9% dd=-31.0%
+                                                               IS n=185 win=44.9% mean=-0.101% t=-1.1 | OOS n=198 win=45.5% mean=0.06% t=0.56
+Follow 00->16:00 sign into 16->21:00 (corr=0.045)            n= 477 win= 47.4% mean=  0.016% t=0.3 pf=1.05 tot=7.7% dd=-15.9%
+                                                               IS n=240 win=46.2% mean=0.003% t=0.05 | OOS n=237 win=48.5% mean=0.029% t=0.33
+  Fade 00->16:00 sign                                        n= 477 win= 47.6% mean= -0.076% t=-1.4 pf=0.81 tot=-36.3% dd=-40.6%
+                                                               IS n=240 win=45.0% mean=-0.063% t=-0.97 | OOS n=237 win=50.2% mean=-0.089% t=-1.03
+  Follow |00->16|>0.3%                                       n= 411 win= 46.7% mean=  0.008% t=0.13 pf=1.02 tot=3.2% dd=-19.4%
+                                                               IS n=199 win=45.2% mean=-0.024% t=-0.32 | OOS n=212 win=48.1% mean=0.038% t=0.4
+  Follow |00->16|>0.5%                                       n= 372 win= 46.0% mean=  0.002% t=0.04 pf=1.01 tot=0.9% dd=-21.4%
+                                                               IS n=183 win=42.1% mean=-0.05% t=-0.63 | OOS n=189 win=49.7% mean=0.053% t=0.52
+
+=== ASIAN RANGE (00:00-07:00 GMT) BREAKOUT, decided on 1h closes, exit 21:00 ===
+Range 00-07 break during 07-10, stop=mid, exit 21:00         n= 349 win= 29.5% mean= -0.186% t=-1.71 pf=0.75 tot=-65.0% dd=-80.6%
+                                                               IS n=181 win=26.0% mean=-0.135% t=-1.54 | OOS n=168 win=33.3% mean=-0.242% t=-1.17
+Range 00-07 break during 07-10, stop=opp, exit 21:00         n= 349 win= 42.1% mean= -0.107% t=-0.88 pf=0.87 tot=-37.4% dd=-54.0%
+                                                               IS n=181 win=42.0% mean=-0.019% t=-0.17 | OOS n=168 win=42.3% mean=-0.202% t=-0.91
+Range 00-07 break during 07-10, stop=None, exit 21:00        n= 349 win= 47.9% mean= -0.102% t=-0.75 pf=0.88 tot=-35.5% dd=-57.3%
+                                                               IS n=181 win=48.6% mean=-0.0% t=-0.0 | OOS n=168 win=47.0% mean=-0.211% t=-0.85
+   long/short split: {'count': {-1: 175, 1: 174}, 'mean': {-1: -0.332, 1: 0.02}}
+Range 00-07 break during 07-13, stop=mid, exit 21:00         n= 421 win= 29.9% mean= -0.197% t=-2.09 pf=0.73 tot=-83.0% dd=-98.8%
+                                                               IS n=217 win=27.6% mean=-0.159% t=-1.99 | OOS n=204 win=32.4% mean=-0.238% t=-1.36
+Range 00-07 break during 07-13, stop=opp, exit 21:00         n= 421 win= 42.0% mean= -0.118% t=-1.12 pf=0.85 tot=-49.9% dd=-66.6%
+                                                               IS n=217 win=42.4% mean=-0.051% t=-0.51 | OOS n=204 win=41.7% mean=-0.191% t=-0.99
+Range 00-07 break during 07-13, stop=None, exit 21:00        n= 421 win= 47.3% mean=  -0.11% t=-0.92 pf=0.87 tot=-46.2% dd=-68.1%
+                                                               IS n=217 win=48.4% mean=-0.058% t=-0.48 | OOS n=204 win=46.1% mean=-0.165% t=-0.78
+   long/short split: {'count': {-1: 211, 1: 210}, 'mean': {-1: -0.34, 1: 0.007}}
+Range 00-08 break during 08-13, stop=mid, exit 21:00         n= 380 win= 33.4% mean= -0.157% t=-1.69 pf=0.77 tot=-59.8% dd=-69.6%
+                                                               IS n=201 win=32.3% mean=-0.132% t=-1.53 | OOS n=179 win=34.6% mean=-0.186% t=-1.07
+Range 00-08 break during 08-13, stop=opp, exit 21:00         n= 380 win= 44.7% mean=  -0.08% t=-0.75 pf=0.89 tot=-30.3% dd=-44.4%
+                                                               IS n=201 win=45.8% mean=-0.04% t=-0.4 | OOS n=179 win=43.6% mean=-0.124% t=-0.64
+Range 00-08 break during 08-13, stop=None, exit 21:00        n= 380 win= 47.9% mean= -0.104% t=-0.89 pf=0.87 tot=-39.5% dd=-56.6%
+                                                               IS n=201 win=48.8% mean=-0.083% t=-0.68 | OOS n=179 win=46.9% mean=-0.127% t=-0.62
+   long/short split: {'count': {-1: 191, 1: 189}, 'mean': {-1: -0.309, 1: 0.056}}
+Range 00-07 break during 07-16, stop=mid, exit 21:00         n= 455 win= 30.8% mean=  -0.19% t=-2.13 pf=0.74 tot=-86.3% dd=-102.8%
+                                                               IS n=233 win=28.3% mean=-0.155% t=-2.01 | OOS n=222 win=33.3% mean=-0.226% t=-1.38
+Range 00-07 break during 07-16, stop=opp, exit 21:00         n= 455 win= 42.0% mean= -0.123% t=-1.23 pf=0.85 tot=-56.0% dd=-72.8%
+                                                               IS n=233 win=42.1% mean=-0.059% t=-0.63 | OOS n=222 win=41.9% mean=-0.19% t=-1.06
+Range 00-07 break during 07-16, stop=None, exit 21:00        n= 455 win= 46.8% mean= -0.113% t=-1.01 pf=0.86 tot=-51.5% dd=-73.4%
+                                                               IS n=233 win=47.6% mean=-0.064% t=-0.56 | OOS n=222 win=45.9% mean=-0.164% t=-0.84
+   long/short split: {'count': {-1: 230, 1: 225}, 'mean': {-1: -0.352, 1: 0.037}}
+
+=== US-session range (13:00-15:00) breakout 15:00-18:00, exit 21:00 ===
+Range 13-15 break 15-19 stop=mid                             n= 357 win= 40.9% mean= -0.114% t=-1.96 pf=0.73 tot=-40.6% dd=-42.4%
+                                                               IS n=183 win=43.2% mean=-0.131% t=-1.9 | OOS n=174 win=38.5% mean=-0.095% t=-1.01
+Range 13-15 break 15-19 stop=opp                             n= 357 win= 44.0% mean= -0.083% t=-1.34 pf=0.8 tot=-29.7% dd=-31.4%
+                                                               IS n=183 win=46.4% mean=-0.085% t=-1.25 | OOS n=174 win=41.4% mean=-0.081% t=-0.77
+Range 13-15 break 15-19 stop=None                            n= 357 win= 44.3% mean= -0.084% t=-1.34 pf=0.8 tot=-30.1% dd=-33.9%
+                                                               IS n=183 win=46.4% mean=-0.085% t=-1.25 | OOS n=174 win=42.0% mean=-0.083% t=-0.77
+
+=== NEXT-HOUR after big 1h move (within session) ===
+Fade next hour after |move|>1.5 sd (n=1229)                  n=1229 win= 49.6% mean= -0.023% t=-1.14 pf=0.91 tot=-28.8% dd=-36.4%
+                                                               IS n=683 win=48.2% mean=-0.034% t=-1.42 | OOS n=546 win=51.5% mean=-0.01% t=-0.29
+Fade next hour after |move|>2 sd (n=634)                     n= 634 win= 49.7% mean= -0.024% t=-0.79 pf=0.91 tot=-15.0% dd=-31.7%
+                                                               IS n=353 win=48.2% mean=-0.03% t=-0.85 | OOS n=281 win=51.6% mean=-0.015% t=-0.3
+Fade next hour after |move|>3 sd (n=189)                     n= 189 win= 51.3% mean=  0.003% t=0.05 pf=1.01 tot=0.6% dd=-10.5%
+                                                               IS n=91 win=47.3% mean=-0.058% t=-0.73 | OOS n=98 win=55.1% mean=0.06% t=0.67
+
+=== WEDNESDAY (EIA 14:30/15:30 GMT) hourly means ===
+hour        0        1        2        3        4        5        6        7        8        9        10       11       12       13       14       15       16       17       18      19       20
+count  101.000  102.000  102.000  102.000  102.000  101.000  101.000  101.000  101.000  101.000  101.000  101.000  101.000  101.000  102.000  102.000  102.000  102.000  101.000  101.00  101.000
+mean    -0.062    0.053   -0.021   -0.072   -0.001    0.008   -0.012   -0.024   -0.015   -0.005   -0.085   -0.012    0.209   -0.039   -0.021    0.124   -0.079    0.018    0.056    0.08    0.024
+
+=== Settlement/late hours ===
+Long 17:00-18:00 bar                                         n= 500 win= 48.4% mean= -0.006% t=-0.19 pf=0.97 tot=-3.0% dd=-24.1%
+                                                               IS n=252 win=49.2% mean=0.023% t=0.49 | OOS n=248 win=47.6% mean=-0.035% t=-0.8
+Long 18:00-19:00 bar                                         n= 497 win= 48.9% mean=  0.026% t=1.04 pf=1.15 tot=12.8% dd=-7.7%
+                                                               IS n=250 win=49.2% mean=-0.003% t=-0.11 | OOS n=247 win=48.6% mean=0.055% t=1.32
+Long 19:00-20:00 bar                                         n= 494 win= 49.4% mean= -0.026% t=-0.86 pf=0.86 tot=-12.6% dd=-19.5%
+                                                               IS n=248 win=48.4% mean=-0.02% t=-0.83 | OOS n=246 win=50.4% mean=-0.031% t=-0.57
+Long 20:00-21:00 bar                                         n= 494 win= 42.1% mean= -0.035% t=-1.55 pf=0.79 tot=-17.4% dd=-21.6%
+                                                               IS n=248 win=37.5% mean=-0.047% t=-1.85 | OOS n=246 win=46.7% mean=-0.024% t=-0.62

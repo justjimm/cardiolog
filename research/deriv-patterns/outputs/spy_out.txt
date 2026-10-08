@@ -1,0 +1,134 @@
+=== SPY daily n=501 2024-10-03..2026-10-02 cost=0.05% ===
+gap: mean=0.044% |gap|=0.431% up=58.3% fill-same-day=58.7%  intra mean=0.023%  cc mean=0.066%
+OVERNIGHT hold long (close->open), every night               n= 501 win= 52.5% mean= -0.006% t=-0.22 pf=0.97 tot=-3.2% dd=-20.1%
+                                                               IS n=250 win=52.4% mean=-0.027% t=-0.58 | OOS n=251 win=52.6% mean=0.014% t=0.41
+INTRADAY hold long (open->close), every day                  n= 501 win= 48.9% mean= -0.027% t=-0.69 pf=0.9 tot=-13.6% dd=-16.6%
+                                                               IS n=250 win=51.6% mean=0.0% t=0.0 | OOS n=251 win=46.2% mean=-0.055% t=-1.33
+WEEKEND hold long (Fri close->Mon open)                      n= 104 win= 51.9% mean=  0.007% t=0.09 pf=1.03 tot=0.8% dd=-8.3%
+                                                               IS n=52 win=53.8% mean=-0.078% t=-0.59 | OOS n=52 win=50.0% mean=0.093% t=1.09
+Weeknight hold long (1-day gaps)                             n= 389 win= 52.4% mean= -0.011% t=-0.36 pf=0.94 tot=-4.3% dd=-15.4%
+                                                               IS n=193 win=51.8% mean=-0.012% t=-0.25 | OOS n=196 win=53.1% mean=-0.01% t=-0.27
+  overnight into Mon open                                    n=  96 win= 52.1% mean=  0.018% t=0.22 pf=1.07 tot=1.7% dd=-9.0%
+                                                               IS n=48 win=52.1% mean=-0.096% t=-0.69 | OOS n=48 win=52.1% mean=0.131% t=1.54
+  intraday Mon                                               n=  96 win= 55.2% mean=  0.087% t=1.19 pf=1.4 tot=8.3% dd=-4.3%
+                                                               IS n=48 win=54.2% mean=0.088% t=0.76 | OOS n=48 win=56.2% mean=0.086% t=0.95
+  overnight into Tue open                                    n= 104 win= 44.2% mean= -0.059% t=-1.01 pf=0.73 tot=-6.1% dd=-9.6%
+                                                               IS n=52 win=50.0% mean=0.033% t=0.36 | OOS n=52 win=38.5% mean=-0.15% t=-2.06
+  intraday Tue                                               n= 104 win= 48.1% mean= -0.011% t=-0.15 pf=0.96 tot=-1.1% dd=-7.9%
+                                                               IS n=52 win=53.8% mean=-0.051% t=-0.41 | OOS n=52 win=42.3% mean=0.03% t=0.39
+  overnight into Wed open                                    n= 102 win= 57.8% mean=  0.097% t=1.71 pf=1.76 tot=9.9% dd=-3.3%
+                                                               IS n=50 win=52.0% mean=0.06% t=0.64 | OOS n=52 win=63.5% mean=0.132% t=2.05
+  intraday Wed                                               n= 102 win= 48.0% mean=  0.011% t=0.09 pf=1.04 tot=1.2% dd=-10.5%
+                                                               IS n=50 win=50.0% mean=0.181% t=0.74 | OOS n=52 win=46.2% mean=-0.152% t=-1.92
+  overnight into Thu open                                    n=  99 win= 52.5% mean= -0.047% t=-0.67 pf=0.82 tot=-4.6% dd=-9.0%
+                                                               IS n=50 win=54.0% mean=-0.067% t=-0.6 | OOS n=49 win=51.0% mean=-0.025% t=-0.31
+  intraday Thu                                               n=  99 win= 42.4% mean= -0.157% t=-2.13 pf=0.56 tot=-15.5% dd=-20.9%
+                                                               IS n=50 win=44.0% mean=-0.17% t=-1.7 | OOS n=49 win=40.8% mean=-0.143% t=-1.31
+  overnight into Fri open                                    n= 100 win= 56.0% mean= -0.041% t=-0.72 pf=0.82 tot=-4.1% dd=-8.3%
+                                                               IS n=50 win=54.0% mean=-0.069% t=-0.8 | OOS n=50 win=58.0% mean=-0.012% t=-0.16
+  intraday Fri                                               n= 100 win= 51.0% mean= -0.065% t=-0.8 pf=0.79 tot=-6.5% dd=-8.4%
+                                                               IS n=50 win=56.0% mean=-0.041% t=-0.32 | OOS n=50 win=46.0% mean=-0.089% t=-0.88
+
+--- GAP FADE / FOLLOW (open->close) ---
+Fade gap, exit close, all                                    n= 501 win= 47.3% mean=  0.001% t=0.01 pf=1.0 tot=0.3% dd=-20.9%
+                                                               IS n=250 win=46.8% mean=0.026% t=0.39 | OOS n=251 win=47.8% mean=-0.025% t=-0.61
+Follow gap, exit close, all                                  n= 501 win= 44.3% mean= -0.101% t=-2.54 pf=0.69 tot=-50.4% dd=-59.7%
+                                                               IS n=250 win=44.4% mean=-0.126% t=-1.86 | OOS n=251 win=44.2% mean=-0.075% t=-1.83
+      bucket    n   win   mean  median     t
+0    [0,0.3)  257  49.0 -0.029  -0.002 -0.79
+1  [0.3,0.6)  130  38.5 -0.064  -0.127 -1.08
+2    [0.6,1)   67  53.7  0.123   0.076  0.65
+3      [1,2)   37  54.1  0.154   0.022  0.95
+4      [2,5)   10  50.0  0.216  -0.153  0.29
+by gap/ATR:
+       bucket    n   win   mean  median     t
+0     [0,0.1)   94  44.7 -0.104  -0.035 -1.59
+1  [0.1,0.25)  122  56.6  0.051   0.073  0.88
+2  [0.25,0.5)  135  40.7 -0.008  -0.126 -0.08
+3     [0.5,1)  108  44.4 -0.030  -0.047 -0.45
+4      [1,10)   42  54.8  0.195   0.006  0.95
+Gap UP fade (short) by size:
+    bucket    n   win   mean  median     t
+0  [0,0.5)  213  41.8 -0.056  -0.070 -1.35
+1  [0.5,1)   59  55.9  0.025   0.086  0.33
+2    [1,2)   15  40.0 -0.143  -0.412 -0.49
+3    [2,5)    5  60.0  1.005   0.006  1.03
+Gap DOWN fade (long) by size:
+    bucket    n   win   mean  median     t
+0  [0,0.5)  143  51.7 -0.022   0.018 -0.40
+1  [0.5,1)   37  43.2  0.165  -0.080  0.50
+2    [1,2)   22  63.6  0.356   0.439  1.97
+3    [2,5)    5  40.0 -0.572  -1.476 -0.51
+fill rate by |gap| bucket:
+            count   mean
+gap                     
+(0.0, 0.3]    255  0.800
+(0.3, 0.6]    130  0.423
+(0.6, 1.0]     67  0.328
+(1.0, 2.0]     37  0.297
+(2.0, 5.0]     10  0.200
+Fade gap, target=fill else close, all                        n= 499 win= 56.5% mean= -0.026% t=-1.03 pf=0.86 tot=-13.0% dd=-16.3%
+                                                               IS n=248 win=55.2% mean=-0.012% t=-0.3 | OOS n=251 win=57.8% mean=-0.04% t=-1.32
+Fade gap |gap|>1%, target=fill else close                    n=  47 win= 57.4% mean=  0.195% t=1.11 pf=1.55 tot=9.2% dd=-5.2%
+                                                               IS n=30 win=63.3% mean=0.293% t=1.16 | OOS n=17 win=47.1% mean=0.024% t=0.12
+Fade gap UP >1% (short), target=fill                         n=  20 win= 50.0% mean=   0.17% t=0.65 pf=1.49 tot=3.4% dd=-2.9%
+                                                               IS n=12 win=50.0% mean=0.407% t=1.09 | OOS n=8 win=50.0% mean=-0.186% t=-0.56
+Fade gap DOWN >1% (long), target=fill                        n=  27 win= 63.0% mean=  0.214% t=0.89 pf=1.59 tot=5.8% dd=-5.2%
+                                                               IS n=18 win=72.2% mean=0.217% t=0.62 | OOS n=9 win=44.4% mean=0.209% t=0.96
+Fade WEEKEND gap, target=fill                                n= 104 win= 55.8% mean=  0.042% t=0.71 pf=1.24 tot=4.4% dd=-4.0%
+                                                               IS n=52 win=59.6% mean=0.107% t=1.08 | OOS n=52 win=51.9% mean=-0.022% t=-0.33
+Follow gap |gap|>2% exit close                               n=  10 win= 50.0% mean= -0.316% t=-0.42 pf=0.68 tot=-3.2% dd=-8.1%
+                                                               IS n=9 win=55.6% mean=-0.34% t=-0.4 | OOS n=1 win=0.0% mean=-0.106% t=None
+Follow gap |gap|>3% exit close                               n=   4 win= 50.0% mean= -1.591% t=-1.08 pf=0.21 tot=-6.4% dd=-8.1%
+                                                               IS n=4 win=50.0% mean=-1.591% t=-1.08 | OOS n=0 win=None% mean=None% t=None
+Long intraday after prev day < -3%                           n=   3 win= 66.7% mean=  0.511% t=0.25 pf=1.43 tot=1.5% dd=0.0%
+                                                               IS n=3 win=66.7% mean=0.511% t=0.25 | OOS n=0 win=None% mean=None% t=None
+Long intraday after prev day > +3%                           n=   2 win= 50.0% mean= -0.469% t=-0.47 pf=0.36 tot=-0.9% dd=0.0%
+                                                               IS n=2 win=50.0% mean=-0.469% t=-0.47 | OOS n=0 win=None% mean=None% t=None
+Overnight long after day < -3%                               n=   3 win=  0.0% mean=  -2.02% t=-2.34 pf=0.0 tot=-6.1% dd=-3.6%
+                                                               IS n=3 win=0.0% mean=-2.02% t=-2.34 | OOS n=0 win=None% mean=None% t=None
+Overnight long after day > +3%                               n=   2 win= 50.0% mean= -1.513% t=-0.99 pf=0.01 tot=-3.0% dd=0.0%
+                                                               IS n=2 win=50.0% mean=-1.513% t=-0.99 | OOS n=0 win=None% mean=None% t=None
+Overnight long after intraday < -2% (buy close)              n=   6 win= 66.7% mean=  0.453% t=0.57 pf=2.05 tot=2.7% dd=-2.5%
+                                                               IS n=4 win=50.0% mean=0.281% t=0.23 | OOS n=2 win=100.0% mean=0.798% t=1.13
+Overnight long after intraday > +2%                          n=   3 win=  0.0% mean= -1.415% t=-1.55 pf=0.0 tot=-4.2% dd=-1.0%
+                                                               IS n=3 win=0.0% mean=-1.415% t=-1.55 | OOS n=0 win=None% mean=None% t=None
+
+--- HOURLY (New York time) ---
+               n   mean   win     t     IS    OOS  absmean
+09:30-10:30  500  0.006  52.4  0.33  0.001  0.010    0.277
+10:30-11:30  499 -0.001  53.7 -0.10 -0.000 -0.002    0.208
+11:30-12:30  499  0.009  55.1  0.73  0.011  0.006    0.176
+12:30-13:30  494  0.004  53.6  0.27  0.011 -0.003    0.181
+13:30-14:30  495  0.013  53.5  1.09  0.015  0.011    0.162
+14:30-15:30  495 -0.017  48.9 -1.61 -0.012 -0.022    0.149
+15:30-16:00  495 -0.001  48.1 -0.09  0.012 -0.014    0.143
+dow              0      1      2      3      4
+nh                                            
+09:30-10:30  0.056 -0.010  0.041 -0.044 -0.013
+10:30-11:30 -0.006  0.001 -0.014 -0.002  0.015
+11:30-12:30  0.025  0.050 -0.007 -0.034  0.010
+12:30-13:30  0.020 -0.028  0.043 -0.008 -0.005
+13:30-14:30  0.022  0.031  0.006  0.011 -0.006
+14:30-15:30 -0.032  0.016 -0.034 -0.016 -0.021
+15:30-16:00  0.038 -0.022  0.007 -0.020 -0.006
+
+--- FIRST HOUR -> REST OF DAY ---  corr 0.089
+Follow first-hour sign, exit close                           n= 494 win= 49.0% mean= -0.041% t=-1.23 pf=0.83 tot=-20.2% dd=-27.7%
+                                                               IS n=247 win=51.0% mean=-0.005% t=-0.09 | OOS n=247 win=47.0% mean=-0.077% t=-2.11
+Fade first-hour sign, exit close                             n= 494 win= 39.7% mean= -0.059% t=-1.77 pf=0.76 tot=-29.2% dd=-31.8%
+                                                               IS n=247 win=36.4% mean=-0.095% t=-1.7 | OOS n=247 win=42.9% mean=-0.023% t=-0.63
+Follow first hour |r1|>1%                                    n=  11 win= 63.6% mean=  1.053% t=1.29 pf=5.31 tot=11.6% dd=-1.4%
+                                                               IS n=9 win=77.8% mean=1.437% t=1.5 | OOS n=2 win=0.0% mean=-0.678% t=-6.9
+Follow first hour |r1|>2%: n=0
+Follow first hour |r1|>3%: n=0
+First-hour range breakout (1h close), exit close             n= 433 win= 43.2% mean= -0.041% t=-1.71 pf=0.77 tot=-17.6% dd=-19.8%
+                                                               IS n=223 win=46.6% mean=-0.035% t=-0.91 | OOS n=210 win=39.5% mean=-0.047% t=-1.7
+Last 30m: follow day direction                               n= 494 win= 30.0% mean= -0.064% t=-6.76 pf=0.42 tot=-31.8% dd=-31.9%
+                                                               IS n=247 win=32.4% mean=-0.06% t=-3.77 | OOS n=247 win=27.5% mean=-0.069% t=-6.56
+Last 30m: follow day direction when |day|>2%                 n=  10 win= 60.0% mean=  0.067% t=0.32 pf=1.28 tot=0.7% dd=-1.9%
+                                                               IS n=8 win=50.0% mean=-0.029% t=-0.12 | OOS n=2 win=100.0% mean=0.451% t=7.69
+Last 30m: follow day direction when |day|>4%                 n=   2 win=100.0% mean=  0.251% t=1.77 pf=None tot=0.5% dd=0.0%
+                                                               IS n=2 win=100.0% mean=0.251% t=1.77 | OOS n=0 win=None% mean=None% t=None
+Buy 15:30 NY, sell next open (overnight incl. last 30m)      n= 494 win= 53.0% mean=  0.002% t=0.08 pf=1.01 tot=1.2% dd=-20.0%
+                                                               IS n=247 win=53.8% mean=-0.004% t=-0.08 | OOS n=247 win=52.2% mean=0.009% t=0.25

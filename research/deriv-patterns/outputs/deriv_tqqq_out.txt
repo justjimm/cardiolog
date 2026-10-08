@@ -1,0 +1,216 @@
+bars 58309, 2023-10-02 13:30:00 .. 2026-10-07 19:55:00, days 758
+first bar time of day (count): {1330: 501, 1430: 255, 1455: 1, 1345: 1}  last bar: {1955: 502, 2055: 209, 2000: 39, 1755: 3}
+bars per day: {'min': 1.0, '50%': 78.0, 'max': 78.0}
+spread recorded on 17088 bars from 2025-11-20; mean 1.00 pts = 0.017% of price; at first bar 0.017%
+spread % by hour (recorded bars): {13: 0.015, 14: 0.016, 15: 0.017, 16: 0.017, 17: 0.017, 18: 0.016, 19: 0.016, 20: 0.019}
+
+=================== OVERNIGHT GAPS (Deriv feed), 756 days ===================
+mean |gap| 1.72%, up 57%, fill by close 59%, within 30 min 34%, within 1h 43%; first-hour range 2.57%
+fill rate by |gap| bucket (30min / 1h / close):
+   [0,0.5): n=175   78% /  83% /  90%
+   [0.5,1): n=156   50% /  60% /  75%
+   [1,2): n=197   20% /  32% /  53%
+   [2,3): n=108    3% /  13% /  38%
+   [3,5): n= 81    0% /   5% /  22%
+   [5,99): n= 39    5% /   8% /  21%
+
+--- simple fade / follow from the 13:35 open (second bar), by exit ---
+Fade, exit 30 min, all gaps                                      n= 756 win=  40% mean=-0.190% t=-4.82 pf=0.62 tot=-144.0% dd=-144.7% | by year 2023:-0.22 2024:-0.19 2025:-0.16 2026:-0.22
+  Fade, exit 30 min, |gap|>=1%                                   n= 425 win=  40% mean=-0.163% t=-2.85 pf=0.68 tot= -69.1% dd=-80.4% | by year 2023:-0.20 2024:-0.22 2025:-0.14 2026:-0.11
+  Follow, exit 30 min, |gap|>=1%                                 n= 425 win=  45% mean=-0.157% t=-2.76 pf=0.69 tot= -66.9% dd=-71.3% | by year 2023:-0.12 2024:-0.10 2025:-0.18 2026:-0.21
+Fade, exit 1 h, all gaps                                         n= 756 win=  43% mean=-0.219% t=-4.05 pf=0.68 tot=-165.2% dd=-166.6% | by year 2023:-0.21 2024:-0.22 2025:-0.17 2026:-0.28
+  Fade, exit 1 h, |gap|>=1%                                      n= 425 win=  45% mean=-0.143% t=-1.89 pf=0.79 tot= -61.0% dd=-80.7% | by year 2023:-0.14 2024:-0.24 2025:-0.12 2026:-0.06
+  Follow, exit 1 h, |gap|>=1%                                    n= 425 win=  48% mean=-0.177% t=-2.33 pf=0.74 tot= -75.0% dd=-80.7% | by year 2023:-0.18 2024:-0.08 2025:-0.20 2026:-0.26
+Fade, exit 2 h, all gaps                                         n= 756 win=  46% mean=-0.180% t=-2.69 pf=0.77 tot=-136.1% dd=-133.8% | by year 2023:-0.33 2024:-0.17 2025:-0.12 2026:-0.22
+  Fade, exit 2 h, |gap|>=1%                                      n= 425 win=  47% mean=-0.102% t=-1.10 pf=0.87 tot= -43.5% dd=-60.9% | by year 2023:-0.21 2024:-0.13 2025:-0.10 2026:-0.04
+  Follow, exit 2 h, |gap|>=1%                                    n= 425 win=  47% mean=-0.218% t=-2.34 pf=0.74 tot= -92.5% dd=-99.9% | by year 2023:-0.11 2024:-0.19 2025:-0.22 2026:-0.28
+Fade, exit close, all gaps                                       n= 756 win=  46% mean=-0.160% t=-1.47 pf=0.85 tot=-120.6% dd=-130.5% | by year 2023:-0.34 2024:-0.38 2025:+0.29 2026:-0.41
+  Fade, exit close, |gap|>=1%                                    n= 425 win=  49% mean=-0.140% t=-0.98 pf=0.88 tot= -59.6% dd=-71.8% | by year 2023:-0.22 2024:-0.35 2025:+0.22 2026:-0.32
+  Follow, exit close, |gap|>=1%                                  n= 425 win=  47% mean=-0.180% t=-1.26 pf=0.85 tot= -76.4% dd=-110.9% | by year 2023:-0.10 2024:+0.03 2025:-0.54 2026:-0.00
+
+--- fade by |gap|/ATR bucket, exit 1h ---
+  |gap|/ATR in [0,0.25)                                          n= 329 win=  42% mean=-0.304% t=-3.90 pf=0.56 tot= -99.9% dd=-101.1% | by year 2023:-0.15 2024:-0.14 2025:-0.30 2026:-0.60
+  |gap|/ATR in [0.25,0.5)                                        n= 199 win=  43% mean=-0.239% t=-2.62 pf=0.62 tot= -47.6% dd=-50.6% | by year 2023:-0.06 2024:-0.33 2025:-0.23 2026:-0.18
+  |gap|/ATR in [0.5,1)                                           n= 154 win=  45% mean=-0.070% t=-0.55 pf=0.89 tot= -10.7% dd=-25.9% | by year 2023:+0.38 2024:-0.12 2025:-0.09 2026:-0.04
+  |gap|/ATR in [1,10)                                            n=  54 win=  50% mean=-0.006% t=-0.02 pf=0.99 tot=  -0.3% dd=-16.8% | by year 2023:-1.84 2024:-0.59 2025:+0.62 2026:+0.20
+
+--- BRACKET RULES from the 13:35 open (5-minute bars, stop counted first when both touched) ---
+follow cap 30 min tgt 1.0x stop 0.5x |gap|>=0.0% (tgt 17% stop 49%) n= 756 win=  35% mean=-0.180% t=-5.56 pf=0.58 tot=-136.2% dd=-142.5% | by year 2023:-0.12 2024:-0.17 2025:-0.17 2026:-0.23
+follow cap 30 min tgt 1.0x stop 0.5x |gap|>=1.0% (tgt 9% stop 34%) n= 425 win=  41% mean=-0.180% t=-3.24 pf=0.67 tot= -76.4% dd=-84.7% | by year 2023:-0.10 2024:-0.20 2025:-0.14 2026:-0.22
+follow cap 30 min tgt 1.0x stop 0.5x |gap|>=2.0% (tgt 2% stop 21%) n= 228 win=  44% mean=-0.222% t=-2.48 pf=0.64 tot= -50.6% dd=-57.0% | by year 2023:+0.09 2024:-0.23 2025:-0.19 2026:-0.29
+follow cap 30 min tgt 2.0x stop 0.5x |gap|>=0.0% (tgt 7% stop 52%) n= 756 win=  32% mean=-0.183% t=-5.44 pf=0.58 tot=-138.5% dd=-140.2% | by year 2023:-0.15 2024:-0.18 2025:-0.14 2026:-0.24
+follow cap 30 min tgt 0.5x stop 1.0x |gap|>=0.0% (tgt 39% stop 25%) n= 756 win=  45% mean=-0.185% t=-5.36 pf=0.55 tot=-139.6% dd=-146.1% | by year 2023:-0.10 2024:-0.16 2025:-0.17 2026:-0.27
+follow cap 30 min tgt 0.5x stop 1.0x |gap|>=1.0% (tgt 31% stop 9%) n= 425 win=  51% mean=-0.161% t=-2.73 pf=0.69 tot= -68.4% dd=-77.4% | by year 2023:-0.11 2024:-0.14 2025:-0.09 2026:-0.28
+follow cap 30 min tgt 0.5x stop 1.0x |gap|>=2.0% (tgt 19% stop 3%) n= 228 win=  49% mean=-0.157% t=-1.61 pf=0.74 tot= -35.8% dd=-45.5% | by year 2023:+0.39 2024:-0.09 2025:-0.18 2026:-0.27
+follow cap 30 min tgt 1.0x stop 1.0x |gap|>=0.0% (tgt 22% stop 28%) n= 756 win=  43% mean=-0.176% t=-4.77 pf=0.61 tot=-133.3% dd=-141.9% | by year 2023:-0.12 2024:-0.14 2025:-0.15 2026:-0.28
+fade   cap 30 min tgt 1.0x stop 0.5x |gap|>=0.0% (tgt 17% stop 47%) n= 756 win=  33% mean=-0.156% t=-4.53 pf=0.63 tot=-117.8% dd=-123.0% | by year 2023:-0.23 2024:-0.17 2025:-0.18 2026:-0.07
+fade   cap 30 min tgt 1.0x stop 0.5x |gap|>=1.0% (tgt 9% stop 31%) n= 425 win=  37% mean=-0.159% t=-2.70 pf=0.71 tot= -67.6% dd=-77.3% | by year 2023:-0.21 2024:-0.18 2025:-0.23 2026:-0.04
+fade   cap 30 min tgt 1.0x stop 0.5x |gap|>=2.0% (tgt 3% stop 19%) n= 228 win=  38% mean=-0.163% t=-1.67 pf=0.74 tot= -37.1% dd=-45.6% | by year 2023:-0.71 2024:-0.23 2025:-0.14 2026:-0.05
+fade   cap 30 min tgt 2.0x stop 0.5x |gap|>=0.0% (tgt 7% stop 50%) n= 756 win=  30% mean=-0.138% t=-3.51 pf=0.68 tot=-104.0% dd=-119.7% | by year 2023:-0.23 2024:-0.17 2025:-0.17 2026:-0.03
+fade   cap 30 min tgt 0.5x stop 1.0x |gap|>=0.0% (tgt 41% stop 25%) n= 756 win=  45% mean=-0.160% t=-4.93 pf=0.60 tot=-121.0% dd=-123.6% | by year 2023:-0.22 2024:-0.17 2025:-0.18 2026:-0.11
+fade   cap 30 min tgt 0.5x stop 1.0x |gap|>=1.0% (tgt 34% stop 9%) n= 425 win=  47% mean=-0.140% t=-2.52 pf=0.73 tot= -59.6% dd=-66.3% | by year 2023:-0.22 2024:-0.12 2025:-0.18 2026:-0.10
+fade   cap 30 min tgt 0.5x stop 1.0x |gap|>=2.0% (tgt 21% stop 2%) n= 228 win=  43% mean=-0.098% t=-1.09 pf=0.83 tot= -22.3% dd=-29.4% | by year 2023:-0.41 2024:-0.09 2025:-0.13 2026:-0.03
+fade   cap 30 min tgt 1.0x stop 1.0x |gap|>=0.0% (tgt 23% stop 28%) n= 756 win=  40% mean=-0.157% t=-4.25 pf=0.65 tot=-118.6% dd=-128.9% | by year 2023:-0.21 2024:-0.19 2025:-0.19 2026:-0.06
+follow cap 1 h    tgt 1.0x stop 0.5x |gap|>=0.0% (tgt 19% stop 55%) n= 756 win=  33% mean=-0.203% t=-5.38 pf=0.60 tot=-153.6% dd=-157.1% | by year 2023:-0.17 2024:-0.17 2025:-0.21 2026:-0.25
+follow cap 1 h    tgt 1.0x stop 0.5x |gap|>=1.0% (tgt 13% stop 43%) n= 425 win=  39% mean=-0.214% t=-3.27 pf=0.68 tot= -90.9% dd=-96.7% | by year 2023:-0.20 2024:-0.17 2025:-0.22 2026:-0.25
+follow cap 1 h    tgt 1.0x stop 0.5x |gap|>=2.0% (tgt 5% stop 31%) n= 228 win=  42% mean=-0.241% t=-2.23 pf=0.70 tot= -55.0% dd=-63.2% | by year 2023:-0.13 2024:-0.12 2025:-0.29 2026:-0.31
+follow cap 1 h    tgt 2.0x stop 0.5x |gap|>=0.0% (tgt 8% stop 59%) n= 756 win=  29% mean=-0.214% t=-5.45 pf=0.59 tot=-162.0% dd=-162.9% | by year 2023:-0.19 2024:-0.17 2025:-0.22 2026:-0.27
+follow cap 1 h    tgt 0.5x stop 1.0x |gap|>=0.0% (tgt 47% stop 30%) n= 756 win=  48% mean=-0.195% t=-4.56 pf=0.61 tot=-147.0% dd=-153.9% | by year 2023:-0.09 2024:-0.14 2025:-0.24 2026:-0.23
+follow cap 1 h    tgt 0.5x stop 1.0x |gap|>=1.0% (tgt 44% stop 16%) n= 425 win=  57% mean=-0.170% t=-2.29 pf=0.74 tot= -72.1% dd=-82.2% | by year 2023:-0.07 2024:-0.10 2025:-0.21 2026:-0.23
+follow cap 1 h    tgt 0.5x stop 1.0x |gap|>=2.0% (tgt 32% stop 9%) n= 228 win=  54% mean=-0.168% t=-1.34 pf=0.79 tot= -38.3% dd=-52.4% | by year 2023:+0.45 2024:-0.02 2025:-0.35 2026:-0.21
+follow cap 1 h    tgt 1.0x stop 1.0x |gap|>=0.0% (tgt 27% stop 35%) n= 756 win=  44% mean=-0.210% t=-4.49 pf=0.64 tot=-158.8% dd=-165.9% | by year 2023:-0.17 2024:-0.16 2025:-0.24 2026:-0.26
+fade   cap 1 h    tgt 1.0x stop 0.5x |gap|>=0.0% (tgt 22% stop 55%) n= 756 win=  34% mean=-0.146% t=-3.43 pf=0.70 tot=-110.4% dd=-109.6% | by year 2023:-0.25 2024:-0.19 2025:-0.11 2026:-0.10
+fade   cap 1 h    tgt 1.0x stop 0.5x |gap|>=1.0% (tgt 16% stop 44%) n= 425 win=  38% mean=-0.150% t=-2.03 pf=0.78 tot= -63.9% dd=-68.0% | by year 2023:-0.25 2024:-0.22 2025:-0.11 2026:-0.09
+fade   cap 1 h    tgt 1.0x stop 0.5x |gap|>=2.0% (tgt 9% stop 32%) n= 228 win=  39% mean=-0.152% t=-1.21 pf=0.81 tot= -34.6% dd=-37.3% | by year 2023:-0.77 2024:-0.30 2025:+0.03 2026:-0.11
+fade   cap 1 h    tgt 2.0x stop 0.5x |gap|>=0.0% (tgt 9% stop 59%) n= 756 win=  30% mean=-0.115% t=-2.08 pf=0.78 tot= -86.9% dd=-98.4% | by year 2023:-0.29 2024:-0.18 2025:-0.03 2026:-0.07
+fade   cap 1 h    tgt 0.5x stop 1.0x |gap|>=0.0% (tgt 47% stop 27%) n= 756 win=  50% mean=-0.137% t=-3.62 pf=0.69 tot=-103.6% dd=-108.2% | by year 2023:-0.17 2024:-0.17 2025:-0.13 2026:-0.09
+fade   cap 1 h    tgt 0.5x stop 1.0x |gap|>=1.0% (tgt 43% stop 13%) n= 425 win=  55% mean=-0.106% t=-1.62 pf=0.82 tot= -45.1% dd=-53.6% | by year 2023:-0.12 2024:-0.15 2025:-0.10 2026:-0.07
+fade   cap 1 h    tgt 0.5x stop 1.0x |gap|>=2.0% (tgt 31% stop 5%) n= 228 win=  50% mean=-0.079% t=-0.73 pf=0.89 tot= -17.9% dd=-27.1% | by year 2023:-0.19 2024:-0.20 2025:-0.03 2026:-0.01
+fade   cap 1 h    tgt 1.0x stop 1.0x |gap|>=0.0% (tgt 29% stop 32%) n= 756 win=  44% mean=-0.123% t=-2.63 pf=0.77 tot= -93.1% dd=-102.8% | by year 2023:-0.16 2024:-0.18 2025:-0.09 2026:-0.08
+follow cap 2 h    tgt 1.0x stop 0.5x |gap|>=0.0% (tgt 21% stop 60%) n= 756 win=  32% mean=-0.233% t=-5.55 pf=0.58 tot=-176.5% dd=-178.2% | by year 2023:-0.19 2024:-0.21 2025:-0.27 2026:-0.23
+follow cap 2 h    tgt 1.0x stop 0.5x |gap|>=1.0% (tgt 16% stop 51%) n= 425 win=  37% mean=-0.265% t=-3.62 pf=0.65 tot=-112.6% dd=-116.4% | by year 2023:-0.22 2024:-0.25 2025:-0.32 2026:-0.24
+follow cap 2 h    tgt 1.0x stop 0.5x |gap|>=2.0% (tgt 8% stop 41%) n= 228 win=  42% mean=-0.307% t=-2.49 pf=0.67 tot= -70.0% dd=-73.3% | by year 2023:-0.15 2024:-0.23 2025:-0.42 2026:-0.28
+follow cap 2 h    tgt 2.0x stop 0.5x |gap|>=0.0% (tgt 10% stop 65%) n= 756 win=  27% mean=-0.234% t=-5.13 pf=0.60 tot=-176.9% dd=-181.2% | by year 2023:-0.15 2024:-0.23 2025:-0.24 2026:-0.27
+follow cap 2 h    tgt 0.5x stop 1.0x |gap|>=0.0% (tgt 50% stop 33%) n= 756 win=  49% mean=-0.220% t=-4.75 pf=0.59 tot=-166.2% dd=-173.8% | by year 2023:-0.11 2024:-0.16 2025:-0.31 2026:-0.22
+follow cap 2 h    tgt 0.5x stop 1.0x |gap|>=1.0% (tgt 49% stop 20%) n= 425 win=  58% mean=-0.213% t=-2.65 pf=0.71 tot= -90.6% dd=-101.7% | by year 2023:-0.11 2024:-0.14 2025:-0.31 2026:-0.21
+follow cap 2 h    tgt 0.5x stop 1.0x |gap|>=2.0% (tgt 39% stop 13%) n= 228 win=  54% mean=-0.245% t=-1.78 pf=0.73 tot= -55.8% dd=-69.2% | by year 2023:+0.37 2024:-0.10 2025:-0.53 2026:-0.19
+follow cap 2 h    tgt 1.0x stop 1.0x |gap|>=0.0% (tgt 29% stop 39%) n= 756 win=  43% mean=-0.250% t=-4.81 pf=0.62 tot=-188.8% dd=-195.6% | by year 2023:-0.21 2024:-0.21 2025:-0.31 2026:-0.24
+fade   cap 2 h    tgt 1.0x stop 0.5x |gap|>=0.0% (tgt 24% stop 58%) n= 756 win=  35% mean=-0.121% t=-2.61 pf=0.77 tot= -91.2% dd=-91.1% | by year 2023:-0.23 2024:-0.17 2025:-0.04 2026:-0.12
+fade   cap 2 h    tgt 1.0x stop 0.5x |gap|>=1.0% (tgt 20% stop 49%) n= 425 win=  39% mean=-0.107% t=-1.32 pf=0.85 tot= -45.4% dd=-48.1% | by year 2023:-0.21 2024:-0.18 2025:-0.01 2026:-0.11
+fade   cap 2 h    tgt 1.0x stop 0.5x |gap|>=2.0% (tgt 13% stop 39%) n= 228 win=  42% mean=-0.075% t=-0.55 pf=0.91 tot= -17.1% dd=-26.8% | by year 2023:-0.69 2024:-0.22 2025:+0.21 2026:-0.13
+fade   cap 2 h    tgt 2.0x stop 0.5x |gap|>=0.0% (tgt 11% stop 64%) n= 756 win=  29% mean=-0.101% t=-1.72 pf=0.81 tot= -76.5% dd=-83.2% | by year 2023:-0.27 2024:-0.16 2025:+0.03 2026:-0.14
+fade   cap 2 h    tgt 0.5x stop 1.0x |gap|>=0.0% (tgt 52% stop 29%) n= 756 win=  53% mean=-0.107% t=-2.53 pf=0.77 tot= -80.7% dd=-85.2% | by year 2023:-0.15 2024:-0.14 2025:-0.07 2026:-0.10
+fade   cap 2 h    tgt 0.5x stop 1.0x |gap|>=1.0% (tgt 51% stop 16%) n= 425 win=  60% mean=-0.055% t=-0.75 pf=0.91 tot= -23.4% dd=-30.2% | by year 2023:-0.10 2024:-0.07 2025:-0.00 2026:-0.08
+fade   cap 2 h    tgt 0.5x stop 1.0x |gap|>=2.0% (tgt 41% stop 8%) n= 228 win=  54% mean=-0.013% t=-0.10 pf=0.98 tot=  -2.9% dd=-16.8% | by year 2023:-0.17 2024:-0.09 2025:+0.10 2026:-0.04
+fade   cap 2 h    tgt 1.0x stop 1.0x |gap|>=0.0% (tgt 34% stop 35%) n= 756 win=  47% mean=-0.083% t=-1.61 pf=0.85 tot= -63.1% dd=-68.9% | by year 2023:-0.12 2024:-0.12 2025:-0.03 2026:-0.09
+follow cap close  tgt 1.0x stop 0.5x |gap|>=0.0% (tgt 25% stop 65%) n= 756 win=  32% mean=-0.196% t=-3.82 pf=0.68 tot=-148.0% dd=-149.5% | by year 2023:-0.19 2024:-0.14 2025:-0.22 2026:-0.24
+follow cap close  tgt 1.0x stop 0.5x |gap|>=1.0% (tgt 24% stop 59%) n= 425 win=  36% mean=-0.196% t=-2.18 pf=0.77 tot= -83.2% dd=-86.9% | by year 2023:-0.23 2024:-0.11 2025:-0.23 2026:-0.24
+follow cap close  tgt 1.0x stop 0.5x |gap|>=2.0% (tgt 18% stop 52%) n= 228 win=  39% mean=-0.210% t=-1.35 pf=0.81 tot= -47.8% dd=-57.5% | by year 2023:-0.18 2024:-0.03 2025:-0.27 2026:-0.30
+follow cap close  tgt 2.0x stop 0.5x |gap|>=0.0% (tgt 13% stop 72%) n= 756 win=  25% mean=-0.174% t=-3.00 pf=0.73 tot=-131.5% dd=-141.1% | by year 2023:-0.12 2024:-0.13 2025:-0.21 2026:-0.20
+follow cap close  tgt 0.5x stop 1.0x |gap|>=0.0% (tgt 53% stop 37%) n= 756 win=  50% mean=-0.242% t=-4.51 pf=0.60 tot=-183.1% dd=-191.5% | by year 2023:-0.13 2024:-0.19 2025:-0.34 2026:-0.22
+follow cap close  tgt 0.5x stop 1.0x |gap|>=1.0% (tgt 56% stop 27%) n= 425 win=  60% mean=-0.252% t=-2.68 pf=0.71 tot=-106.9% dd=-117.0% | by year 2023:-0.15 2024:-0.19 2025:-0.37 2026:-0.21
+follow cap close  tgt 0.5x stop 1.0x |gap|>=2.0% (tgt 48% stop 22%) n= 228 win=  57% mean=-0.305% t=-1.87 pf=0.73 tot= -69.5% dd=-87.4% | by year 2023:+0.46 2024:-0.20 2025:-0.64 2026:-0.20
+follow cap close  tgt 1.0x stop 1.0x |gap|>=0.0% (tgt 35% stop 45%) n= 756 win=  44% mean=-0.220% t=-3.44 pf=0.70 tot=-166.5% dd=-172.1% | by year 2023:-0.23 2024:-0.15 2025:-0.31 2026:-0.20
+fade   cap close  tgt 1.0x stop 0.5x |gap|>=0.0% (tgt 29% stop 62%) n= 756 win=  34% mean=-0.098% t=-1.83 pf=0.83 tot= -74.3% dd=-75.4% | by year 2023:-0.21 2024:-0.14 2025:-0.01 2026:-0.11
+fade   cap close  tgt 1.0x stop 0.5x |gap|>=1.0% (tgt 27% stop 56%) n= 425 win=  38% mean=-0.068% t=-0.73 pf=0.91 tot= -29.1% dd=-33.6% | by year 2023:-0.17 2024:-0.13 2025:+0.05 2026:-0.11
+fade   cap close  tgt 1.0x stop 0.5x |gap|>=2.0% (tgt 22% stop 48%) n= 228 win=  41% mean=-0.015% t=-0.09 pf=0.98 tot=  -3.4% dd=-28.5% | by year 2023:-0.78 2024:-0.12 2025:+0.32 2026:-0.12
+fade   cap close  tgt 2.0x stop 0.5x |gap|>=0.0% (tgt 14% stop 69%) n= 756 win=  27% mean=-0.045% t=-0.63 pf=0.93 tot= -34.0% dd=-49.2% | by year 2023:-0.26 2024:-0.07 2025:+0.09 2026:-0.12
+fade   cap close  tgt 0.5x stop 1.0x |gap|>=0.0% (tgt 57% stop 33%) n= 756 win=  55% mean=-0.144% t=-2.82 pf=0.74 tot=-109.2% dd=-113.8% | by year 2023:-0.15 2024:-0.20 2025:-0.12 2026:-0.10
+fade   cap close  tgt 0.5x stop 1.0x |gap|>=1.0% (tgt 59% stop 24%) n= 425 win=  63% mean=-0.124% t=-1.38 pf=0.84 tot= -52.8% dd=-57.8% | by year 2023:-0.09 2024:-0.21 2025:-0.09 2026:-0.08
+fade   cap close  tgt 0.5x stop 1.0x |gap|>=2.0% (tgt 52% stop 18%) n= 228 win=  59% mean=-0.110% t=-0.71 pf=0.89 tot= -25.2% dd=-43.0% | by year 2023:-0.14 2024:-0.29 2025:-0.05 2026:-0.02
+fade   cap close  tgt 1.0x stop 1.0x |gap|>=0.0% (tgt 39% stop 41%) n= 756 win=  46% mean=-0.113% t=-1.76 pf=0.83 tot= -85.4% dd=-90.2% | by year 2023:-0.10 2024:-0.19 2025:-0.02 2026:-0.14
+
+=================== INTRADAY GAPS: open of a 5-min bar vs previous bar's close, same day ===================
+bars 57551: |intraday gap| mean 0.003%, median 0.000%; share >0.2%: 0.0%, >0.5%: 0.01%, >1%: 0.00%
+when do >0.5% intraday gaps occur (GMT hour: count): {14: 1, 15: 2, 18: 1}
+   by 5-min slot, top 8: {1550: 1, 1500: 1, 1855: 1, 1440: 1}
+
+--- intraday gaps |gap|>=0.3% : n=15 ---
+  Fade at gap-bar OPEN, exit after 1 bar(s) (5 min)              n=  15 win=  53% mean=+0.192% t= 0.77 pf=2.17 tot=  +2.9% dd= -1.1% | by year 2025:-0.03 2026:+0.39
+  Fade at gap-bar CLOSE, exit 1 bar(s) later                     n=  15 win=  33% mean=-0.094% t=-1.16 pf=0.50 tot=  -1.4% dd= -1.3% | by year 2025:-0.11 2026:-0.08
+  Fade at gap-bar OPEN, exit after 3 bar(s) (15 min)             n=  15 win=  67% mean=+0.428% t= 1.42 pf=3.43 tot=  +6.4% dd= -0.9% | by year 2025:+0.24 2026:+0.59
+  Fade at gap-bar CLOSE, exit 3 bar(s) later                     n=  14 win=  43% mean=-0.044% t=-0.29 pf=0.82 tot=  -0.6% dd= -1.8% | by year 2025:+0.08 2026:-0.14
+  Fade at gap-bar OPEN, exit after 6 bar(s) (30 min)             n=  13 win=  54% mean=+0.549% t= 1.43 pf=3.81 tot=  +7.1% dd= -0.8% | by year 2025:+0.32 2026:+0.74
+  Fade at gap-bar CLOSE, exit 6 bar(s) later                     n=  13 win=  62% mean=+0.238% t= 0.97 pf=1.96 tot=  +3.1% dd= -1.4% | by year 2025:+0.18 2026:+0.28
+  Fade at gap-bar OPEN, exit after 12 bar(s) (60 min)            n=  13 win=  62% mean=+0.416% t= 1.10 pf=2.41 tot=  +5.4% dd= -1.2% | by year 2025:-0.05 2026:+0.82
+  Fade at gap-bar CLOSE, exit 12 bar(s) later                    n=  13 win=  62% mean=+0.168% t= 0.68 pf=1.56 tot=  +2.2% dd= -1.3% | by year 2025:-0.03 2026:+0.33
+  Follow at gap-bar CLOSE, exit 6 bars later                     n=  13 win=  31% mean=-0.558% t=-2.27 pf=0.20 tot=  -7.3% dd= -8.4% | by year 2025:-0.50 2026:-0.60
+  Fade at CLOSE, 6 bars, excluding first 30 min (n=15)           n=  13 win=  62% mean=+0.238% t= 0.97 pf=1.96 tot=  +3.1% dd= -1.4% | by year 2025:+0.18 2026:+0.28
+  Fade at OPEN, 3 bars, excluding first 30 min (n=15)            n=  15 win=  67% mean=+0.428% t= 1.42 pf=3.43 tot=  +6.4% dd= -0.9% | by year 2025:+0.24 2026:+0.59
+
+--- intraday gaps |gap|>=0.5% : n=4 ---
+  Fade at gap-bar OPEN, exit after 1 bar(s) (5 min)              n=   4 win=  75% mean=+0.823% t= 1.01 pf=59.87 tot=  +3.3% dd= -0.1% | by year 2025:+0.01 2026:+1.09
+  Fade at gap-bar CLOSE, exit 1 bar(s) later                     n=   4 win=  50% mean=+0.047% t= 0.26 pf=1.36 tot=  +0.2% dd= -0.2% | by year 2025:-0.29 2026:+0.16
+  Fade at gap-bar OPEN, exit after 3 bar(s) (15 min)             n=   4 win=  50% mean=+0.974% t= 0.97 pf=6.65 tot=  +3.9% dd= -0.2% | by year 2025:-0.53 2026:+1.47
+  Fade at gap-bar CLOSE, exit 3 bar(s) later                     n=   4 win=  25% mean=-0.254% t=-0.95 pf=0.33 tot=  -1.0% dd= -0.5% | by year 2025:-0.73 2026:-0.10
+  Fade at gap-bar OPEN, exit after 6 bar(s) (30 min)             n=   4 win=  50% mean=+1.074% t= 0.88 pf=4.41 tot=  +4.3% dd= -0.6% | by year 2025:-0.70 2026:+1.66
+  Fade at gap-bar CLOSE, exit 6 bar(s) later                     n=   4 win=  50% mean=+0.197% t= 0.30 pf=1.43 tot=  +0.8% dd= -0.8% | by year 2025:-1.00 2026:+0.60
+  Fade at gap-bar OPEN, exit after 12 bar(s) (60 min)            n=   4 win=  50% mean=+0.764% t= 0.64 pf=2.46 tot=  +3.1% dd= -1.2% | by year 2025:-0.87 2026:+1.31
+  Fade at gap-bar CLOSE, exit 12 bar(s) later                    n=   4 win=  50% mean=-0.231% t=-0.34 pf=0.67 tot=  -0.9% dd= -1.3% | by year 2025:-1.57 2026:+0.22
+  Follow at gap-bar CLOSE, exit 6 bars later                     n=   4 win=  50% mean=-0.517% t=-0.78 pf=0.36 tot=  -2.1% dd= -3.3% | by year 2025:+0.68 2026:-0.92
+  Fade at CLOSE, 6 bars, excluding first 30 min (n=4)            n=   4 win=  50% mean=+0.197% t= 0.30 pf=1.43 tot=  +0.8% dd= -0.8% | by year 2025:-1.00 2026:+0.60
+  Fade at OPEN, 3 bars, excluding first 30 min (n=4)             n=   4 win=  50% mean=+0.974% t= 0.97 pf=6.65 tot=  +3.9% dd= -0.2% | by year 2025:-0.53 2026:+1.47
+
+--- intraday gaps |gap|>=1.0% : n=1 ---
+  Fade at gap-bar OPEN, exit after 1 bar(s) (5 min)              n=   1 win= 100% mean=+3.274% t=  nan pf= inf tot=  +3.3% dd=  0.0% | by year 2026:+3.27
+  Fade at gap-bar CLOSE, exit 1 bar(s) later                     n=   1 win= 100% mean=+0.421% t=  nan pf= inf tot=  +0.4% dd=  0.0% | by year 2026:+0.42
+  Fade at gap-bar OPEN, exit after 3 bar(s) (15 min)             n=   1 win= 100% mean=+3.875% t=  nan pf= inf tot=  +3.9% dd=  0.0% | by year 2026:+3.88
+  Fade at gap-bar CLOSE, exit 3 bar(s) later                     n=   1 win=   0% mean=-0.285% t=  nan pf=0.00 tot=  -0.3% dd=  0.0% | by year 2026:-0.28
+  Fade at gap-bar OPEN, exit after 6 bar(s) (30 min)             n=   1 win= 100% mean=+4.519% t=  nan pf= inf tot=  +4.5% dd=  0.0% | by year 2026:+4.52
+  Fade at gap-bar CLOSE, exit 6 bar(s) later                     n=   1 win= 100% mean=+1.708% t=  nan pf= inf tot=  +1.7% dd=  0.0% | by year 2026:+1.71
+  Fade at gap-bar OPEN, exit after 12 bar(s) (60 min)            n=   1 win= 100% mean=+4.004% t=  nan pf= inf tot=  +4.0% dd=  0.0% | by year 2026:+4.00
+  Fade at gap-bar CLOSE, exit 12 bar(s) later                    n=   1 win= 100% mean=+0.878% t=  nan pf= inf tot=  +0.9% dd=  0.0% | by year 2026:+0.88
+  Follow at gap-bar CLOSE, exit 6 bars later                     n=   1 win=   0% mean=-2.028% t=  nan pf=0.00 tot=  -2.0% dd=  0.0% | by year 2026:-2.03
+  Fade at CLOSE, 6 bars, excluding first 30 min (n=1)            n=   1 win= 100% mean=+1.708% t=  nan pf= inf tot=  +1.7% dd=  0.0% | by year 2026:+1.71
+  Fade at OPEN, 3 bars, excluding first 30 min (n=1)             n=   1 win= 100% mean=+3.875% t=  nan pf= inf tot=  +3.9% dd=  0.0% | by year 2026:+3.88
+
+--- intraday gaps >= 3x the rolling 5-min range and >=0.3%: n=2 ---
+  Fade at CLOSE, exit 1 bars later                               n=   2 win=  50% mean=+0.098% t=  nan pf=1.87 tot=  +0.2% dd= -0.2% | by year 2026:+0.10
+  Fade at CLOSE, exit 3 bars later                               n=   2 win=   0% mean=-0.391% t=  nan pf=0.00 tot=  -0.8% dd= -0.5% | by year 2026:-0.39
+  Fade at CLOSE, exit 6 bars later                               n=   2 win=  50% mean=+0.442% t=  nan pf=2.07 tot=  +0.9% dd= -0.8% | by year 2026:+0.44
+  Fade at CLOSE, exit 12 bars later                              n=   2 win=  50% mean=-0.194% t=  nan pf=0.69 tot=  -0.4% dd= -1.3% | by year 2026:-0.19
+intraday gaps >=0.5%: filled (prior bar close touched) within 3 / 6 / 12 bars: {3: 50, 6: 50, 12: 50}
+
+--- bracket rules on intraday gaps >=0.5%, entry at the gap bar's close ---
+follow cap 30 min tgt 1.0x stop 0.5x (tgt 25% stop 50%)          n=   4 win=  50% mean=-0.207% t=-0.43 pf=0.57 tot=  -0.8% dd= -1.9% | by year 2025:+0.58 2026:-0.47
+follow cap 30 min tgt 0.5x stop 1.0x (tgt 50% stop 25%)          n=   4 win=  50% mean=-0.572% t=-1.08 pf=0.16 tot=  -2.3% dd= -2.7% | by year 2025:+0.21 2026:-0.83
+follow cap 30 min tgt 1.0x stop 1.0x (tgt 25% stop 25%)          n=   4 win=  50% mean=-0.408% t=-0.67 pf=0.40 tot=  -1.6% dd= -2.7% | by year 2025:+0.58 2026:-0.74
+fade   cap 30 min tgt 1.0x stop 0.5x (tgt 25% stop 50%)          n=   4 win=  50% mean=+0.252% t= 0.48 pf=1.94 tot=  +1.0% dd= -0.5% | by year 2025:-0.53 2026:+0.51
+fade   cap 30 min tgt 0.5x stop 1.0x (tgt 50% stop 25%)          n=   4 win=  50% mean=-0.113% t=-0.23 pf=0.74 tot=  -0.5% dd= -0.8% | by year 2025:-0.90 2026:+0.15
+fade   cap 30 min tgt 1.0x stop 1.0x (tgt 25% stop 25%)          n=   4 win=  50% mean=+0.088% t= 0.14 pf=1.20 tot=  +0.4% dd= -0.8% | by year 2025:-0.90 2026:+0.42
+follow cap 60 min tgt 1.0x stop 0.5x (tgt 50% stop 50%)          n=   4 win=  50% mean=-0.184% t=-0.37 pf=0.61 tot=  -0.7% dd= -1.9% | by year 2025:+0.58 2026:-0.44
+follow cap 60 min tgt 0.5x stop 1.0x (tgt 50% stop 25%)          n=   4 win=  50% mean=-0.364% t=-1.04 pf=0.23 tot=  -1.5% dd= -1.9% | by year 2025:+0.21 2026:-0.56
+follow cap 60 min tgt 1.0x stop 1.0x (tgt 50% stop 25%)          n=   4 win=  50% mean=-0.177% t=-0.39 pf=0.62 tot=  -0.7% dd= -1.9% | by year 2025:+0.58 2026:-0.43
+fade   cap 60 min tgt 1.0x stop 0.5x (tgt 25% stop 50%)          n=   4 win=  50% mean=+0.044% t= 0.13 pf=1.17 tot=  +0.2% dd= -0.5% | by year 2025:-0.53 2026:+0.24
+fade   cap 60 min tgt 0.5x stop 1.0x (tgt 50% stop 50%)          n=   4 win=  50% mean=-0.136% t=-0.27 pf=0.70 tot=  -0.5% dd= -0.9% | by year 2025:-0.90 2026:+0.12
+fade   cap 60 min tgt 1.0x stop 1.0x (tgt 25% stop 50%)          n=   4 win=  50% mean=-0.143% t=-0.31 pf=0.69 tot=  -0.6% dd= -0.9% | by year 2025:-0.90 2026:+0.11
+
+=================== STOP SWEEP on overnight gaps, entry 13:35, |gap|>=1% (also all gaps for the best rows) ===================
+mode   cap    target  stop        n  win    mean      t stop%  by year
+fade   2h     2.0     None      425  49% +0.041%   0.36    0%  2023:-0.19 2024:-0.09 2025:+0.10 2026:+0.18
+fade   close  2.0     0.5       425  33% +0.030%   0.24   60%  2023:-0.29 2024:-0.02 2025:+0.24 2026:-0.07
+fade   close  2.0     None      425  51% +0.017%   0.11    0%  2023:-0.26 2024:-0.29 2025:+0.36 2026:+0.02
+fade   2h     2.0     3.0       425  48% +0.000%   0.00    2%  2023:-0.19 2024:-0.09 2025:+0.08 2026:+0.06
+fade   2h     2.0     1.0       425  45% -0.015%  -0.13   22%  2023:-0.14 2024:-0.05 2025:+0.09 2026:-0.06
+fade   2h     1.0     None      425  52% -0.018%  -0.19    0%  2023:-0.18 2024:-0.13 2025:-0.01 2026:+0.13
+fade   1h     2.0     None      425  45% -0.020%  -0.19    0%  2023:-0.19 2024:-0.21 2025:+0.07 2026:+0.13
+fade   2h     2.0     2.0       425  48% -0.022%  -0.19    6%  2023:-0.15 2024:-0.10 2025:+0.07 2026:-0.02
+fade   close  2.0     3.0       425  50% -0.026%  -0.17    5%  2023:-0.22 2024:-0.30 2025:+0.32 2026:-0.08
+fade   close  2.0     1.0       425  43% -0.032%  -0.23   36%  2023:-0.03 2024:-0.16 2025:+0.18 2026:-0.14
+fade   2h     2.0     1.5       425  47% -0.038%  -0.33   13%  2023:-0.10 2024:-0.07 2025:+0.04 2026:-0.07
+fade   1h     2.0     3.0       425  45% -0.039%  -0.39    1%  2023:-0.19 2024:-0.21 2025:+0.05 2026:+0.08
+fade   2h     1.0     3.0       425  52% -0.044%  -0.46    1%  2023:-0.19 2024:-0.13 2025:-0.03 2026:+0.07
+fade   2h     1.0     1.0       425  49% -0.052%  -0.58   21%  2023:-0.10 2024:-0.09 2025:-0.00 2026:-0.06
+fade   1h     2.0     2.0       425  44% -0.055%  -0.54    4%  2023:-0.18 2024:-0.21 2025:+0.06 2026:+0.01
+... worst 5:
+follow 2h     None    1.0       425  43% -0.302%  -3.25   26%  2023:-0.14 2024:-0.19 2025:-0.31 2026:-0.45
+follow 2h     1.0     2.0       425  49% -0.305%  -2.76    8%  2023:-0.18 2024:-0.27 2025:-0.41 2026:-0.26
+follow close  None    2.0       425  45% -0.337%  -2.19   16%  2023:-0.06 2024:-0.03 2025:-0.68 2026:-0.34
+follow 2h     None    1.5       425  44% -0.345%  -3.34   14%  2023:-0.14 2024:-0.17 2025:-0.42 2026:-0.50
+follow 2h     None    2.0       425  45% -0.361%  -3.18    9%  2023:-0.13 2024:-0.23 2025:-0.42 2026:-0.50
+
+--- fixed % stops, no target: follow vs fade, |gap|>=1% ---
+follow cap 1h    stop 0.5%  no target (stopped 70%)              n= 425 win=  26% mean=-0.154% t=-3.41 pf=0.67 tot= -65.3% dd=-70.8% | by year 2023:-0.14 2024:+0.01 2025:-0.24 2026:-0.23
+follow cap 1h    stop 1.0%  no target (stopped 50%)              n= 425 win=  36% mean=-0.226% t=-3.95 pf=0.65 tot= -95.9% dd=-98.7% | by year 2023:-0.25 2024:-0.07 2025:-0.31 2026:-0.29
+follow cap 1h    stop 1.5%  no target (stopped 32%)              n= 425 win=  43% mean=-0.189% t=-2.85 pf=0.72 tot= -80.4% dd=-86.3% | by year 2023:-0.17 2024:-0.10 2025:-0.17 2026:-0.31
+follow cap 1h    stop 2.0%  no target (stopped 21%)              n= 425 win=  44% mean=-0.209% t=-2.91 pf=0.71 tot= -88.8% dd=-93.9% | by year 2023:-0.16 2024:-0.14 2025:-0.18 2026:-0.33
+follow cap 1h    stop 3.0%  no target (stopped 9%)               n= 425 win=  46% mean=-0.227% t=-2.94 pf=0.70 tot= -96.5% dd=-103.1% | by year 2023:-0.11 2024:-0.11 2025:-0.22 2026:-0.39
+follow cap 1h    stop None% no target (stopped 0%)               n= 425 win=  47% mean=-0.198% t=-2.47 pf=0.73 tot= -84.0% dd=-92.4% | by year 2023:-0.11 2024:-0.11 2025:-0.23 2026:-0.28
+fade   cap 1h    stop 0.5%  no target (stopped 74%)              n= 425 win=  22% mean=-0.195% t=-4.11 pf=0.61 tot= -83.0% dd=-87.7% | by year 2023:-0.33 2024:-0.20 2025:-0.23 2026:-0.12
+fade   cap 1h    stop 1.0%  no target (stopped 51%)              n= 425 win=  34% mean=-0.206% t=-3.27 pf=0.69 tot= -87.8% dd=-94.2% | by year 2023:-0.35 2024:-0.18 2025:-0.20 2026:-0.19
+fade   cap 1h    stop 1.5%  no target (stopped 31%)              n= 425 win=  40% mean=-0.200% t=-2.85 pf=0.72 tot= -85.1% dd=-90.9% | by year 2023:-0.33 2024:-0.13 2025:-0.21 2026:-0.22
+fade   cap 1h    stop 2.0%  no target (stopped 18%)              n= 425 win=  43% mean=-0.180% t=-2.43 pf=0.75 tot= -76.4% dd=-89.0% | by year 2023:-0.16 2024:-0.18 2025:-0.20 2026:-0.16
+fade   cap 1h    stop 3.0%  no target (stopped 8%)               n= 425 win=  43% mean=-0.237% t=-2.97 pf=0.70 tot=-100.6% dd=-104.7% | by year 2023:-0.22 2024:-0.21 2025:-0.25 2026:-0.25
+fade   cap 1h    stop None% no target (stopped 0%)               n= 425 win=  44% mean=-0.122% t=-1.53 pf=0.82 tot= -52.0% dd=-72.0% | by year 2023:-0.21 2024:-0.21 2025:-0.09 2026:-0.04
+follow cap close stop 0.5%  no target (stopped 83%)              n= 425 win=  17% mean=-0.098% t=-1.43 pf=0.82 tot= -41.8% dd=-61.2% | by year 2023:+0.12 2024:+0.09 2025:-0.26 2026:-0.17
+follow cap close stop 1.0%  no target (stopped 68%)              n= 425 win=  28% mean=-0.153% t=-1.77 pf=0.81 tot= -65.0% dd=-78.2% | by year 2023:+0.04 2024:+0.05 2025:-0.29 2026:-0.26
+follow cap close stop 1.5%  no target (stopped 55%)              n= 425 win=  36% mean=-0.112% t=-1.07 pf=0.88 tot= -47.6% dd=-64.8% | by year 2023:+0.11 2024:-0.00 2025:-0.18 2026:-0.21
+follow cap close stop 2.0%  no target (stopped 45%)              n= 425 win=  40% mean=-0.179% t=-1.58 pf=0.83 tot= -76.2% dd=-89.6% | by year 2023:+0.06 2024:-0.08 2025:-0.24 2026:-0.28
+follow cap close stop 3.0%  no target (stopped 26%)              n= 425 win=  44% mean=-0.190% t=-1.54 pf=0.83 tot= -80.8% dd=-100.2% | by year 2023:+0.05 2024:+0.06 2025:-0.37 2026:-0.32
+follow cap close stop None% no target (stopped 0%)               n= 425 win=  47% mean=-0.180% t=-1.26 pf=0.85 tot= -76.4% dd=-110.9% | by year 2023:-0.10 2024:+0.03 2025:-0.54 2026:-0.00
+fade   cap close stop 0.5%  no target (stopped 83%)              n= 425 win=  16% mean=-0.188% t=-2.91 pf=0.66 tot= -79.7% dd=-79.1% | by year 2023:-0.29 2024:-0.15 2025:-0.15 2026:-0.25
+fade   cap close stop 1.0%  no target (stopped 69%)              n= 425 win=  28% mean=-0.214% t=-2.49 pf=0.74 tot= -90.9% dd=-92.6% | by year 2023:-0.36 2024:-0.14 2025:-0.10 2026:-0.38
+fade   cap close stop 1.5%  no target (stopped 54%)              n= 425 win=  37% mean=-0.152% t=-1.45 pf=0.84 tot= -64.7% dd=-80.8% | by year 2023:-0.01 2024:+0.01 2025:-0.10 2026:-0.43
+fade   cap close stop 2.0%  no target (stopped 41%)              n= 425 win=  42% mean=-0.181% t=-1.61 pf=0.82 tot= -76.8% dd=-91.8% | by year 2023:+0.14 2024:-0.18 2025:-0.03 2026:-0.44
+fade   cap close stop 3.0%  no target (stopped 24%)              n= 425 win=  46% mean=-0.245% t=-1.91 pf=0.79 tot=-104.1% dd=-115.2% | by year 2023:-0.05 2024:-0.29 2025:+0.09 2026:-0.64
+fade   cap close stop None% no target (stopped 0%)               n= 425 win=  49% mean=-0.140% t=-0.98 pf=0.88 tot= -59.6% dd=-71.8% | by year 2023:-0.22 2024:-0.35 2025:+0.22 2026:-0.32

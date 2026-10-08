@@ -1,0 +1,92 @@
+=== TQQQ daily conditional patterns (next-day outcome, cost 0.16) ===
+2+ down days -> next next_cc                                 n=  95 win= 55.8% mean=  0.469% t=1.1 pf=1.34 tot=44.5% dd=-18.8%
+                                                               IS n=43 win=55.8% mean=0.32% t=0.58 | OOS n=52 win=55.8% mean=0.592% t=0.94
+2+ down days -> next next_gap                                n=  95 win= 61.1% mean=  0.387% t=1.3 pf=1.41 tot=36.7% dd=-22.2%
+                                                               IS n=43 win=60.5% mean=0.008% t=0.02 | OOS n=52 win=61.5% mean=0.7% t=1.66
+2+ down days -> next next_intra                              n=  95 win= 50.5% mean= -0.064% t=-0.18 pf=0.95 tot=-6.0% dd=-29.5%
+                                                               IS n=43 win=55.8% mean=0.18% t=0.34 | OOS n=52 win=46.2% mean=-0.265% t=-0.55
+3+ down days -> next next_cc                                 n=  40 win= 57.5% mean=  1.005% t=1.62 pf=1.94 tot=40.2% dd=-10.5%
+                                                               IS n=19 win=52.6% mean=0.46% t=0.52 | OOS n=21 win=61.9% mean=1.498% t=1.72
+3+ down days -> next next_gap                                n=  40 win= 62.5% mean=  0.875% t=2.1 pf=2.33 tot=35.0% dd=-9.8%
+                                                               IS n=19 win=52.6% mean=-0.046% t=-0.09 | OOS n=21 win=71.4% mean=1.709% t=2.82
+3+ down days -> next next_intra                              n=  40 win= 42.5% mean= -0.023% t=-0.05 pf=0.98 tot=-0.9% dd=-19.3%
+                                                               IS n=19 win=52.6% mean=0.342% t=0.49 | OOS n=21 win=33.3% mean=-0.353% t=-0.49
+4+ down days -> next next_cc                                 n=  16 win= 50.0% mean=  0.101% t=0.1 pf=1.07 tot=1.6% dd=-9.4%
+                                                               IS n=9 win=55.6% mean=0.193% t=0.16 | OOS n=7 win=42.9% mean=-0.018% t=-0.01
+4+ down days -> next next_gap                                n=  16 win= 56.2% mean=   0.42% t=0.72 pf=1.58 tot=6.7% dd=-3.0%
+                                                               IS n=9 win=55.6% mean=-0.133% t=-0.23 | OOS n=7 win=57.1% mean=1.13% t=1.02
+4+ down days -> next next_intra                              n=  16 win= 31.2% mean= -0.495% t=-0.7 pf=0.64 tot=-7.9% dd=-11.1%
+                                                               IS n=9 win=44.4% mean=0.15% t=0.17 | OOS n=7 win=14.3% mean=-1.324% t=-1.18
+3+ up days -> next next_cc                                   n=  90 win= 53.3% mean=  0.234% t=0.74 pf=1.24 tot=21.1% dd=-25.6%
+                                                               IS n=50 win=48.0% mean=-0.378% t=-1.08 | OOS n=40 win=60.0% mean=1.0% t=1.83
+3+ up days (short) -> next next_cc                           n=  90 win= 53.3% mean=  0.234% t=0.74 pf=1.24 tot=21.1% dd=-25.6%
+                                                               IS n=50 win=48.0% mean=-0.378% t=-1.08 | OOS n=40 win=60.0% mean=1.0% t=1.83
+4+ up days -> next next_cc                                   n=  50 win= 46.0% mean=  0.151% t=0.45 pf=1.19 tot=7.5% dd=-13.2%
+                                                               IS n=26 win=34.6% mean=-0.508% t=-1.59 | OOS n=24 win=58.3% mean=0.865% t=1.48
+4+ up days (short) -> next next_cc                           n=  50 win= 46.0% mean=  0.151% t=0.45 pf=1.19 tot=7.5% dd=-13.2%
+                                                               IS n=26 win=34.6% mean=-0.508% t=-1.59 | OOS n=24 win=58.3% mean=0.865% t=1.48
+5+ up days -> next next_cc                                   n=  26 win= 53.8% mean=  0.625% t=1.14 pf=1.85 tot=16.2% dd=-9.2%
+                                                               IS n=11 win=45.5% mean=-0.037% t=-0.08 | OOS n=15 win=60.0% mean=1.11% t=1.26
+5+ up days (short) -> next next_cc                           n=  26 win= 53.8% mean=  0.625% t=1.14 pf=1.85 tot=16.2% dd=-9.2%
+                                                               IS n=11 win=45.5% mean=-0.037% t=-0.08 | OOS n=15 win=60.0% mean=1.11% t=1.26
+3-day return < -5% -> next next_cc                           n=  84 win= 51.2% mean=  0.347% t=0.54 pf=1.2 tot=29.2% dd=-43.3%
+                                                               IS n=42 win=50.0% mean=0.615% t=0.55 | OOS n=42 win=52.4% mean=0.079% t=0.12
+3-day return < -5% -> next next_gap                          n=  84 win= 56.0% mean=  0.291% t=0.84 pf=1.28 tot=24.4% dd=-31.8%
+                                                               IS n=42 win=52.4% mean=-0.131% t=-0.25 | OOS n=42 win=59.5% mean=0.713% t=1.63
+3-day return < -5% -> next next_intra                        n=  84 win= 46.4% mean=  -0.07% t=-0.11 pf=0.96 tot=-5.9% dd=-38.9%
+                                                               IS n=42 win=52.4% mean=0.646% t=0.57 | OOS n=42 win=40.5% mean=-0.787% t=-1.65
+3-day return < -8% -> next next_cc                           n=  40 win= 52.5% mean=  0.804% t=0.68 pf=1.43 tot=32.2% dd=-27.8%
+                                                               IS n=22 win=50.0% mean=0.68% t=0.34 | OOS n=18 win=55.6% mean=0.956% t=0.86
+3-day return < -8% -> next next_gap                          n=  40 win= 52.5% mean=  0.215% t=0.34 pf=1.15 tot=8.6% dd=-27.7%
+                                                               IS n=22 win=40.9% mean=-0.822% t=-0.91 | OOS n=18 win=66.7% mean=1.483% t=1.94
+3-day return < -8% -> next next_intra                        n=  40 win= 47.5% mean=  0.489% t=0.42 pf=1.25 tot=19.6% dd=-21.9%
+                                                               IS n=22 win=54.5% mean=1.443% t=0.72 | OOS n=18 win=38.9% mean=-0.677% t=-0.85
+3-day return > 5% -> next next_cc                            n= 109 win= 53.2% mean=  0.261% t=0.72 pf=1.21 tot=28.5% dd=-44.9%
+                                                               IS n=53 win=49.1% mean=-0.254% t=-0.47 | OOS n=56 win=57.1% mean=0.748% t=1.53
+3-day return > 8% -> next next_cc                            n=  46 win= 63.0% mean=   0.46% t=0.84 pf=1.42 tot=21.2% dd=-18.5%
+                                                               IS n=18 win=66.7% mean=0.334% t=0.34 | OOS n=28 win=60.7% mean=0.541% t=0.82
+close in bottom 20% of range -> next next_cc                 n=  74 win= 54.1% mean=   0.86% t=1.27 pf=1.66 tot=63.7% dd=-20.6%
+                                                               IS n=36 win=58.3% mean=0.887% t=0.71 | OOS n=38 win=50.0% mean=0.835% t=1.39
+close in bottom 20% of range -> next next_gap                n=  74 win= 60.8% mean=  0.342% t=0.96 pf=1.35 tot=25.3% dd=-29.1%
+                                                               IS n=36 win=55.6% mean=-0.406% t=-0.74 | OOS n=38 win=65.8% mean=1.05% t=2.41
+close in bottom 20% of range -> next next_intra              n=  74 win= 48.6% mean=  0.378% t=0.6 pf=1.28 tot=28.0% dd=-23.3%
+                                                               IS n=36 win=50.0% mean=1.153% t=0.97 | OOS n=38 win=47.4% mean=-0.356% t=-0.71
+close in top 20% of range -> next next_cc                    n= 143 win= 55.9% mean=  0.273% t=0.97 pf=1.25 tot=39.1% dd=-33.0%
+                                                               IS n=76 win=55.3% mean=0.021% t=0.06 | OOS n=67 win=56.7% mean=0.559% t=1.37
+close in top 20% of range -> next next_gap                   n= 143 win= 49.0% mean= -0.066% t=-0.34 pf=0.92 tot=-9.4% dd=-26.5%
+                                                               IS n=76 win=50.0% mean=-0.052% t=-0.2 | OOS n=67 win=47.8% mean=-0.081% t=-0.29
+close in top 20% of range -> next next_intra                 n= 143 win= 53.8% mean=   0.18% t=0.86 pf=1.2 tot=25.7% dd=-23.1%
+                                                               IS n=76 win=48.7% mean=-0.083% t=-0.27 | OOS n=67 win=59.7% mean=0.478% t=1.69
+close > MA10 & MA50 (trend) -> next next_cc                  n= 219 win= 53.9% mean= -0.115% t=-0.54 pf=0.9 tot=-25.2% dd=-64.3%
+                                                               IS n=106 win=56.6% mean=-0.017% t=-0.06 | OOS n=113 win=51.3% mean=-0.207% t=-0.62
+close > MA10 & MA50 -> next next_gap                         n= 219 win= 55.7% mean= -0.031% t=-0.22 pf=0.96 tot=-6.7% dd=-34.1%
+                                                               IS n=106 win=59.4% mean=0.064% t=0.31 | OOS n=113 win=52.2% mean=-0.12% t=-0.62
+close > MA10 & MA50 -> next next_intra                       n= 219 win= 50.2% mean= -0.245% t=-1.55 pf=0.74 tot=-53.7% dd=-61.0%
+                                                               IS n=106 win=53.8% mean=-0.233% t=-1.1 | OOS n=113 win=46.9% mean=-0.257% t=-1.09
+close < MA10 & < MA50 -> next next_cc                        n= 129 win= 52.7% mean=  0.108% t=0.22 pf=1.06 tot=14.0% dd=-74.3%
+                                                               IS n=46 win=50.0% mean=-0.174% t=-0.15 | OOS n=83 win=54.2% mean=0.265% t=0.63
+close < MA10 & < MA50 -> next next_gap                       n= 129 win= 54.3% mean=   0.15% t=0.52 pf=1.13 tot=19.4% dd=-52.0%
+                                                               IS n=46 win=47.8% mean=-0.326% t=-0.5 | OOS n=83 win=57.8% mean=0.414% t=1.51
+close < MA10 but > MA50 (dip in uptrend) -> next next_cc     n=  61 win= 54.1% mean=  0.613% t=1.3 pf=1.51 tot=37.4% dd=-11.8%
+                                                               IS n=30 win=53.3% mean=0.544% t=0.98 | OOS n=31 win=54.8% mean=0.68% t=0.89
+dip in uptrend -> next next_gap                              n=  61 win= 59.0% mean=  0.237% t=0.7 pf=1.27 tot=14.5% dd=-10.4%
+                                                               IS n=30 win=63.3% mean=-0.087% t=-0.22 | OOS n=31 win=54.8% mean=0.551% t=1.02
+dip in uptrend -> next next_intra                            n=  61 win= 57.4% mean=  0.219% t=0.63 pf=1.21 tot=13.4% dd=-14.8%
+                                                               IS n=30 win=60.0% mean=0.477% t=1.09 | OOS n=31 win=54.8% mean=-0.031% t=-0.06
+gap down >2% AND closes up (reversal day) -> next next_cc    n=  37 win= 62.2% mean=  -0.12% t=-0.15 pf=0.93 tot=-4.4% dd=-29.5%
+                                                               IS n=17 win=64.7% mean=0.404% t=0.31 | OOS n=20 win=60.0% mean=-0.565% t=-0.58
+gap up >2% AND closes down -> next next_cc                   n=  49 win= 59.2% mean=  0.959% t=1.07 pf=1.7 tot=47.0% dd=-17.8%
+                                                               IS n=20 win=70.0% mean=2.453% t=1.3 | OOS n=29 win=51.7% mean=-0.071% t=-0.09
+Monday intraday long after down Friday                       n=  38 win= 68.4% mean=   0.91% t=1.74 pf=2.23 tot=34.6% dd=-12.1%
+                                                               IS n=17 win=88.2% mean=1.966% t=2.48 | OOS n=21 win=52.4% mean=0.054% t=0.08
+Monday intraday long after up Friday                         n=  58 win= 53.4% mean=  0.066% t=0.19 pf=1.07 tot=3.8% dd=-21.4%
+                                                               IS n=31 win=51.6% mean=-0.488% t=-1.02 | OOS n=27 win=55.6% mean=0.702% t=1.53
+Weekend hold after down Friday                               n=  38 win= 63.2% mean=  0.315% t=0.46 pf=1.22 tot=12.0% dd=-36.4%
+                                                               IS n=17 win=47.1% mean=-1.264% t=-1.0 | OOS n=21 win=76.2% mean=1.593% t=2.76
+Weekend hold after up Friday                                 n=  58 win= 48.3% mean=  0.087% t=0.28 pf=1.1 tot=5.0% dd=-11.6%
+                                                               IS n=31 win=54.8% mean=0.189% t=0.44 | OOS n=27 win=40.7% mean=-0.031% t=-0.07
+Weekend hold after Friday < -2%                              n=  22 win= 72.7% mean=  0.547% t=0.67 pf=1.43 tot=12.0% dd=-20.4%
+                                                               IS n=9 win=55.6% mean=-1.705% t=-1.15 | OOS n=13 win=84.6% mean=2.106% t=3.13
+Monday intraday long quarterly: {Period('2024Q4', 'Q-DEC'): -0.02, Period('2025Q1', 'Q-DEC'): -0.35, Period('2025Q2', 'Q-DEC'): 1.4, Period('2025Q3', 'Q-DEC'): 0.47, Period('2025Q4', 'Q-DEC'): 0.21, Period('2026Q1', 'Q-DEC'): 1.04, Period('2026Q2', 'Q-DEC'): 0.59, Period('2026Q3', 'Q-DEC'): -0.09} pos 5 / 8
+Thursday intraday short quarterly: {Period('2024Q4', 'Q-DEC'): 0.7, Period('2025Q1', 'Q-DEC'): 1.33, Period('2025Q2', 'Q-DEC'): 0.49, Period('2025Q3', 'Q-DEC'): -0.32, Period('2025Q4', 'Q-DEC'): 2.17, Period('2026Q1', 'Q-DEC'): 1.66, Period('2026Q2', 'Q-DEC'): -1.78, Period('2026Q3', 'Q-DEC'): -0.78, Period('2026Q4', 'Q-DEC'): 0.03} pos 6 / 9
+Overnight into Wed quarterly: {Period('2024Q4', 'Q-DEC'): 0.39, Period('2025Q1', 'Q-DEC'): 0.6, Period('2025Q2', 'Q-DEC'): -0.5, Period('2025Q3', 'Q-DEC'): 0.35, Period('2025Q4', 'Q-DEC'): 0.16, Period('2026Q1', 'Q-DEC'): 0.46, Period('2026Q2', 'Q-DEC'): 1.6, Period('2026Q3', 'Q-DEC'): -0.15} pos 6 / 8

@@ -1,0 +1,27 @@
+; BrentFadeEA, AGGRESSIVE set: 5x notional, weekend at full size, halt at 75% drawdown
+; Backtest (haircut): year 1 +65%, year 2 +537%, worst drawdown -65%; one year in ten loses money
+LeverageMultiple=5.0
+WeekendSizeFactor=1.0
+MaxDrawdownHaltPct=75.0
+EnableEarlyFade=true
+EnableWeekendFade=true
+SizingMode=0
+FixedLots=10.0
+MaxLots=1000.0
+FadeThresholdPct=0.5
+FadeDecisionHourGMT=3
+FadeDecisionWindowMin=10
+FadeExitHourGMT=13
+FadeStopPct=2.0
+WeekendMinGapPct=0.3
+WeekendEntryDelayMin=2
+WeekendEntryWindowMin=10
+WeekendExitHourGMT=20
+WeekendExitMinute=50
+WeekendStopPct=0.0
+GMTOffsetOverrideHours=-99
+MaxSpreadPoints=0
+SlippagePoints=50
+MagicEarly=240301
+MagicWeekend=240302
+TradeComment=BrentFade
